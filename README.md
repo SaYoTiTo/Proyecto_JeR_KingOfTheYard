@@ -1,22 +1,27 @@
-# Proyecto_JeR_KingOfTheYard
 Proyecto para la asignatura Juegos en Red 2021/2022
 
-# KING OF THE YARD
+# King of the Yard
 
 King of the Yard es un juego arcade 2D basado en el juego del pilla-pilla en el que dos niños pelean por la corona la cual les convertirá en el rey del patio.
 
 # 1-Introducción
 Este es el documento de diseño de juego de “King of the Yard”. Un juego casual para PC que pretende generar una jugabilidad competitiva simple para entretener a dos jugadores de forma offline o online.
+
 ## Concepto del juego
 “King of the Yard” es un videojuego en el que controlamos a dos niños los cuales luchan por ser los reyes del patio. El último rey se ha marchado del colegio después de cuatro años intentando aprobar y ahora no hay nadie que gobierne el recreo. Uno de ellos debe tomar el trono y todo se decidirá con un “Atrapa la Corona”.
 
-Características principales
+## Características principales
 
 El juego se basa en los siguientes puntos:
+
 - Planteamiento sencillo: la trama se usará únicamente para dar contexto y un objetivo a los jugadores, pero en el transcurso del juego lo que primará será la jugabilidad.
+
 - Competitivo: el juego se basa en el popular juego “Atrapa la bandera” el cual tiene un carácter competitivo, donde los jugadores tienen que agarrar la bandera y huir de su contrincante.
+
 - Casual: el juego no tendrá mucha complicación y su función será meramente de entretenimiento. Su planteamiento permite que los jugadores, con un par de partidas, puedan dominar las mecánicas y disfrutarlo.
+
 - Rejugabilidad: la sencillez y competitividad del juego permite que tenga una gran rejugabilidad.
+
 - Dinamismo: al ser partidas cortas, el juego se vuelve rápido y muy dinámico.
 
 ## Género
@@ -50,7 +55,8 @@ En este apartado se profundizará en las diferentes mecánicas que componen a Ki
 
 ## Tipo de cámara
 La cámara toma una perspectiva cenital que permite ver todo el espacio de juego y el lugar donde se encuentra la corona. Es una perspectiva utilizada en videojuegos como Hotline Miami o Darkwood.
-##Jugabilidad
+
+## Jugabilidad
 - Movimiento: los personajes podrán moverse por todo el escenario con WASD para progresar de forma horizontal y vertical, pero no poseen más mecánicas de movimiento como puedan ser esquivar, rodar o saltar.
 
 - La Corona: es el elemento principal del gameplay, quien tenga la corona durante más tiempo ganará la partida. Esta se encontrará al inicio del duelo en el centro del mapa, a la misma distancia de los dos jugadores. 
