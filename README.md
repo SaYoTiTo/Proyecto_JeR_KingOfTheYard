@@ -5,9 +5,9 @@ Proyecto para la asignatura Juegos en Red 2021/2022
 King of the Yard es un juego arcade 2D basado en el juego del pilla-pilla en el que dos niños pelean por la corona la cual les convertirá en el rey del patio.
 
 ## Integrantes
-David Sayalero Azaustre - d.sayalero.2018@alumnos.urjc.es - SaYoTiTo
-Alejandro Moya Gomez -a.moya.2018@alumnos.urjc.es - strikealex
-ALberto Rodriguez - - AlberVicky09
+- David Sayalero Azaustre - d.sayalero.2018@alumnos.urjc.es - SaYoTiTo
+- Alejandro Moya Gomez -a.moya.2018@alumnos.urjc.es - strikealex
+- ALberto Rodriguez - - AlberVicky09
 
 # 1-Introducción
 Este es el documento de diseño de juego de “King of the Yard”. Un juego casual para PC que pretende generar una jugabilidad competitiva simple para entretener a dos jugadores de forma offline o online.
