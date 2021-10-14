@@ -1,9 +1,10 @@
 var config = {
     type: Phaser.AUTO,
-    width: 420,
-    height: 320,
+    width: 1150,
+    height: 600,
     physics: {
-        default: 'arcade'
+        default: 'arcade',
+        arcade : {debug:true}
     },
     scene:[preloadScene, mainScene]
 };

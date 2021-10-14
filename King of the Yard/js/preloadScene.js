@@ -29,8 +29,11 @@ class preloadScene extends Phaser.Scene{
         this.load.on('progress', this.updateBar, {newGraphics:this.newGraphics,loadingText:loadingText});
         this.load.on('complete', this.complete, {scene: this.scene});
 
-        //Fondo
-        this.load.image('menuBg', 'assets/fondoPrueba.png');
+        //EscenaJuego
+        this.load.image('gameBg', 'assets/fondoJuego.png');
+        this.load.image('blueChar', 'assets/bluePersonaje.png');
+        this.load.image('redChar', 'assets/redPersonaje.png');
+        this.load.image('crown', 'assets/corona.png');
     }
 
     updateBar(percentage) {
