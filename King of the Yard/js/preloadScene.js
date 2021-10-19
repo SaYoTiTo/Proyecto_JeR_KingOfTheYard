@@ -25,6 +25,22 @@ class preloadScene extends Phaser.Scene{
         url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexsliderplugin.min.js';
         this.load.plugin('rexsliderplugin', url, true);
         
+        //Menu principal
+        this.load.video('menuBg', 'assets/fondoMenu.mp4', 'loadeddata', false, true);
+        this.load.image('titulo', 'assets/titulo.png');
+        this.load.image('playButton', 'assets/botonPlay.png');
+        this.load.image('playButtonPressed', 'assets/botonPlayPulsado.png');
+        this.load.image('quitButton', 'assets/botonQuit.png');
+        this.load.image('quitButtonPressed', 'assets/botonQuitPulsado.png');
+
+        //Menu seleccion
+        this.load.video('selectionBg', 'assets/fondoSeleccion.mp4', 'loadeddata', false, true);
+        this.load.image('offlineButton', 'assets/botonOffline.png');
+        this.load.image('offlineButtonPressed', 'assets/botonOfflinePulsado.png');
+        this.load.image('onlineButton', 'assets/botonOnline.png');
+        this.load.image('onlineButtonPressed', 'assets/botonOnlinePulsado.png');
+        this.load.image('onlineButtonOff', 'assets/botonOnlineAnulado.png');
+
         //Barra de carga
         this.load.on('progress', this.updateBar, {newGraphics:this.newGraphics,loadingText:loadingText});
         this.load.on('complete', this.complete, {scene: this.scene});
@@ -49,6 +65,6 @@ class preloadScene extends Phaser.Scene{
     complete() {
 	    console.log("COMPLETE!");
         game.scene.stop('preloadScene');
-        game.scene.start('mainScene');        
+        game.scene.start('mainMenu');        
     }
 }
