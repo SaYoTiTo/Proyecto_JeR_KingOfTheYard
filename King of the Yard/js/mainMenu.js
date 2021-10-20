@@ -6,8 +6,15 @@ class mainMenu extends Phaser.Scene{
 
     create(){
 
-        this.bg = this.add.video(575, 300,'menuBg');
-        this.bg.play(true);
+        this.anims.create({
+            key: 'menuBgAnim',
+            frameRate: 2.5,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('menuBg', {start: 0, end: 2}),
+        });
+
+        this.bg = this.add.sprite(575, 300, 'menuBg');
+        this.bg.anims.play('menuBgAnim');
 
         this.play = this.physics.add.sprite(575, 350, 'playButton');
         this.playPressed = this.physics.add.sprite(575, 350, 'playButtonPressed');

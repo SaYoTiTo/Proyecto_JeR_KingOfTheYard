@@ -6,13 +6,20 @@ class selectionMenu extends Phaser.Scene{
 
     create(){
 
-        this.bg = this.add.video(575, 300, 'selectionBg');
-        this.bg.play(true);
+        this.anims.create({
+            key: 'selectionBgAnim',
+            frameRate: 2.5,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('selectionBg', {start: 0, end: 2}),
+        });
 
-        this.online = this.physics.add.sprite(200, 350, 'onlineButtonOff').setScale(0.5).refreshBody();
+        this.bg = this.add.sprite(575, 300, 'selectionBg');
+        this.bg.anims.play('selectionBgAnim');
 
-        this.offline = this.physics.add.sprite(800, 350, 'offlineButton').setScale(0.5).refreshBody();
-        this.offlinePressed = this.physics.add.sprite(800, 350, 'offlineButtonPressed').setScale(0.5).refreshBody();
+        this.online = this.physics.add.sprite(300, 350, 'onlineButtonOff').setScale(0.7).refreshBody();
+
+        this.offline = this.physics.add.sprite(900, 350, 'offlineButton').setScale(0.7).refreshBody();
+        this.offlinePressed = this.physics.add.sprite(900, 350, 'offlineButtonPressed').setScale(0.7).refreshBody();
 
         this.offlinePressed.alpha = 0;
 

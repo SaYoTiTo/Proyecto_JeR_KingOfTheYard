@@ -9,15 +9,36 @@ class mainScene extends Phaser.Scene{
         this.input.mouse.disableContextMenu();
 
         //Background
-        this.physics.add.sprite(575, 300, 'gameBg', 0).setScale(0.6).refreshBody();
+        this.anims.create({
+            key: 'gameBgAnim',
+            frameRate: 2.5,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('gameBg', {start: 0, end: 2}),
+        });
+
+        this.bg = this.add.sprite(575, 300, 'gameBg');
+        this.bg.anims.play('gameBgAnim');
 
         //Characters
         this.red = this.physics.add.sprite(500,200, 'redChar', 0).setScale(0.25).refreshBody();
         this.red.setCollideWorldBounds(true);
         this.red.name = 'red';
+        this.anims.create({
+            key: 'redWalkAnim',
+            frameRate: 2.5,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('redCharAnim', {start: 0, end: 7}),
+        });
+
         this.blue = this.physics.add.sprite(650,400, 'blueChar', 0).setScale(0.25).refreshBody();
-        this.blue.name = 'blue';
         this.blue.setCollideWorldBounds(true);
+        this.blue.name = 'blue';   
+        this.anims.create({
+            key: 'blueWalkAnim',
+            frameRate: 2.5,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('blueCharAnim', {start: 0, end: 7}),
+        });
 
         //Crown
         this.crown = this.physics.add.sprite(360,240, 'crown', 0).setScale(0.3).refreshBody();
@@ -34,14 +55,17 @@ class mainScene extends Phaser.Scene{
         this.keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
         this.keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
         this.keyL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
-
+        
         //Colliders
         this.physics.add.collider(this.red, this.blue, stealCrown(this.crown));
         this.physics.add.collider(this.red, this.crown, getCrown(this.red, this.crown));
         this.physics.add.collider(this.blue, this.crown, getCrown(this.blue, this.crown));
+        
     }
 
     update(){
+
+        
 
         //Update red
         if (this.keyA.isDown)
@@ -59,6 +83,14 @@ class mainScene extends Phaser.Scene{
             this.red.body.velocity.y = 160;
         }else{
             this.red.body.velocity.y = 0;
+        }
+
+        //Red animation
+        if(this.red.body.velocity.x !== 0 || this.red.body.velocity.y !== 0){
+            if(!this.red.anims.isPlaying)
+                this.red.anims.play('redWalkAnim');
+        }else{
+            this.red.anims.stop();
         }
 
         //Update red rotation
@@ -80,7 +112,7 @@ class mainScene extends Phaser.Scene{
             }
         }else if(this.red.body.velocity.y < 0){
             this.red.body.rotation = 0;
-        }else{
+        }else if(this.red.body.velocity.y > 0){
             this.red.body.rotation = 180;
         }
 
@@ -102,6 +134,14 @@ class mainScene extends Phaser.Scene{
             this.blue.body.velocity.y = 0;
         }
 
+        //Blue animation
+        if(this.blue.body.velocity.x !== 0 || this.blue.body.velocity.y !== 0){
+            if(!this.blue.anims.isPlaying)
+                this.blue.anims.play('blueWalkAnim');
+        }else{
+            this.blue.anims.stop();
+        }
+
         //Update blue rotation
         if(this.blue.body.velocity.x > 0){
             if(this.blue.body.velocity.y > 0){
@@ -121,7 +161,7 @@ class mainScene extends Phaser.Scene{
             }
         }else if(this.blue.body.velocity.y < 0){
             this.blue.body.rotation = 0;
-        }else{
+        }else if(this.blue.body.velocity.y > 0){
             this.blue.body.rotation = 180;
         }
 
