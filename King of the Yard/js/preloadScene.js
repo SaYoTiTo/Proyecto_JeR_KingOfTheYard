@@ -47,6 +47,12 @@ class preloadScene extends Phaser.Scene{
         this.load.image('onlineButtonPressed', 'assets/botonOnlinePulsado.png');
         this.load.image('onlineButtonOff', 'assets/botonOnlineAnulado.png');
 
+        //Menu controles
+        this.load.spritesheet('controlsBg', 'assets/fondoTutorialSprite.png',{
+            frameWidth: 1200,
+            frameHeight: 675,
+        });
+
         //Barra de carga
         this.load.on('progress', this.updateBar, {newGraphics:this.newGraphics,loadingText:loadingText});
         this.load.on('complete', this.complete, {scene: this.scene});
@@ -82,6 +88,6 @@ class preloadScene extends Phaser.Scene{
     complete() {
 	    //console.log("COMPLETE!");
         game.scene.stop('preloadScene');
-        game.scene.start('mainMenu');        
+        game.scene.start('mainScene');        
     }
 }
