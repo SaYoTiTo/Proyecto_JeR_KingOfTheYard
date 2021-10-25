@@ -1,8 +1,10 @@
 var red;
 var blue;
 var crown;
+
 var boolSteal = false;
 var pointTimer;
+
 var redText;
 var blueText;
 
@@ -30,7 +32,7 @@ class mainScene extends Phaser.Scene{
         //Characters
 
         //Red
-        red = this.physics.add.sprite(500,200, 'redChar', 0).setScale(0.35).refreshBody();
+        red = this.physics.add.sprite(600,100, 'redChar', 0).setScale(0.35).refreshBody();
         red.setCollideWorldBounds(true);
         red.name = 'red';
         red.points = 0;
@@ -42,7 +44,7 @@ class mainScene extends Phaser.Scene{
         });
 
         //Blue
-        blue = this.physics.add.sprite(650,400, 'blueChar', 0).setScale(0.35).refreshBody();
+        blue = this.physics.add.sprite(600,575, 'blueChar', 0).setScale(0.35).refreshBody();
         blue.setCollideWorldBounds(true);
         blue.name = 'blue';
         blue.points = 0; 
@@ -54,10 +56,65 @@ class mainScene extends Phaser.Scene{
         });
 
         //Crown
-        crown = this.physics.add.sprite(360,240, 'crown', 0).setScale(0.4).refreshBody();
+        crown = this.physics.add.sprite(600,337.5, 'crown', 0).setScale(0.5).refreshBody();
         crown.attached = 'null';
         //crown.setCollideWorldBounds(true);
 
+        //Scene objects
+        this.anims.create({
+            key: 'stringsAnim',
+            frameRate: 2.5,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('strings', {start: 0, end: 3}),
+        });
+        this.strings = this.physics.add.sprite(220,240, 'strings', 0).setScale(0.8).refreshBody();
+        this.strings.anims.play('stringsAnim');
+        this.strings.body.setImmovable();
+
+        this.anims.create({
+            key: 'seatsAnim',
+            frameRate: 2.5,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('seats', {start: 0, end: 3}),
+        });
+        this.seats = this.physics.add.sprite(220,240, 'seats', 0).setScale(0.8).refreshBody();
+        this.seats.anims.play('seatsAnim');
+        this.seats.body.setImmovable();
+
+        this.swingBar = this.physics.add.sprite(220,225, 'swingBar', 0).setScale(0.8).refreshBody();
+        this.swingBar.body.setImmovable();
+
+        this.anims.create({
+            key: 'wheelAnim',
+            frameRate: 2.5,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('wheel', {start: 0, end: 2}),
+        });
+        this.wheel = this.physics.add.sprite(200,550, 'wheel', 0).setScale(0.65).refreshBody();
+        this.wheel.anims.play('wheelAnim');
+        this.wheel.body.setCircle(140);
+        this.wheel.body.setOffset(60,30);
+        this.wheel.body.setImmovable();
+
+        //Trees
+        this.anims.create({
+            key: 'treeAnim',
+            frameRate: 2.5,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('tree', {start: 0, end: 2}),
+        });
+        this.tree1 = this.physics.add.sprite(515,500, 'tree', 0).setScale(0.75).refreshBody();
+        this.tree1.anims.play('treeAnim');
+        this.tree1.depth = 30;
+        this.tree2 = this.physics.add.sprite(440,160, 'tree', 0).setScale(0.75).refreshBody();
+        this.tree2.anims.play('treeAnim');
+        this.tree2.rotation = -0.4;
+        this.tree2.depth = 30;
+        this.tree3 = this.physics.add.sprite(945,150, 'tree', 0).setScale(0.75).refreshBody();
+        this.tree3.anims.play('treeAnim');
+        this.tree3.rotation = 0.4;
+        this.tree3.depth = 30;
+        
         //Point texts
         redText = this.add.text(16, 16, 'Red Score: 0', { fontSize: '32px', fill: 'FF0000' });
         blueText = this.add.text(900, 16, 'Blue Score: 0', { fontSize: '32px', fill: '00FFF3' });
@@ -77,7 +134,14 @@ class mainScene extends Phaser.Scene{
         this.physics.add.collider(red, blue, stealCrown, null, this);
         this.physics.add.overlap(red, crown, getCrown, null, this);
         this.physics.add.overlap(blue, crown, getCrown, null, this);
-        
+        this.physics.add.collider(red, this.wheel);         
+        this.physics.add.collider(red, this.strings);        
+        this.physics.add.collider(red, this.swingBar);        
+        this.physics.add.collider(red, this.seats);               
+        this.physics.add.collider(blue, this.wheel);        
+        this.physics.add.collider(blue, this.strings);        
+        this.physics.add.collider(blue, this.swingBar);        
+        this.physics.add.collider(blue, this.seats);        
     }
 
     update(){        

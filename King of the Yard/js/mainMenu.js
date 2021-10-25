@@ -16,11 +16,13 @@ class mainMenu extends Phaser.Scene{
         this.bg = this.add.sprite(600, 337.5, 'menuBg');
         this.bg.anims.play('menuBgAnim');
 
-        this.play = this.physics.add.sprite(575, 350, 'playButton');
-        this.playPressed = this.physics.add.sprite(575, 350, 'playButtonPressed');
+        this.titulo = this.physics.add.sprite(600, 225, 'title').setScale(0.8).refreshBody();
+        
+        this.play = this.physics.add.sprite(575, 475, 'playButton').setScale(0.8).refreshBody();
+        this.playPressed = this.physics.add.sprite(575, 475, 'playButtonPressed').setScale(0.8).refreshBody();
 
-        this.quit = this.physics.add.sprite(575, 500, 'quitButton');
-        this.quitPressed = this.physics.add.sprite(575, 500, 'quitButtonPressed');
+        this.quit = this.physics.add.sprite(575, 600, 'quitButton').setScale(0.8).refreshBody();
+        this.quitPressed = this.physics.add.sprite(575, 600, 'quitButtonPressed').setScale(0.8).refreshBody();
 
         this.quitPressed.alpha = 0;
         this.playPressed.alpha = 0;
