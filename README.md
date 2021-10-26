@@ -140,16 +140,21 @@ En este diagrama de estados se muestran todas las pantallas que se podrán ver a
 ### Menú principal
 - **Botón Jugar:** Al pulsarlo lleva a la pantalla de Selección de Partida.
 - **Botón Salir**: al pulsarlo nos lleva de vuelta al Sistema Operativo.
-**![](https://lh4.googleusercontent.com/6kz1dUd5qaI5FyqX_-wuhK-9RRnQ9BIuvdWtDq3p_DhqIrEU0fv6vGHKy8C2lNE4R7MUWuTtX3zY1KzB0qp4L97yO8rDcFqLVAsUgVi78rZK1pbBWR1IA6A_TWbIfmUuTtutv9Rv=s1600)**
+**![](https://lh6.googleusercontent.com/EeOAzz-bhiVFKVCfgCuyLnxvBuWY7_T9ni3Rtew_okNn5ziwv_gQlYIehOlw5SpvD9OWkufruFhSeJ6owk68qxkWMt65Bt_kyWmMs84OvoiG7YR_Mt6FbWLviBIfB1wcjtjZrF4k=s1600)**
+**
+![](https://lh4.googleusercontent.com/6kz1dUd5qaI5FyqX_-wuhK-9RRnQ9BIuvdWtDq3p_DhqIrEU0fv6vGHKy8C2lNE4R7MUWuTtX3zY1KzB0qp4L97yO8rDcFqLVAsUgVi78rZK1pbBWR1IA6A_TWbIfmUuTtutv9Rv=s1600)**
 ### Selección de Partida
 - **Botón Offline**: Al pulsarlo lleva a la pantalla de Juego
 - **Botón Online**: Al pulsarlo el jugador esperará el emparejamiento y cuando se establezca nos lleva a la pantalla 
 de Juego.
+**![](https://lh4.googleusercontent.com/SweAG-bAAIXqtIh3TozVLa6Q0O90wO310X41ejuMs2RPuzBitjThTKXmJlXjLxwQ1bWJ-3Hnpq_YXdJN9x6O3mJP7oliOWAlZw5DVGzThe_ryTFQCNbmlkSuuaO1mG2Zi6FyYZ67=s1600)**
+
 **![](https://lh4.googleusercontent.com/eBuloRNUjioA2Q0e4WrzZMkUBz5KiWdk4dBE9dv6RyrQ_DVNLH41BKnW8y4bGzN4e0jtoM4xRf0fagnMbWvOy2pS6kfl2mDgrFSToyZ3Ic05OK6lIw5JvtnVF4ugCqPFQliWTta0=s1600)**
 
 ### Juego
 - Cuando acaba la partida te lleva a la pantalla de Victoria, en la que aparece el jugador que ha ganado. 
-**![](https://lh6.googleusercontent.com/VXY3mFMRUJtdwXhpa6YI7yJLfXkRMgKIKDmjgG8DcnWs_H2SUBHd03oeWsJaPogou3VnFrK8Di5bjL3jsiLktRQlkfFQvxuesiaB7rYY5gyrwSymJ5lR-I1nN3FWv8KBkANTorGP=s1600)** 
+**![](https://lh4.googleusercontent.com/J5wuvDuDZmc1uh5AimaBRO7UYN7CPDDDQUvtUdXlN1S12wffT6Mq5j-LVV7DB1Keo-1iWYBrRUDxhLbADsQa_7rWLOzSuSBo-pUL4mU-5LZiHw3L0-W606Eez_Tz6PZoJQrARmzi=s1600)**
+**![](https://lh5.googleusercontent.com/lSNsb4SFkFiqg90pqH1ZQzc9wbLGcNDr48xwTseADx28b4hpyiHTPYU3lw2pApR3dymEKw9KMMhYenHojE8LgiEEhTUYOkv-Ecj0LQ2lZBnFP7cShVU_GtwtBZhpBCKfYzHoJ6vx=s1600)**
 ### Victoria
 - **Botón Salir**: te devuelve a la pantalla de Selección de Partida.
 - **![](https://lh6.googleusercontent.com/wKAUZu94vBynwhndnXmR0kS0NIVX5k1pcYnh8Nff5xvRXgy1voK8szhYyOeEUWvto9KTbeNdeS3chaGkk1jJAVqJjDthzVAJ_WIIoHx9oi1nQ-8zCdJ_2ZrAK8H6oVhBvQ2VzqiY=s1600)**
