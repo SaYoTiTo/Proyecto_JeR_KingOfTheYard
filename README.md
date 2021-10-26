@@ -107,7 +107,7 @@ Descripción: Es uno de los protagonistas del juego. Es uno de los niños que de
 Descripción: Es uno de los protagonistas del juego. Es uno de los niños que desea conseguir el trono de forma legítima y gobernar el patio. Todo el mundo le apoda Blue porque le encanta ese color y lo lleva en su ropa todos los días. Es el gemelo de Red (aunque nació después y es mucho más listo que su hermano).
 
 # Movimiento y físicas
-##Interacción entre elementos
+## Interacción entre elementos
 
 King of the Yard se desarrolla en un plano 2D y ambos jugadores pueden desplazarse por él. El escenario tendrá varios obstáculos que podrán ralentizar o bloquear a los jugadores, para que sea más fácil alcanzar a uno o alejarse el otro.
 
@@ -123,13 +123,10 @@ Personaje - Personaje (cuando un jugador se acerque al otro y le robe la corona,
 Escenario - Personaje (Cuando un jugador choque con con uno de los obstáculos móviles será stuneado y cuando pase por encima de unas zonas con lodo o barro será ralentizado).
 Personaje - Ítems (cuando un jugador se acerque a un “power up” este lo obtendrá y se le otorgará automáticamente).
 
-##Controles
+## Controles
 
 - Movimiento Pj1: teclas W, A, S, D.
 - Movimiento Pj2: teclas I, J, K, L.
-
-
-
 
 
 # 3-Interfaz
@@ -142,14 +139,19 @@ En este diagrama de estados se muestran todas las pantallas que se podrán ver a
 ### Menú principal
 - Botón Jugar: Al pulsarlo lleva a la pantalla de Selección de Partida.
 - Botón Salir: al pulsarlo nos lleva de vuelta al Sistema Operativo.
-
+**![](https://lh4.googleusercontent.com/6kz1dUd5qaI5FyqX_-wuhK-9RRnQ9BIuvdWtDq3p_DhqIrEU0fv6vGHKy8C2lNE4R7MUWuTtX3zY1KzB0qp4L97yO8rDcFqLVAsUgVi78rZK1pbBWR1IA6A_TWbIfmUuTtutv9Rv=s1600)**
 ### Selección de Partida
 - Botón Offline: Al pulsarlo lleva a la pantalla de Juego
-- Botón Online: Al pulsarlo el jugador esperará el emparejamiento y cuando se establezca nos lleva a la pantalla de Juego.
+- Botón Online: Al pulsarlo el jugador esperará el emparejamiento y cuando se establezca nos lleva a la pantalla 
+de Juego.
+**![](https://lh4.googleusercontent.com/eBuloRNUjioA2Q0e4WrzZMkUBz5KiWdk4dBE9dv6RyrQ_DVNLH41BKnW8y4bGzN4e0jtoM4xRf0fagnMbWvOy2pS6kfl2mDgrFSToyZ3Ic05OK6lIw5JvtnVF4ugCqPFQliWTta0=s1600)**
+
 ### Juego
 - Cuando acaba la partida te lleva a la pantalla de Victoria, en la que aparece el jugador que ha ganado. 
-Victoria
+**![](https://lh6.googleusercontent.com/VXY3mFMRUJtdwXhpa6YI7yJLfXkRMgKIKDmjgG8DcnWs_H2SUBHd03oeWsJaPogou3VnFrK8Di5bjL3jsiLktRQlkfFQvxuesiaB7rYY5gyrwSymJ5lR-I1nN3FWv8KBkANTorGP=s1600)** 
+### Victoria
 - Botón Salir: te devuelve a la pantalla de Selección de Partida.
+- **![](https://lh6.googleusercontent.com/wKAUZu94vBynwhndnXmR0kS0NIVX5k1pcYnh8Nff5xvRXgy1voK8szhYyOeEUWvto9KTbeNdeS3chaGkk1jJAVqJjDthzVAJ_WIIoHx9oi1nQ-8zCdJ_2ZrAK8H6oVhBvQ2VzqiY=s1600)**
 
 # 4-Arte
 Uno de los puntos en los que se sustenta King of the Yard es la competitividad de los jugadores y la simpleza de un juego de pilla-pilla; por eso el estilo es un cartoon 2D. La trama es simple ya que el juego no tiene intención de ser complicado, ya que el objetivo del juego es que los jugadores compitan para convertirse en el nuevo rey del patio y se diviertan consiguiendoló.
@@ -159,7 +161,9 @@ Las imágenes usadas están en formato .png por su alta calidad y la facilidad d
 
 ## Sprites
 - Blue (animación estática, de movimiento y stun)
+**![](https://lh3.googleusercontent.com/LKfyDLtswzx1-5cFJqlzW5eAhQul6v69i5a8-wArMqjIVeLlfd5QRMYcslckkQWJkg2gewqFhLRATljSd-Zj3G9HiWtdcyZUACIwq8E_TZ6ibq9pqI9jmtUVBU6drQiSKqVmefAM=s1600)**
 - Red (animación estática, de movimiento y stun)
+**![](https://lh3.googleusercontent.com/GSRVqQEPgrcFS1pQ67_2l9sDCwZe5916P9s3pkeq09e6C_tO7sQJJKVQXkwxuq5T4QTHq7THAv0Xw6_JelVsQlVfjWu2X1JrkspNto2NAP2XEOA9TU5d6YKjafbEb7gvBdHZPmTM=s1600)**
 - Power Ups (animación estática)
 - Objetos móviles (animación de movimiento)
 ## Tiles
@@ -169,9 +173,9 @@ Las imágenes usadas están en formato .png por su alta calidad y la facilidad d
 - Otros
 # Audio
 ## Música
-- Menú principal: música tranquila pero con un tono alegre y divertido.
-- Juego: una melodía también alegre, pero más enérgica para causar una sensación de euforia en el jugador.
-- Victoria: música triunfal y burlesca que sirve para que el ganador se regodee en su victoria.
+- [Menú principal](https://github.com/SaYoTiTo/Proyecto_JeR_KingOfTheYard/blob/main/King%20of%20the%20Yard/assets/Music/GameMusic.wav)
+[- Juego](https://github.com/SaYoTiTo/Proyecto_JeR_KingOfTheYard/blob/main/King%20of%20the%20Yard/assets/Music/Menu%20Music.wav)
+[- Victoria](https://github.com/SaYoTiTo/Proyecto_JeR_KingOfTheYard/blob/main/King%20of%20the%20Yard/assets/Music/VictoryMusic.wav)
 ## Efectos
 - Correr: sonido de pisadas rápidas.
 - Efecto de agua fluyendo.
