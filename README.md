@@ -4,6 +4,8 @@ Proyecto para la asignatura Juegos en Red 2021/2022
 
 King of the Yard es un juego arcade 2D basado en el juego del pilla-pilla en el que dos niños pelean por la corona la cual les convertirá en el rey del patio.
 
+**![](https://lh4.googleusercontent.com/LHMFtg_7dR-Qs71Dj0kLi7DdTLRKCHyBE1X4qwcIopSspTQOXnmCSfgdgRq8lcjFwfcnelrRJAxSlpRBkXFtcf6on78OlBA1BwDzRAFMf-5O22r4G1Gd5VN_M9VsMCVkHcirG5l4=s1600)**
+
 ## Integrantes
 - David Sayalero Azaustre - d.sayalero.2018@alumnos.urjc.es - SaYoTiTo
 - Alejandro Moya Gomez -a.moya.2018@alumnos.urjc.es - strikealex
@@ -50,7 +52,10 @@ El mapa, observado por los jugadores de forma cenital, está compuesto por varia
 - Combate: al colisionar un personaje con el poseedor de la corona, este quedará aturdido y el otro se llevará la corona consigo. Desde ese momento el contador comenzará a subir.
 
 ## Estilo Visual
-King of the Yard tendrá un apartado visual bastante sencillo usando simpáticos sprites de estética cartoon tanto para personajes como escenarios. 
+King of the Yard tendrá un apartado visual bastante sencillo usando simpáticos sprites de estética doodle tanto para personajes como escenarios. 
+
+**![](https://lh3.googleusercontent.com/K7s_tRjQaycc5SH3Y1j-g7tFpWwjFily7ujfgx9yQi_qhvdqyTpQ3yuOFoGOJxtRRrGYTUUYv5YftMJllV-VlwpuvKjipNU2TX1b9xwCAnWguaR0wz-5rX25Ox4ahvZYOGuOze6_=s1600)**
+
 
 ## Alcance
 El objetivo principal es desarrollar un juego familiar y amigable al que toda la familia pueda jugar de forma esporádica. Con el tiempo, podrán añadirse más personajes e incluso aportarles diferencias en cuanto a sus habilidades (velocidad, tiempo de aturdimiento).
@@ -60,6 +65,8 @@ En este apartado se profundizará en las diferentes mecánicas que componen a Ki
 
 ## Tipo de cámara
 La cámara toma una perspectiva cenital que permite ver todo el espacio de juego y el lugar donde se encuentra la corona. Es una perspectiva utilizada en videojuegos como Hotline Miami o Darkwood.
+
+**![](https://lh6.googleusercontent.com/A-jz7QlAg8-wUlL8iVdisLyy88MDixK8RHnOiPF0BEUfcPHVtfz06EBqYqepW-KhJIZ54fNl6_IEjanY615kH3loOAmJMykCpJKruFhxl2rBOkbxPW-mKiqm2Pk6amHcogl6UUpQ=s1600)**
 
 ## Jugabilidad
 - Movimiento: los personajes podrán moverse por todo el escenario con WASD para progresar de forma horizontal y vertical, pero no poseen más mecánicas de movimiento como puedan ser esquivar, rodar o saltar.
@@ -84,7 +91,9 @@ Es una única partida en la que se decide el ganador. Un jugador sale victorioso
 ## Flujo de juego
 A lo largo de esta sección se detalla el transcurso de una partida típica de King of the Yard. Se comentarán los pasos que han de seguir los jugadores desde el inicio del juego hasta completar el juego. Poco a poco vamos desgranando el funcionamiento exacto del juego, en esta sección describimos las mecánicas. Más adelante se definirá el contenido de cada pantalla.
 
-El jugador inicia King of the Yard y se le presenta el Menú Principal. Si desea iniciar una partida el Jugador seleccionará la opción Jugar. Esta opción llevará al jugador a la pantalla de Elección de Modo en el que se puede elegir un duelo offline o un duelo online.
+El jugador inicia King of the Yard y se le presenta el Menú Principal. Si desea iniciar una partida el Jugador seleccionará la opción Jugar. Esta opción llevará al jugador a la pantalla de Elección de Modo en el que se puede elegir un duelo offline o un duelo online. En cualquiera de los dos casos, se presentara primero una pantalla de instrucciones para aprender a jugar.
+
+**![](https://lh5.googleusercontent.com/PcGCPWBcdcBOxAMwikl-2_OmUrpPSNm_2s7BuBAv9_riyG3260EfnxXBxKnCg7VnXAKEzaCW94I_uHrW-t0Enkpu-jLlUpozs4-7fqtjn1nfUyeWUqeBnmJUKi_p5Lf6O3FwEeIL=s1600)**
 
 En el formato offline, la partida empezará directamente después de una pequeña cuenta atrás qué dará tiempo a los jugadores a posicionarse en el teclado. La partida seguirá adelante hasta que uno de los dos jugadores consiga el máximo de puntos por mantener la corona. Tras eso se pasará a una pantalla de resultados y el juego comenzará de nuevo.
 
