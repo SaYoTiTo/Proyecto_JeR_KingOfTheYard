@@ -30,7 +30,7 @@ class preloadScene extends Phaser.Scene{
             frameWidth: 1200,
             frameHeight: 675,
         });
-        this.load.image('titulo', 'assets/titulo.png');
+        this.load.image('title', 'assets/titulo.png');
         this.load.image('playButton', 'assets/botonPlay.png');
         this.load.image('playButtonPressed', 'assets/botonPlayPulsado.png');
         this.load.image('quitButton', 'assets/botonQuit.png');
@@ -46,6 +46,8 @@ class preloadScene extends Phaser.Scene{
         this.load.image('onlineButton', 'assets/botonOnline.png');
         this.load.image('onlineButtonPressed', 'assets/botonOnlinePulsado.png');
         this.load.image('onlineButtonOff', 'assets/botonOnlineAnulado.png');
+        this.load.image('selectionTxt', 'assets/selectionText.png');
+        
 
         //Menu controles
         this.load.spritesheet('controlsBg', 'assets/fondoTutorialSprite.png',{
@@ -73,8 +75,6 @@ class preloadScene extends Phaser.Scene{
             frameHeight: 160,
         });
         this.load.image('crown', 'assets/corona.png');
-<<<<<<< Updated upstream
-=======
 
         this.load.spritesheet('tree', 'assets/Arbol/arbolSpriteSheet.png', {
             frameWidth: 400,
@@ -92,12 +92,11 @@ class preloadScene extends Phaser.Scene{
             frameWidth: 400,
             frameHeight: 350,
         });
+
         this.load.image('swingBar', 'assets/Columpio/columpioBarraXS.png');
         this.load.image('wall', 'assets/borde.png');
-                
->>>>>>> Stashed changes
+               
     }
-
     updateBar(percentage) {
         this.newGraphics.clear();
         this.newGraphics.fillStyle(0x3587e2, 1);

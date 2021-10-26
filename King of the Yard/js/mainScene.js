@@ -1,8 +1,10 @@
 var red;
 var blue;
 var crown;
+
 var boolSteal = false;
 var pointTimer;
+
 var redText;
 var blueText;
 
@@ -32,7 +34,7 @@ class mainScene extends Phaser.Scene{
         //Characters
 
         //Red
-        red = this.physics.add.sprite(500,200, 'redChar', 0).setScale(0.35).refreshBody();
+        red = this.physics.add.sprite(600,100, 'redChar', 0).setScale(0.35).refreshBody();
         red.setCollideWorldBounds(true);
         red.name = 'red';
         red.points = 0;
@@ -45,7 +47,7 @@ class mainScene extends Phaser.Scene{
         });
 
         //Blue
-        blue = this.physics.add.sprite(650,400, 'blueChar', 0).setScale(0.35).refreshBody();
+        blue = this.physics.add.sprite(600,575, 'blueChar', 0).setScale(0.35).refreshBody();
         blue.setCollideWorldBounds(true);
         blue.name = 'blue';
         blue.points = 0;
@@ -58,12 +60,10 @@ class mainScene extends Phaser.Scene{
         });
 
         //Crown
-        crown = this.physics.add.sprite(360,240, 'crown', 0).setScale(0.4).refreshBody();
+        crown = this.physics.add.sprite(600,337.5, 'crown', 0).setScale(0.5).refreshBody();
         crown.attached = 'null';
         //crown.setCollideWorldBounds(true);
 
-<<<<<<< Updated upstream
-=======
         //Scene objects
         this.anims.create({
             key: 'stringsAnim',
@@ -77,11 +77,14 @@ class mainScene extends Phaser.Scene{
         this.anims.create({
             key: 'seatsAnim',
             frameRate: 1.5,
+        this.strings.body.setImmovable();
             repeat: -1,
             frames: this.anims.generateFrameNumbers('seats', {start: 0, end: 3}),
         });
+
         this.seats = this.physics.add.sprite(220,240, 'seats', 0).setScale(0.8).refreshBody();
         this.seats.anims.play('seatsAnim');
+        this.seats.body.setImmovable();
 
         this.swingBar = this.physics.add.sprite(220,225, 'swingBar', 0).setScale(0.8).refreshBody();
         this.swingBar.body.setImmovable();
@@ -116,7 +119,7 @@ class mainScene extends Phaser.Scene{
         this.tree3.anims.play('treeAnim');
         this.tree3.rotation = 0.4;
         this.tree3.depth = 30;
-        
+
         //Scene walls
         this.walls = this.physics.add.staticGroup();
         this.walls.create(937, 435, 'wall').setScale(3.3,0.3).refreshBody();
@@ -137,8 +140,7 @@ class mainScene extends Phaser.Scene{
         //Slowing places
         floorSlow = this.physics.add.sprite(935,510, 'wall').setScale(3.3,3.2).refreshBody();
         floorSlow.setVisible(false);
-        
->>>>>>> Stashed changes
+
         //Point texts
         redText = this.add.text(16, 16, 'Red Score: 0', { fontSize: '32px', fill: 'FF0000' });
         blueText = this.add.text(900, 16, 'Blue Score: 0', { fontSize: '32px', fill: '00FFF3' });
@@ -158,16 +160,12 @@ class mainScene extends Phaser.Scene{
         this.physics.add.collider(red, blue, stealCrown, null, this);
         this.physics.add.overlap(red, crown, getCrown, null, this);
         this.physics.add.overlap(blue, crown, getCrown, null, this);
-<<<<<<< Updated upstream
-        
-=======
         this.physics.add.collider(red, this.wheel);               
         this.physics.add.collider(blue, this.wheel); 
         this.physics.add.collider(red, this.walls);
         this.physics.add.collider(blue, this.walls);
         this.physics.add.overlap(red, floorSlow, reduceSpeed, null, this);
         this.physics.add.overlap(blue, floorSlow, reduceSpeed, null, this);
->>>>>>> Stashed changes
     }
 
     update(){        
