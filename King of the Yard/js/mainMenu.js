@@ -1,3 +1,5 @@
+var bgMusic;
+
 class mainMenu extends Phaser.Scene{
 
     constructor(){
@@ -35,6 +37,10 @@ class mainMenu extends Phaser.Scene{
         this.enterKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.selection = 0;
+
+        bgMusic = this.sound.add('menuMusic');
+        bgMusic.loop = true;
+        bgMusic.play();
     }
 
     update(){

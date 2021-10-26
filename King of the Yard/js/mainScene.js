@@ -13,6 +13,15 @@ var floorSlow;
 var animDone = false;
 var anim = 0;
 
+var gameBgMusic;
+var punchSound;
+var victoryMusic;
+
+var tp0;
+var tp1;
+var tpTimer;
+var tpActive = true;
+
 class mainScene extends Phaser.Scene{
 
     constructor(){
@@ -48,6 +57,13 @@ class mainScene extends Phaser.Scene{
             repeat: 0,
             frames: this.anims.generateFrameNumbers('redCharAnim', {start: 0, end: 7}),
         });
+        this.anims.create({
+            key: 'redStunAnim',
+            frameRate: 1.5,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('redStun', {start: 0, end: 3}),
+        });
+
 
         //Blue
         blue = this.physics.add.sprite(600,575, 'blueChar', 0).setScale(0.35).refreshBody();
@@ -61,6 +77,12 @@ class mainScene extends Phaser.Scene{
             repeat: 0,
             frames: this.anims.generateFrameNumbers('blueCharAnim', {start: 0, end: 7}),
         });
+        this.anims.create({
+            key: 'blueStunAnim',
+            frameRate: 1.5,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('blueStun', {start: 0, end: 3}),
+        });
 
         //Crown
         crown = this.physics.add.sprite(600,337.5, 'crown', 0).setScale(0.5).refreshBody();
@@ -73,7 +95,7 @@ class mainScene extends Phaser.Scene{
             repeat: -1,
             frames: this.anims.generateFrameNumbers('strings', {start: 0, end: 3}),
         });
-        this.strings = this.physics.add.sprite(220,240, 'strings', 0).setScale(0.8).refreshBody();
+        this.strings = this.add.sprite(220,240, 'strings', 0).setScale(0.8);
         this.strings.anims.play('stringsAnim');
 
         this.anims.create({
@@ -83,9 +105,8 @@ class mainScene extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers('seats', {start: 0, end: 3}),
         });
 
-        this.seats = this.physics.add.sprite(220,240, 'seats', 0).setScale(0.8).refreshBody();
+        this.seats = this.add.sprite(220,240, 'seats', 0).setScale(0.8);
         this.seats.anims.play('seatsAnim');
-        this.seats.body.setImmovable();
 
         this.swingBar = this.physics.add.sprite(220,225, 'swingBar', 0).setScale(0.8).refreshBody();
         this.swingBar.body.setImmovable();
@@ -96,7 +117,7 @@ class mainScene extends Phaser.Scene{
             repeat: -1,
             frames: this.anims.generateFrameNumbers('wheel', {start: 0, end: 2}),
         });
-        this.wheel = this.physics.add.sprite(200,535, 'wheel', 0).setScale(0.65).refreshBody();
+        this.wheel = this.physics.add.sprite(235,510, 'wheel', 0).setScale(0.65).refreshBody();
         this.wheel.anims.play('wheelAnim');
         this.wheel.body.setCircle(140);
         this.wheel.body.setOffset(60,30);
@@ -115,7 +136,7 @@ class mainScene extends Phaser.Scene{
         this.swing2Top.setVisible(false);
         this.swing2Top.body.setImmovable();
         this.swing2Bot = this.physics.add.sprite(270, 320, 'wall', 0).setScale(0.8).refreshBody();
-        this.swing1Bot.setVisible(false);
+        this.swing2Bot.setVisible(false);
         this.swing2Bot.body.setImmovable();
         this.swing2Mid = this.physics.add.sprite(270, 240, 'wall', 0).setScale(0.8).refreshBody();
         this.swing2Mid.setVisible(false);
@@ -128,14 +149,14 @@ class mainScene extends Phaser.Scene{
             repeat: -1,
             frames: this.anims.generateFrameNumbers('tree', {start: 0, end: 2}),
         });
-        this.tree1 = this.physics.add.sprite(515,500, 'tree', 0).setScale(0.75).refreshBody();
+        this.tree1 = this.add.sprite(515,500, 'tree', 0).setScale(0.75);
         this.tree1.anims.play('treeAnim');
         this.tree1.depth = 30;
-        this.tree2 = this.physics.add.sprite(440,160, 'tree', 0).setScale(0.75).refreshBody();
+        this.tree2 = this.add.sprite(440,160, 'tree', 0).setScale(0.75);
         this.tree2.anims.play('treeAnim');
         this.tree2.rotation = -0.4;
         this.tree2.depth = 30;
-        this.tree3 = this.physics.add.sprite(945,150, 'tree', 0).setScale(0.75).refreshBody();
+        this.tree3 = this.add.sprite(945,150, 'tree', 0).setScale(0.75);
         this.tree3.anims.play('treeAnim');
         this.tree3.rotation = 0.4;
         this.tree3.depth = 30;
@@ -159,13 +180,30 @@ class mainScene extends Phaser.Scene{
 
         //Slowing places
         floorSlow = this.physics.add.group();
-        floorSlow.create(935,510, 'wall').setScale(3.3, 3.2).refreshBody();    
+        floorSlow.create(935, 510, 'wall').setScale(3.3, 3.2).refreshBody();    
+        floorSlow.create(975, 260, 'wall').setScale(0.7, 1.5).refreshBody();    
+        floorSlow.create(792, 80, 'wall').setScale(0.6, 1.2).refreshBody();    
+        floorSlow.create(305, 80, 'wall').setScale(0.7, 1.2).refreshBody();    
+        floorSlow.create(500, 305, 'wall').setScale(0.8, 1.2).refreshBody();    
+        floorSlow.create(385, 590, 'wall').setScale(0.8, 1.4).refreshBody();    
+        floorSlow.create(385, 590, 'wall').setScale(0.8, 1.4).refreshBody();    
+        floorSlow.create(120, 445, 'wall').setScale(0.6, 1.1).refreshBody();    
 
         var child = floorSlow.getChildren();
         for (var i = 0; i < child.length; i++)
         {
             child[i].setVisible(false);
         }
+
+        //Tps
+        tp1 = this.physics.add.sprite(90, 55, 'wall', 0).setScale(0.6,1.1);
+        tp1.num = 1;
+        tp1.setVisible(false);
+        tp1.body.setImmovable();
+        tp0 = this.physics.add.sprite(1150, 635, 'wall', 0).setScale(0.6,1.1);
+        tp0.num = 0;
+        tp0.setVisible(false);
+        tp0.setImmovable();
 
         //Point texts
         redText = this.add.text(16, 16, 'Red Score: 0', { fontSize: '32px', fill: 'FF0000' });
@@ -209,6 +247,16 @@ class mainScene extends Phaser.Scene{
         this.physics.add.collider(blue, this.swing2Top, stun, null, this);
         this.physics.add.collider(blue, this.swing2Mid, stun, null, this);
         this.physics.add.collider(blue, this.swing2Bot, stun, null, this);
+        
+        this.physics.add.collider(red, tp0, tp, null, this);
+        this.physics.add.collider(red, tp1, tp, null, this);
+        this.physics.add.collider(blue, tp0, tp, null, this);
+        this.physics.add.collider(blue, tp1, tp, null, this);
+
+        //Music
+        gameBgMusic = this.sound.add('gameMusic');
+        gameBgMusic.loop = true;
+        gameBgMusic.play();
     }
 
     update(){        
@@ -377,8 +425,13 @@ class mainScene extends Phaser.Scene{
             if(crown.attached === red.name){
                 //Depends on red position
                 if(red.body.velocity.x !== 0 || red.body.velocity.y !== 0){
-                    crown.x = red.x - red.body.velocity.x / 2.5;
-                    crown.y = red.y - red.body.velocity.y / 2.5;
+                    if(red.speedMod !== 1){
+                        crown.x = red.x - red.body.velocity.x / 1.5;
+                        crown.y = red.y - red.body.velocity.y / 1.5;
+                    }else{
+                        crown.x = red.x - red.body.velocity.x / 2.5;
+                        crown.y = red.y - red.body.velocity.y / 2.5;
+                    }
                 }else{
                     crown.x = red.x;
                     crown.y = red.y - 60;
@@ -387,8 +440,13 @@ class mainScene extends Phaser.Scene{
             }else if(crown.attached === blue.name){
                 //Depends on blue position
                 if(blue.body.velocity.x !== 0 || blue.body.velocity.y !== 0){
-                    crown.x = blue.x - blue.body.velocity.x / 2.5;
-                    crown.y = blue.y - blue.body.velocity.y / 2.5;
+                    if(blue.speedMod !== 1){
+                        crown.x = blue.x - blue.body.velocity.x / 1.5;
+                        crown.y = blue.y - blue.body.velocity.y / 1.5;
+                    }else{
+                        crown.x = blue.x - blue.body.velocity.x / 2.5;
+                        crown.y = blue.y - blue.body.velocity.y / 2.5;
+                    }                    
                 }else{
                     crown.x = blue.x;
                     crown.y = blue.y - 60;
@@ -414,6 +472,7 @@ function stealCrown(){
         if(crown.attached === 'red'){
             crown.attached = 'blue';
             console.log("La corona ahora es de " + crown.attached);
+            red.anims.play("redStunAnim");
             red.speedMod = 0;
             //Creates a timer to stun
             stun = this.time.addEvent({ delay: 2000, callback: () => red.speedMod = 1, callbackScope: this});
@@ -421,6 +480,7 @@ function stealCrown(){
             crown.attached = 'red';
             console.log("La corona ahora es de " + crown.attached);
             //Creates a timer to stun
+            blue.anims.play("blueStunAnim");
             blue.speedMod = 0;
             stun = this.time.addEvent({ delay: 2000, callback: () => blue.speedMod = 1, callbackScope: this});
         } 
@@ -439,6 +499,7 @@ function givePoints(){
         red.points++;
         redText.setText('Red Score: ' + red.points);
         if(red.points === 10){
+            gameBgMusic.stop();
             this.scene.stop('controlsMenu');
             this.scene.start('redWinScene');
         }
@@ -446,6 +507,7 @@ function givePoints(){
         blue.points++;
         blueText.setText('Blue Score: ' + blue.points);
         if(blue.points === 10){
+            gameBgMusic.stop();
             this.scene.stop('controlsMenu');
             this.scene.start('blueWinScene');
         }
@@ -454,7 +516,7 @@ function givePoints(){
 
 function reduceSpeed(player){
     player.slowed = true;
-    player.speedMod = 0.8;
+    player.speedMod = 0.6;
 }
 
 function increaseSpeed(player){
@@ -465,7 +527,28 @@ function increaseSpeed(player){
 function stun(player, object){
     if(crown.attached === player.name)
         crown.attached = 'null';
+    if(!player.anims.isPlaying)
+        player.anims.play(player.name + "StunAnim");
     player.speedMod = 0;
     //Creates a timer to stun
     stun = this.time.addEvent({ delay: 2000, callback: () => player.speedMod = 1, callbackScope: this});
+}
+
+function tp(player, tp){
+    if(tpActive){
+        if(tp.num === 0){
+            player.x = 200;
+            player.y = 50;
+            //Creates a timer to reestablish tp
+            tpActive = false;
+            tpTimer = this.time.addEvent({ delay: 3000, callback: () => tpActive = true, callbackScope: this});
+        }else{
+            player.x = 1175;
+            player.y = 550;
+            //Creates a timer to reestablish tp
+            tpActive = false;
+            tpTimer = this.time.addEvent({ delay: 3000, callback: () => tpActive = true, callbackScope: this});
+         
+        }
+    }
 }
