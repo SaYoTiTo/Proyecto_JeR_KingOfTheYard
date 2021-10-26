@@ -73,6 +73,29 @@ class preloadScene extends Phaser.Scene{
             frameHeight: 160,
         });
         this.load.image('crown', 'assets/corona.png');
+<<<<<<< Updated upstream
+=======
+
+        this.load.spritesheet('tree', 'assets/Arbol/arbolSpriteSheet.png', {
+            frameWidth: 400,
+            frameHeight: 350,
+        });
+        this.load.spritesheet('strings', 'assets/Columpio/cuerdaSpritesheet.png', {
+            frameWidth: 400,
+            frameHeight: 350,
+        });        
+        this.load.spritesheet('seats', 'assets/Columpio/asientoSpritesheet.png', {
+            frameWidth: 400,
+            frameHeight: 350,
+        });
+        this.load.spritesheet('wheel', 'assets/Rueda/ruedaSpritesheet.png', {
+            frameWidth: 400,
+            frameHeight: 350,
+        });
+        this.load.image('swingBar', 'assets/Columpio/columpioBarraXS.png');
+        this.load.image('wall', 'assets/borde.png');
+                
+>>>>>>> Stashed changes
     }
 
     updateBar(percentage) {
