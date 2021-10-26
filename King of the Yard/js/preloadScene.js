@@ -92,11 +92,11 @@ class preloadScene extends Phaser.Scene{
             frameWidth: 400,
             frameHeight: 350,
         });
-        this.load.image('swingBar', 'assets/Columpio/columpioBarra.png');
-        
-        
-    }
 
+        this.load.image('swingBar', 'assets/Columpio/columpioBarraXS.png');
+        this.load.image('wall', 'assets/borde.png');
+               
+    }
     updateBar(percentage) {
         this.newGraphics.clear();
         this.newGraphics.fillStyle(0x3587e2, 1);
