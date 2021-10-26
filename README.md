@@ -174,8 +174,8 @@ Las imágenes usadas están en formato .png por su alta calidad y la facilidad d
 # Audio
 ## Música
 - [Menú principal](https://github.com/SaYoTiTo/Proyecto_JeR_KingOfTheYard/blob/main/King%20of%20the%20Yard/assets/Music/GameMusic.wav)
-[- Juego](https://github.com/SaYoTiTo/Proyecto_JeR_KingOfTheYard/blob/main/King%20of%20the%20Yard/assets/Music/Menu%20Music.wav)
-[- Victoria](https://github.com/SaYoTiTo/Proyecto_JeR_KingOfTheYard/blob/main/King%20of%20the%20Yard/assets/Music/VictoryMusic.wav)
+- [Juego](https://github.com/SaYoTiTo/Proyecto_JeR_KingOfTheYard/blob/main/King%20of%20the%20Yard/assets/Music/Menu%20Music.wav)
+- [Victoria](https://github.com/SaYoTiTo/Proyecto_JeR_KingOfTheYard/blob/main/King%20of%20the%20Yard/assets/Music/VictoryMusic.wav)
 ## Efectos
 - Correr: sonido de pisadas rápidas.
 - Efecto de agua fluyendo.
