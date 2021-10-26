@@ -77,7 +77,6 @@ class mainScene extends Phaser.Scene{
         this.anims.create({
             key: 'seatsAnim',
             frameRate: 1.5,
-        this.strings.body.setImmovable();
             repeat: -1,
             frames: this.anims.generateFrameNumbers('seats', {start: 0, end: 3}),
         });
