@@ -47,7 +47,10 @@ class preloadScene extends Phaser.Scene{
         this.load.image('selectionTxt', 'assets/selectionText.png');
         
         //Menu configuracion
-        this.load.image('configBg', 'assets/Settings/FondoSettings.png');
+        this.load.spritesheet('configBg', 'assets/Settings/settingsSpritesheet.png', {
+            frameWidth: 1200,
+            frameHeight: 675,
+        });
         this.load.spritesheet('soundOff', 'assets/Settings/sonidoMutedSpriteSheet.png', {
             frameWidth: 600,
             frameHeight: 500,

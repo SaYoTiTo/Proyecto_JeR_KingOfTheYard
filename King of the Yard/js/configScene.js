@@ -9,7 +9,15 @@ class configScene extends Phaser.Scene{
 
     create(){
 
-        this.bg = this.add.sprite(600, 400, 'configBg').setScale(0.8);
+        this.anims.create({
+            key: 'configBgAnim',
+            frameRate: 2.5,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('configBg', {start: 0, end: 2}),
+        });
+
+        this.bg = this.add.sprite(600, 337.5, 'configBg');
+        this.bg.anims.play('configBgAnim');
 
         this.anims.create({
             key: 'soundOnAnim',
