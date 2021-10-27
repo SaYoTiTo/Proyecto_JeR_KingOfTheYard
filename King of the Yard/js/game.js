@@ -4,7 +4,7 @@ var config = {
     height: 675,
     physics: {
         default: 'arcade',
-        arcade : {debug:true}
+        arcade : {debug:false}
     },
     scene:[preloadScene, mainMenu, selectionMenu, configScene, controlsMenu, mainScene, redWinScene, blueWinScene]
 };
