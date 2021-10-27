@@ -472,6 +472,7 @@ function stealCrown(){
         if(crown.attached === 'red'){
             crown.attached = 'blue';
             console.log("La corona ahora es de " + crown.attached);
+            punchSound.play();
             red.anims.play("redStunAnim");
             red.speedMod = 0;
             //Creates a timer to stun
@@ -479,9 +480,10 @@ function stealCrown(){
         }else{
             crown.attached = 'red';
             console.log("La corona ahora es de " + crown.attached);
-            //Creates a timer to stun
+            punchSound.play();
             blue.anims.play("blueStunAnim");
             blue.speedMod = 0;
+            //Creates a timer to stun
             stun = this.time.addEvent({ delay: 2000, callback: () => blue.speedMod = 1, callbackScope: this});
         } 
         
