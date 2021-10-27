@@ -94,7 +94,7 @@ A lo largo de esta sección se detalla el transcurso de una partida típica de *
 
 El jugador inicia *King of the Yard* y se le presenta el *Menú Principal*. 
 
-![image](https://user-images.githubusercontent.com/72553373/139107411-f4a978d6-764e-42b7-abd5-d28b23ce4ac0.png)
+![image](https://user-images.githubusercontent.com/72553373/139135325-021d65cc-ca72-4010-82f7-af13c2a1ed86.png)
 
 
 Si desea iniciar una partida el Jugador seleccionará la opción Jugar. Esta opción llevará al jugador a la pantalla de *Elección de Modo* en el que se puede elegir un duelo offline o un duelo online. 
@@ -157,10 +157,20 @@ En este diagrama de estados se muestran todas las pantallas que se podrán ver a
 
 ### Menú principal
 - **Botón Jugar:** Al pulsarlo lleva a la pantalla de Selección de Partida.
-- **Botón Salir**: al pulsarlo nos lleva de vuelta al Sistema Operativo.
-**![](https://lh6.googleusercontent.com/EeOAzz-bhiVFKVCfgCuyLnxvBuWY7_T9ni3Rtew_okNn5ziwv_gQlYIehOlw5SpvD9OWkufruFhSeJ6owk68qxkWMt65Bt_kyWmMs84OvoiG7YR_Mt6FbWLviBIfB1wcjtjZrF4k=s1600)**
-**
+- **Boton Ajustes:** Al pulsarlo te lleva a la pantalla de Ajustes.
+- **Botón Salir**: Al pulsarlo nos lleva de vuelta al Sistema Operativo.
+- 
+![image](https://user-images.githubusercontent.com/72553373/139135325-021d65cc-ca72-4010-82f7-af13c2a1ed86.png)
+
 ![](https://lh4.googleusercontent.com/6kz1dUd5qaI5FyqX_-wuhK-9RRnQ9BIuvdWtDq3p_DhqIrEU0fv6vGHKy8C2lNE4R7MUWuTtX3zY1KzB0qp4L97yO8rDcFqLVAsUgVi78rZK1pbBWR1IA6A_TWbIfmUuTtutv9Rv=s1600)**
+
+### Pantalla Ajustes
+- **Boton Activar Sonido**: Al pulsarlo activas el audio si este está apagado.
+- **Boton Desactivar Sonido**: Al pulsarlo desactivas el audio si este está encendido.
+
+![image](https://user-images.githubusercontent.com/72553373/139135737-881e61c7-19f7-41b1-b07c-a9e7cc8febbe.png)
+
+
 ### Selección de Partida
 - **Botón Offline**: Al pulsarlo lleva a la pantalla de Juego
 - **Botón Online**: Al pulsarlo el jugador esperará el emparejamiento y cuando se establezca nos lleva a la pantalla 
@@ -173,9 +183,12 @@ de Juego.
 - Cuando acaba la partida te lleva a la pantalla de Victoria, en la que aparece el jugador que ha ganado. 
 **![](https://lh4.googleusercontent.com/J5wuvDuDZmc1uh5AimaBRO7UYN7CPDDDQUvtUdXlN1S12wffT6Mq5j-LVV7DB1Keo-1iWYBrRUDxhLbADsQa_7rWLOzSuSBo-pUL4mU-5LZiHw3L0-W606Eez_Tz6PZoJQrARmzi=s1600)**
 **![](https://lh5.googleusercontent.com/lSNsb4SFkFiqg90pqH1ZQzc9wbLGcNDr48xwTseADx28b4hpyiHTPYU3lw2pApR3dymEKw9KMMhYenHojE8LgiEEhTUYOkv-Ecj0LQ2lZBnFP7cShVU_GtwtBZhpBCKfYzHoJ6vx=s1600)**
+
 ### Victoria
 - **Botón Salir**: te devuelve a la pantalla de Selección de Partida.
-- **![](https://lh6.googleusercontent.com/wKAUZu94vBynwhndnXmR0kS0NIVX5k1pcYnh8Nff5xvRXgy1voK8szhYyOeEUWvto9KTbeNdeS3chaGkk1jJAVqJjDthzVAJ_WIIoHx9oi1nQ-8zCdJ_2ZrAK8H6oVhBvQ2VzqiY=s1600)**
+
+![fondo_victoria_n_GIF](https://user-images.githubusercontent.com/72553373/139136047-32cd2810-0d23-4527-9ea2-49a0f7b29bf2.gif)
+
 
 # 4-Arte
 Uno de los puntos en los que se sustenta *King of the Yard* es la competitividad de los jugadores y la simpleza de un juego de pilla-pilla; por eso el estilo es un doodle 2D. La trama es simple ya que el juego no tiene intención de ser complicado, ya que el objetivo del juego es que los jugadores compitan para convertirse en el nuevo rey del patio y se diviertan consiguiendoló.
