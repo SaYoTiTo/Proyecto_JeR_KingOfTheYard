@@ -157,10 +157,20 @@ En este diagrama de estados se muestran todas las pantallas que se podrán ver a
 
 ### Menú principal
 - **Botón Jugar:** Al pulsarlo lleva a la pantalla de Selección de Partida.
-- **Botón Salir**: al pulsarlo nos lleva de vuelta al Sistema Operativo.
-**![](https://lh6.googleusercontent.com/EeOAzz-bhiVFKVCfgCuyLnxvBuWY7_T9ni3Rtew_okNn5ziwv_gQlYIehOlw5SpvD9OWkufruFhSeJ6owk68qxkWMt65Bt_kyWmMs84OvoiG7YR_Mt6FbWLviBIfB1wcjtjZrF4k=s1600)**
-**
+- **Boton Ajustes:** Al pulsarlo te lleva a la pantalla de Ajustes.
+- **Botón Salir**: Al pulsarlo nos lleva de vuelta al Sistema Operativo.
+- 
+![image](https://user-images.githubusercontent.com/72553373/139135325-021d65cc-ca72-4010-82f7-af13c2a1ed86.png)
+
 ![](https://lh4.googleusercontent.com/6kz1dUd5qaI5FyqX_-wuhK-9RRnQ9BIuvdWtDq3p_DhqIrEU0fv6vGHKy8C2lNE4R7MUWuTtX3zY1KzB0qp4L97yO8rDcFqLVAsUgVi78rZK1pbBWR1IA6A_TWbIfmUuTtutv9Rv=s1600)**
+
+### Pantalla Ajustes
+- **Boton Activar Sonido**: Al pulsarlo activas el audio si este está apagado.
+- **Boton Desactivar Sonido**: Al pulsarlo desactivas el audio si este está encendido.
+
+![image](https://user-images.githubusercontent.com/72553373/139135737-881e61c7-19f7-41b1-b07c-a9e7cc8febbe.png)
+
+
 ### Selección de Partida
 - **Botón Offline**: Al pulsarlo lleva a la pantalla de Juego
 - **Botón Online**: Al pulsarlo el jugador esperará el emparejamiento y cuando se establezca nos lleva a la pantalla 
