@@ -92,11 +92,22 @@ Es una única partida en la que se decide el ganador. Un jugador sale victorioso
 ## Flujo de juego
 A lo largo de esta sección se detalla el transcurso de una partida típica de *King of the Yard*. Se comentarán los pasos que han de seguir los jugadores desde el inicio del juego hasta completar el juego. Poco a poco vamos desgranando el funcionamiento exacto del juego, en esta sección describimos las mecánicas. Más adelante se definirá el contenido de cada pantalla.
 
-El jugador inicia *King of the Yard* y se le presenta el *Menú Principal*. Si desea iniciar una partida el Jugador seleccionará la opción Jugar. Esta opción llevará al jugador a la pantalla de *Elección de Modo* en el que se puede elegir un duelo offline o un duelo online. En cualquiera de los dos casos, se presentara primero una pantalla de instrucciones para aprender a jugar.
+El jugador inicia *King of the Yard* y se le presenta el *Menú Principal*. 
+
+![image](https://user-images.githubusercontent.com/72553373/139107411-f4a978d6-764e-42b7-abd5-d28b23ce4ac0.png)
+
+
+Si desea iniciar una partida el Jugador seleccionará la opción Jugar. Esta opción llevará al jugador a la pantalla de *Elección de Modo* en el que se puede elegir un duelo offline o un duelo online. 
+
+![image](https://user-images.githubusercontent.com/72553373/139107528-289af6e6-29eb-4cd6-8465-5cfc3b639792.png)
+
+En cualquiera de los dos casos, se presentara primero una pantalla de instrucciones para aprender a jugar.
 
 **![](https://lh5.googleusercontent.com/PcGCPWBcdcBOxAMwikl-2_OmUrpPSNm_2s7BuBAv9_riyG3260EfnxXBxKnCg7VnXAKEzaCW94I_uHrW-t0Enkpu-jLlUpozs4-7fqtjn1nfUyeWUqeBnmJUKi_p5Lf6O3FwEeIL=s1600)**
 
 En el formato offline, la partida empezará directamente después de una pequeña cuenta atrás qué dará tiempo a los jugadores a posicionarse en el teclado. La partida seguirá adelante hasta que uno de los dos jugadores consiga el máximo de puntos por mantener la corona. Tras eso se pasará a una pantalla de resultados y el juego comenzará de nuevo.
+
+![image](https://user-images.githubusercontent.com/72553373/139107805-c886a2bd-2320-478e-984d-3337804a9000.png)
 
 En el caso online, se buscará automáticamente una persona para jugar y se le emparejará para que el juego comience y termine igual que en la versión offline.
 
