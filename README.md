@@ -127,8 +127,10 @@ Las colisiones que se producirán:
 ## Controles
 
 - **Movimiento Pj1**: teclas W, A, S, D.
+
 - **Movimiento Pj2**: teclas I, J, K, L.
 
+![fondo_tutorialGIF](https://user-images.githubusercontent.com/72553373/139106969-0d8bb58f-fba6-496d-83e3-85c19aa59072.jpg)
 
 # 3-Interfaz
 
