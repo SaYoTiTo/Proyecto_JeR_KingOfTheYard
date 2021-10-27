@@ -64,7 +64,6 @@ class mainScene extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers('redStun', {start: 0, end: 3}),
         });
 
-
         //Blue
         blue = this.physics.add.sprite(600,575, 'blueChar', 0).setScale(0.35).refreshBody();
         blue.setCollideWorldBounds(true);
@@ -247,16 +246,14 @@ class mainScene extends Phaser.Scene{
         this.physics.add.collider(blue, this.swing2Top, stun, null, this);
         this.physics.add.collider(blue, this.swing2Mid, stun, null, this);
         this.physics.add.collider(blue, this.swing2Bot, stun, null, this);
-        
+
         this.physics.add.collider(red, tp0, tp, null, this);
         this.physics.add.collider(red, tp1, tp, null, this);
         this.physics.add.collider(blue, tp0, tp, null, this);
         this.physics.add.collider(blue, tp1, tp, null, this);
 
-        //Music
-        gameBgMusic = this.sound.add('gameMusic');
-        gameBgMusic.loop = true;
-        gameBgMusic.play();
+        //Music        
+        gameBgMusic.setVolume(1);
     }
 
     update(){        
@@ -284,7 +281,7 @@ class mainScene extends Phaser.Scene{
                     this.swing2Bot.body.enable = false;
                     this.swing2Mid.body.enable = false;
                     animDone = true;
-                    this.time.addEvent({ delay: 750, callback: function() { anim++; animDone = false}, callbackScope: this});
+                    this.time.addEvent({ delay: 650, callback: function() { anim++; animDone = false}, callbackScope: this});
                 break;
 
                 case 1:
@@ -295,7 +292,7 @@ class mainScene extends Phaser.Scene{
                     this.swing2Bot.body.enable = false;
                     this.swing2Mid.body.enable = true;
                     animDone = true;
-                    this.time.addEvent({ delay: 750, callback: function() { anim++; animDone = false}, callbackScope: this});
+                    this.time.addEvent({ delay: 650, callback: function() { anim++; animDone = false}, callbackScope: this});
                 break;
 
                 case 2:
@@ -306,7 +303,7 @@ class mainScene extends Phaser.Scene{
                     this.swing2Bot.body.enable = true;
                     this.swing2Mid.body.enable = false;
                     animDone = true;
-                    this.time.addEvent({ delay: 750, callback: function() { anim++; animDone = false}, callbackScope: this});
+                    this.time.addEvent({ delay: 650, callback: function() { anim++; animDone = false}, callbackScope: this});
                 break;
 
                 case 3:
@@ -317,7 +314,7 @@ class mainScene extends Phaser.Scene{
                     this.swing2Bot.body.enable = false;
                     this.swing2Mid.body.enable = true;
                     animDone = true;
-                    this.time.addEvent({ delay: 750, callback: function() { anim = 0; animDone = false}, callbackScope: this});
+                    this.time.addEvent({ delay: 650, callback: function() { anim = 0; animDone = false}, callbackScope: this});
                 break;
             }
         }
@@ -424,6 +421,7 @@ class mainScene extends Phaser.Scene{
         if(crown.attached !== 'null'){
             if(crown.attached === red.name){
                 //Depends on red position
+                //SI solo va a la derecha, que se aleje mas
                 if(red.body.velocity.x !== 0 || red.body.velocity.y !== 0){
                     if(red.speedMod !== 1){
                         crown.x = red.x - red.body.velocity.x / 1.5;
@@ -499,7 +497,7 @@ function givePoints(){
         red.points++;
         redText.setText('Red Score: ' + red.points);
         if(red.points === 10){
-            gameBgMusic.stop();
+            gameBgMusic.setVolume(0);
             this.scene.stop('controlsMenu');
             this.scene.start('redWinScene');
         }
@@ -507,7 +505,7 @@ function givePoints(){
         blue.points++;
         blueText.setText('Blue Score: ' + blue.points);
         if(blue.points === 10){
-            gameBgMusic.stop();
+            gameBgMusic.setVolume(0);
             this.scene.stop('controlsMenu');
             this.scene.start('blueWinScene');
         }
@@ -529,9 +527,13 @@ function stun(player, object){
         crown.attached = 'null';
     if(!player.anims.isPlaying)
         player.anims.play(player.name + "StunAnim");
+    else{
+        player.anims.stop();
+        player.anims.play(player.name + "StunAnim");
+    }
     player.speedMod = 0;
     //Creates a timer to stun
-    stun = this.time.addEvent({ delay: 2000, callback: () => player.speedMod = 1, callbackScope: this});
+    this.time.addEvent({ delay: 2000, callback: () => player.speedMod = 1, callbackScope: this});
 }
 
 function tp(player, tp){
@@ -547,8 +549,7 @@ function tp(player, tp){
             player.y = 550;
             //Creates a timer to reestablish tp
             tpActive = false;
-            tpTimer = this.time.addEvent({ delay: 3000, callback: () => tpActive = true, callbackScope: this});
-         
+            tpTimer = this.time.addEvent({ delay: 3000, callback: () => tpActive = true, callbackScope: this});         
         }
     }
 }

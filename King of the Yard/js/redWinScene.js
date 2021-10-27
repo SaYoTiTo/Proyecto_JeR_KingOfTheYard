@@ -26,20 +26,18 @@ class redWinScene extends Phaser.Scene{
         this.enterKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-        redWinMusic = this.sound.add('victoryMusic');
-        redWinMusic.loop = true;
-        redWinMusic.play();
+        victoryBgMusic.setVolume(1);
     }
 
     update(){
 
         if(this.enterKey.isDown || this.spaceKey.isDown){
-            redWinMusic.stop();
+            victoryBgMusic.setVolume(0);
             this.scene.stop('redWinScene');
             this.scene.start('mainMenu');
         }
         this.bg.on("pointerdown", function(){
-            redWinMusic.stop();
+            victoryBgMusic.setVolume(0);
             this.scene.scene.stop('redWinScene');
             this.scene.scene.start('mainMenu');
         });

@@ -25,12 +25,12 @@ class controlsMenu extends Phaser.Scene{
     update(){
 
         if(this.enterKey.isDown || this.spaceKey.isDown){
-            bgMusic.stop();
+            menuBgMusic.setVolume(0);
             this.scene.stop('controlsMenu');
             this.scene.start('mainScene');
         }
         this.bg.on("pointerdown", function(){
-            bgMusic.stop();
+            menuBgMusic.setVolume(0);
             this.scene.scene.stop('controlsMenu');
             this.scene.scene.start('mainScene');
         });

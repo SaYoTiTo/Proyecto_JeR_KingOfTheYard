@@ -1,4 +1,6 @@
-var bgMusic;
+var gameBgMusic;
+var menuBgMusic;
+var victoryBgMusic;
 
 class mainMenu extends Phaser.Scene{
 
@@ -38,9 +40,22 @@ class mainMenu extends Phaser.Scene{
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.selection = 0;
 
-        bgMusic = this.sound.add('menuMusic');
-        bgMusic.loop = true;
-        bgMusic.play();
+        if(gameBgMusic === undefined){
+            gameBgMusic = this.sound.add('gameMusic');
+            gameBgMusic.loop = true;
+            gameBgMusic.play();
+            gameBgMusic.setVolume(0);
+
+            menuBgMusic = this.sound.add('menuMusic');
+            menuBgMusic.loop = true;
+            menuBgMusic.play();
+
+            victoryBgMusic = this.sound.add('victoryMusic');
+            victoryBgMusic.loop = true;
+            victoryBgMusic.play();
+            victoryBgMusic.setVolume(0);
+        }
+        menuBgMusic.setVolume(1);
     }
 
     update(){

@@ -136,6 +136,6 @@ class preloadScene extends Phaser.Scene{
     complete() {
 	    //console.log("COMPLETE!");
         game.scene.stop('preloadScene');
-        game.scene.start('mainScene');        
+        game.scene.start('mainMenu');        
     }
 }
