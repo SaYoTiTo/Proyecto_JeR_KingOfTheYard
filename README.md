@@ -94,7 +94,7 @@ A lo largo de esta sección se detalla el transcurso de una partida típica de *
 
 El jugador inicia *King of the Yard* y se le presenta el *Menú Principal*. 
 
-![image](https://user-images.githubusercontent.com/72553373/139107411-f4a978d6-764e-42b7-abd5-d28b23ce4ac0.png)
+![image](https://user-images.githubusercontent.com/72553373/139135325-021d65cc-ca72-4010-82f7-af13c2a1ed86.png)
 
 
 Si desea iniciar una partida el Jugador seleccionará la opción Jugar. Esta opción llevará al jugador a la pantalla de *Elección de Modo* en el que se puede elegir un duelo offline o un duelo online. 
