@@ -26,7 +26,7 @@ class redWinScene extends Phaser.Scene{
         this.enterKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-        victoryBgMusic.setVolume(1);
+        victoryBgMusic.setVolume(musicMult);
     }
 
     update(){

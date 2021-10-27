@@ -15,7 +15,6 @@ var anim = 0;
 
 var gameBgMusic;
 var punchSound;
-var victoryMusic;
 
 var tp0;
 var tp1;
@@ -181,12 +180,10 @@ class mainScene extends Phaser.Scene{
         floorSlow = this.physics.add.group();
         floorSlow.create(935, 510, 'wall').setScale(3.3, 3.2).refreshBody();    
         floorSlow.create(975, 260, 'wall').setScale(0.7, 1.5).refreshBody();    
-        floorSlow.create(792, 80, 'wall').setScale(0.6, 1.2).refreshBody();    
-        floorSlow.create(305, 80, 'wall').setScale(0.7, 1.2).refreshBody();    
+        floorSlow.create(792, 80, 'wall').setScale(0.6, 1.2).refreshBody();            
         floorSlow.create(500, 305, 'wall').setScale(0.8, 1.2).refreshBody();    
-        floorSlow.create(385, 590, 'wall').setScale(0.8, 1.4).refreshBody();    
-        floorSlow.create(385, 590, 'wall').setScale(0.8, 1.4).refreshBody();    
-        floorSlow.create(120, 445, 'wall').setScale(0.6, 1.1).refreshBody();    
+        floorSlow.create(450, 595, 'wall').setScale(0.9, 1.4).refreshBody();    
+        floorSlow.create(55, 405, 'wall').setScale(0.65, 1.15).refreshBody();    
 
         var child = floorSlow.getChildren();
         for (var i = 0; i < child.length; i++)
@@ -195,18 +192,18 @@ class mainScene extends Phaser.Scene{
         }
 
         //Tps
-        tp1 = this.physics.add.sprite(90, 55, 'wall', 0).setScale(0.6,1.1);
+        tp1 = this.physics.add.sprite(85, 55, 'wall', 0).setScale(0.6,1.1);
         tp1.num = 1;
         tp1.setVisible(false);
         tp1.body.setImmovable();
-        tp0 = this.physics.add.sprite(1150, 635, 'wall', 0).setScale(0.6,1.1);
+        tp0 = this.physics.add.sprite(1135, 635, 'wall', 0).setScale(0.6,1.1);
         tp0.num = 0;
         tp0.setVisible(false);
         tp0.setImmovable();
 
         //Point texts
-        redText = this.add.text(16, 16, 'Red Score: 0', { fontSize: '32px', fill: 'FF0000' });
-        blueText = this.add.text(900, 16, 'Blue Score: 0', { fontSize: '32px', fill: '00FFF3' });
+        redText = this.add.text(300, 16, 'Red Score: 0', { fontSize: '32px', fill: '#FF0000' });
+        blueText = this.add.text(625, 16, 'Blue Score: 0', { fontSize: '32px', fill: '#060057' });
     
         //Character controlls
         this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -253,7 +250,9 @@ class mainScene extends Phaser.Scene{
         this.physics.add.collider(blue, tp1, tp, null, this);
 
         //Music        
-        gameBgMusic.setVolume(1);
+        gameBgMusic.setVolume(musicMult);
+        punchSound = this.sound.add('punch');
+        punchSound.setVolume(musicMult);
     }
 
     update(){        
@@ -422,7 +421,10 @@ class mainScene extends Phaser.Scene{
             if(crown.attached === red.name){
                 //Depends on red position
                 //SI solo va a la derecha, que se aleje mas
-                if(red.body.velocity.x !== 0 || red.body.velocity.y !== 0){
+                if(red.body.velocity.x > 0 && red.body.velocity.y === 0){
+                    crown.x = red.x - 90;
+                    crown.y = red.y;
+                }else if(red.body.velocity.x !== 0 || red.body.velocity.y !== 0){
                     if(red.speedMod !== 1){
                         crown.x = red.x - red.body.velocity.x / 1.5;
                         crown.y = red.y - red.body.velocity.y / 1.5;
@@ -432,7 +434,7 @@ class mainScene extends Phaser.Scene{
                     }
                 }else{
                     crown.x = red.x;
-                    crown.y = red.y - 60;
+                    crown.y = red.y - 65;
                 }
                 
             }else if(crown.attached === blue.name){
@@ -513,8 +515,10 @@ function givePoints(){
 }
 
 function reduceSpeed(player){
-    player.slowed = true;
-    player.speedMod = 0.6;
+    if(player.speedMod !== 0){
+        player.slowed = true;
+        player.speedMod = 0.6;
+    }
 }
 
 function increaseSpeed(player){
@@ -525,10 +529,8 @@ function increaseSpeed(player){
 function stun(player, object){
     if(crown.attached === player.name)
         crown.attached = 'null';
-    if(!player.anims.isPlaying)
-        player.anims.play(player.name + "StunAnim");
-    else{
-        player.anims.stop();
+    if(player.speedMod !== 0){
+        punchSound.play();
         player.anims.play(player.name + "StunAnim");
     }
     player.speedMod = 0;
@@ -545,7 +547,7 @@ function tp(player, tp){
             tpActive = false;
             tpTimer = this.time.addEvent({ delay: 3000, callback: () => tpActive = true, callbackScope: this});
         }else{
-            player.x = 1175;
+            player.x = 1125;
             player.y = 550;
             //Creates a timer to reestablish tp
             tpActive = false;

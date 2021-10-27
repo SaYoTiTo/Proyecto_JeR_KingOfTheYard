@@ -20,10 +20,6 @@ class preloadScene extends Phaser.Scene{
 
         var loadingText = this.add.text(250, 175,"Loading: ", { fontSize: '54px', fill: '#FFF' });
 
-        //Slider
-        var url;
-        url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexsliderplugin.min.js';
-        this.load.plugin('rexsliderplugin', url, true);
         
         //Menu principal
         this.load.spritesheet('menuBg', 'assets/fondoMenuSprite.png', {
@@ -35,6 +31,8 @@ class preloadScene extends Phaser.Scene{
         this.load.image('playButtonPressed', 'assets/botonPlayPulsado.png');
         this.load.image('quitButton', 'assets/botonQuit.png');
         this.load.image('quitButtonPressed', 'assets/botonQuitPulsado.png');
+        this.load.image('settingsButton', 'assets/botonSettings.png');
+        this.load.image('settingsButtonPressed', 'assets/botonSettingsPulsado.png');
 
         //Menu seleccion
         this.load.spritesheet('selectionBg', 'assets/fondoMenuSeleccionSprite.png', {
@@ -48,6 +46,16 @@ class preloadScene extends Phaser.Scene{
         this.load.image('onlineButtonOff', 'assets/botonOnlineAnulado.png');
         this.load.image('selectionTxt', 'assets/selectionText.png');
         
+        //Menu configuracion
+        this.load.image('configBg', 'assets/Settings/FondoSettings.png');
+        this.load.spritesheet('soundOff', 'assets/Settings/sonidoMutedSpriteSheet.png', {
+            frameWidth: 600,
+            frameHeight: 500,
+        });
+        this.load.spritesheet('soundOn', 'assets/Settings/sonidoSpritesheet.png', {
+            frameWidth: 600,
+            frameHeight: 500,
+        });
 
         //Menu controles
         this.load.spritesheet('controlsBg', 'assets/fondoTutorialSprite.png',{

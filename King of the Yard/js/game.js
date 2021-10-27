@@ -4,9 +4,9 @@ var config = {
     height: 675,
     physics: {
         default: 'arcade',
-        arcade : {debug:false}
+        arcade : {debug:true}
     },
-    scene:[preloadScene, mainMenu, selectionMenu, controlsMenu, mainScene, redWinScene, blueWinScene]
+    scene:[preloadScene, mainMenu, selectionMenu, configScene, controlsMenu, mainScene, redWinScene, blueWinScene]
 };
 
 let game = new Phaser.Game(config);
