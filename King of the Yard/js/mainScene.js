@@ -455,8 +455,7 @@ class mainScene extends Phaser.Scene{
         this.seats.anims.play('seatsAnim');
         this.seats.body.setImmovable();
 
-        this.swingBar = this.physics.add.sprite(220,225, 'swingBar', 0).setScale(0.8).refreshBody();
-        this.swingBar.body.setImmovable();
+        this.swingBar = this.add.sprite(220,225, 'swingBar', 0).setScale(0.8);
 
         this.anims.create({
             key: 'wheelAnim',
@@ -577,6 +576,17 @@ class mainScene extends Phaser.Scene{
         this.physics.add.collider(blue, this.swing2Top, stun, null, this);
         this.physics.add.collider(blue, this.swing2Mid, stun, null, this);
         this.physics.add.collider(blue, this.swing2Bot, stun, null, this);
+<<<<<<< Updated upstream
+=======
+        
+        this.physics.add.collider(red, tp0, tp, null, this);
+        this.physics.add.collider(red, tp1, tp, null, this);
+        this.physics.add.collider(blue, tp0, tp, null, this);
+        this.physics.add.collider(blue, tp1, tp, null, this);
+
+        //Music        
+        gameBgMusic.setVolume(1);
+>>>>>>> Stashed changes
     }
 
     update(){        
@@ -604,7 +614,7 @@ class mainScene extends Phaser.Scene{
                     this.swing2Bot.body.enable = false;
                     this.swing2Mid.body.enable = false;
                     animDone = true;
-                    this.time.addEvent({ delay: 750, callback: function() { anim++; animDone = false}, callbackScope: this});
+                    this.time.addEvent({ delay: 650, callback: function() { anim++; animDone = false}, callbackScope: this});
                 break;
 
                 case 1:
@@ -615,7 +625,7 @@ class mainScene extends Phaser.Scene{
                     this.swing2Bot.body.enable = false;
                     this.swing2Mid.body.enable = true;
                     animDone = true;
-                    this.time.addEvent({ delay: 750, callback: function() { anim++; animDone = false}, callbackScope: this});
+                    this.time.addEvent({ delay: 650, callback: function() { anim++; animDone = false}, callbackScope: this});
                 break;
 
                 case 2:
@@ -626,7 +636,7 @@ class mainScene extends Phaser.Scene{
                     this.swing2Bot.body.enable = true;
                     this.swing2Mid.body.enable = false;
                     animDone = true;
-                    this.time.addEvent({ delay: 750, callback: function() { anim++; animDone = false}, callbackScope: this});
+                    this.time.addEvent({ delay: 650, callback: function() { anim++; animDone = false}, callbackScope: this});
                 break;
 
                 case 3:
@@ -637,7 +647,7 @@ class mainScene extends Phaser.Scene{
                     this.swing2Bot.body.enable = false;
                     this.swing2Mid.body.enable = true;
                     animDone = true;
-                    this.time.addEvent({ delay: 750, callback: function() { anim = 0; animDone = false}, callbackScope: this});
+                    this.time.addEvent({ delay: 650, callback: function() { anim = 0; animDone = false}, callbackScope: this});
                 break;
             }
         }
@@ -744,6 +754,7 @@ class mainScene extends Phaser.Scene{
         if(crown.attached !== 'null'){
             if(crown.attached === red.name){
                 //Depends on red position
+                //SI solo va a la derecha, que se aleje mas
                 if(red.body.velocity.x !== 0 || red.body.velocity.y !== 0){
                     crown.x = red.x - red.body.velocity.x / 2.5;
                     crown.y = red.y - red.body.velocity.y / 2.5;
@@ -807,6 +818,10 @@ function givePoints(){
         red.points++;
         redText.setText('Red Score: ' + red.points);
         if(red.points === 10){
+<<<<<<< Updated upstream
+=======
+            gameBgMusic.setVolume(0);
+>>>>>>> Stashed changes
             this.scene.stop('controlsMenu');
             this.scene.start('redWinScene');
         }
@@ -814,6 +829,10 @@ function givePoints(){
         blue.points++;
         blueText.setText('Blue Score: ' + blue.points);
         if(blue.points === 10){
+<<<<<<< Updated upstream
+=======
+            gameBgMusic.setVolume(0);
+>>>>>>> Stashed changes
             this.scene.stop('controlsMenu');
             this.scene.start('blueWinScene');
         }
@@ -833,8 +852,38 @@ function increaseSpeed(player){
 function stun(player, object){
     if(crown.attached === player.name)
         crown.attached = 'null';
+<<<<<<< Updated upstream
+=======
+    if(!player.anims.isPlaying)
+        player.anims.play(player.name + "StunAnim");
+    else{
+        player.anims.stop();
+        player.anims.play(player.name + "StunAnim");
+    }
+>>>>>>> Stashed changes
     player.speedMod = 0;
     //Creates a timer to stun
-    stun = this.time.addEvent({ delay: 2000, callback: () => player.speedMod = 1, callbackScope: this});
+    this.time.addEvent({ delay: 2000, callback: () => player.speedMod = 1, callbackScope: this});
+}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+
+function tp(player, tp){
+    if(tpActive){
+        if(tp.num === 0){
+            player.x = 200;
+            player.y = 50;
+            //Creates a timer to reestablish tp
+            tpActive = false;
+            tpTimer = this.time.addEvent({ delay: 3000, callback: () => tpActive = true, callbackScope: this});
+        }else{
+            player.x = 1175;
+            player.y = 550;
+            //Creates a timer to reestablish tp
+            tpActive = false;
+            tpTimer = this.time.addEvent({ delay: 3000, callback: () => tpActive = true, callbackScope: this});
+        }
+    }
 }
 >>>>>>> Stashed changes

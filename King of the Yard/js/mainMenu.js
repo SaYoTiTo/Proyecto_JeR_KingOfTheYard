@@ -1,3 +1,10 @@
+<<<<<<< Updated upstream
+=======
+var gameBgMusic;
+var menuBgMusic;
+var victoryBgMusic;
+
+>>>>>>> Stashed changes
 class mainMenu extends Phaser.Scene{
 
     constructor(){
@@ -33,6 +40,26 @@ class mainMenu extends Phaser.Scene{
         this.enterKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.selection = 0;
+<<<<<<< Updated upstream
+=======
+
+        if(gameBgMusic === undefined){
+            gameBgMusic = this.sound.add('gameMusic');
+            gameBgMusic.loop = true;
+            gameBgMusic.play();
+            gameBgMusic.setVolume(0);
+
+            menuBgMusic = this.sound.add('menuMusic');
+            menuBgMusic.loop = true;
+            menuBgMusic.play();
+
+            victoryBgMusic = this.sound.add('victoryMusic');
+            victoryBgMusic.loop = true;
+            victoryBgMusic.play();
+            victoryBgMusic.setVolume(0);
+        }
+        menuBgMusic.setVolume(1);
+>>>>>>> Stashed changes
     }
 
     update(){
