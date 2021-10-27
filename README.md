@@ -105,9 +105,14 @@ En cualquiera de los dos casos, se presentara primero una pantalla de instruccio
 
 **![](https://lh5.googleusercontent.com/PcGCPWBcdcBOxAMwikl-2_OmUrpPSNm_2s7BuBAv9_riyG3260EfnxXBxKnCg7VnXAKEzaCW94I_uHrW-t0Enkpu-jLlUpozs4-7fqtjn1nfUyeWUqeBnmJUKi_p5Lf6O3FwEeIL=s1600)**
 
-En el formato offline, la partida empezará directamente después de una pequeña cuenta atrás qué dará tiempo a los jugadores a posicionarse en el teclado. La partida seguirá adelante hasta que uno de los dos jugadores consiga el máximo de puntos por mantener la corona. Tras eso se pasará a una pantalla de resultados y el juego comenzará de nuevo.
+En el formato offline, la partida empezará directamente después de una pequeña cuenta atrás qué dará tiempo a los jugadores a posicionarse en el teclado. 
 
 ![image](https://user-images.githubusercontent.com/72553373/139107805-c886a2bd-2320-478e-984d-3337804a9000.png)
+
+La partida seguirá adelante hasta que uno de los dos jugadores consiga el máximo de puntos por mantener la corona. Tras eso se pasará a una pantalla de resultados y el juego comenzará de nuevo.
+
+![image](https://user-images.githubusercontent.com/72553373/139108138-9c5d39fb-be6c-44c1-a040-8216ab685273.png)
+
 
 En el caso online, se buscará automáticamente una persona para jugar y se le emparejará para que el juego comience y termine igual que en la versión offline.
 
