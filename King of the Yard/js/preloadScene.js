@@ -30,7 +30,7 @@ class preloadScene extends Phaser.Scene{
             frameWidth: 1200,
             frameHeight: 675,
         });
-        this.load.image('titulo', 'assets/titulo.png');
+        this.load.image('title', 'assets/titulo.png');
         this.load.image('playButton', 'assets/botonPlay.png');
         this.load.image('playButtonPressed', 'assets/botonPlayPulsado.png');
         this.load.image('quitButton', 'assets/botonQuit.png');
@@ -46,6 +46,8 @@ class preloadScene extends Phaser.Scene{
         this.load.image('onlineButton', 'assets/botonOnline.png');
         this.load.image('onlineButtonPressed', 'assets/botonOnlinePulsado.png');
         this.load.image('onlineButtonOff', 'assets/botonOnlineAnulado.png');
+        this.load.image('selectionTxt', 'assets/selectionText.png');
+        
 
         //Menu controles
         this.load.spritesheet('controlsBg', 'assets/fondoTutorialSprite.png',{
@@ -58,7 +60,7 @@ class preloadScene extends Phaser.Scene{
         this.load.on('complete', this.complete, {scene: this.scene});
 
         //EscenaJuego
-        this.load.spritesheet('gameBg', 'assets/fondoJuegoSprite.jpg', {
+        this.load.spritesheet('gameBg', 'assets/fondoJuegoSprite.png', {
             frameWidth: 1200,
             frameHeight: 675,
         });
@@ -67,14 +69,22 @@ class preloadScene extends Phaser.Scene{
             frameWidth: 254.375,
             frameHeight: 160,
         });
+        this.load.spritesheet('blueStun', 'assets/blueStunned.png', {
+            frameWidth: 253.5,
+            frameHeight: 225,
+        });
+        
         this.load.image('redChar', 'assets/redPersonaje.png');
         this.load.spritesheet('redCharAnim', 'assets/redAnimacion.png', {
             frameWidth: 254.375,
             frameHeight: 160,
         });
+        this.load.spritesheet('redStun', 'assets/redStunned.png', {
+            frameWidth: 253.5,
+            frameHeight: 225,
+        });
+
         this.load.image('crown', 'assets/corona.png');
-<<<<<<< Updated upstream
-=======
 
         this.load.spritesheet('tree', 'assets/Arbol/arbolSpriteSheet.png', {
             frameWidth: 400,
@@ -92,12 +102,27 @@ class preloadScene extends Phaser.Scene{
             frameWidth: 400,
             frameHeight: 350,
         });
+
         this.load.image('swingBar', 'assets/Columpio/columpioBarraXS.png');
         this.load.image('wall', 'assets/borde.png');
-                
->>>>>>> Stashed changes
-    }
 
+        //Escena victoria
+        this.load.spritesheet('victoryBg', 'assets/fondo_victoria/victorySpritesheet.png',{
+            frameWidth: 1200,
+            frameHeight: 675,
+        });
+        this.load.image('redName', 'assets/redName.png');
+        this.load.image('blueName', 'assets/blueName.png');
+
+        //Sonidos
+        this.load.audio('gameMusic', ['assets/Music/gameMusic.wav']);
+        this.load.audio('menuMusic', ['assets/Music/menuMusic.wav']);
+        this.load.audio('victoryMusic', ['assets/Music/victoryMusic.wav']);
+        this.load.audio('punch', ['assets/Music/punchSFX.mp3']);
+        this.load.audio('victory', ['assets/Music/victorySFX.mp3']);
+
+               
+    }
     updateBar(percentage) {
         this.newGraphics.clear();
         this.newGraphics.fillStyle(0x3587e2, 1);

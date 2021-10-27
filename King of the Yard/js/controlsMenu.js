@@ -25,18 +25,12 @@ class controlsMenu extends Phaser.Scene{
     update(){
 
         if(this.enterKey.isDown || this.spaceKey.isDown){
-<<<<<<< Updated upstream
-=======
             menuBgMusic.setVolume(0);
->>>>>>> Stashed changes
             this.scene.stop('controlsMenu');
             this.scene.start('mainScene');
         }
         this.bg.on("pointerdown", function(){
-<<<<<<< Updated upstream
-=======
             menuBgMusic.setVolume(0);
->>>>>>> Stashed changes
             this.scene.scene.stop('controlsMenu');
             this.scene.scene.start('mainScene');
         });

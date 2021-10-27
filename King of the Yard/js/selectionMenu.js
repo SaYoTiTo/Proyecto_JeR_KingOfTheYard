@@ -16,11 +16,13 @@ class selectionMenu extends Phaser.Scene{
         this.bg = this.add.sprite(600, 337.5, 'selectionBg');
         this.bg.anims.play('selectionBgAnim');
 
-        this.online = this.physics.add.sprite(300, 350, 'onlineButtonOff').setScale(0.7).refreshBody();
+        this.select = this.physics.add.sprite(600, 175, 'selectionTxt').setScale(0.8).refreshBody();
+
+        this.online = this.physics.add.sprite(300, 450, 'onlineButtonOff').setScale(0.7).refreshBody();
         //this.onlinePressed = this.physics.add.sprite(300, 350, 'onlineButtonOffPressed').setScale(0.7).refreshBody();
 
-        this.offline = this.physics.add.sprite(900, 350, 'offlineButton').setScale(0.7).refreshBody();
-        this.offlinePressed = this.physics.add.sprite(900, 350, 'offlineButtonPressed').setScale(0.7).refreshBody();
+        this.offline = this.physics.add.sprite(900, 450, 'offlineButton').setScale(0.7).refreshBody();
+        this.offlinePressed = this.physics.add.sprite(900, 450, 'offlineButtonPressed').setScale(0.7).refreshBody();
 
         this.offlinePressed.alpha = 0;
         //this.onlinePressed.alpha = 0;

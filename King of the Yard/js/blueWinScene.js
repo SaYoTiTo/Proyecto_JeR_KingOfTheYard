@@ -1,3 +1,5 @@
+var blueWinMusic;
+
 class blueWinScene extends Phaser.Scene{
 
     constructor(){
@@ -7,41 +9,35 @@ class blueWinScene extends Phaser.Scene{
     create(){
         
         this.anims.create({
-            key: 'controlsBgAnim',
+            key: 'victoryBgAnim',
             frameRate: 3,
             repeat: -1,
-            frames: this.anims.generateFrameNumbers('controlsBg', {start: 0, end: 2}),
+            frames: this.anims.generateFrameNumbers('victoryBg', {start: 0, end: 2}),
         });
 
-        this.bg = this.add.sprite(600, 337.5, 'controlsBg');
-        this.bg.anims.play('controlsBgAnim');
+        this.bg = this.add.sprite(600, 337.5, 'victoryBg');
+        this.bg.anims.play('victoryBgAnim');
+
+        this.blueName = this.add.sprite(600, 300, 'blueName');
+        this.blue = this.add.sprite(600, 500, 'blueChar');
 
         this.bg.setInteractive();
 
         this.enterKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-<<<<<<< Updated upstream
-=======
-
+      
         victoryBgMusic.setVolume(1);
->>>>>>> Stashed changes
     }
 
     update(){
 
         if(this.enterKey.isDown || this.spaceKey.isDown){
-<<<<<<< Updated upstream
-=======
             victoryBgMusic.setVolume(0);
->>>>>>> Stashed changes
             this.scene.stop('blueWinScene');
             this.scene.start('mainMenu');
         }
         this.bg.on("pointerdown", function(){
-<<<<<<< Updated upstream
-=======
             victoryBgMusic.setVolume(0);
->>>>>>> Stashed changes
             this.scene.scene.stop('blueWinScene');
             this.scene.scene.start('mainMenu');
         });

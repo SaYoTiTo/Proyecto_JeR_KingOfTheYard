@@ -1,10 +1,7 @@
-<<<<<<< Updated upstream
-=======
 var gameBgMusic;
 var menuBgMusic;
 var victoryBgMusic;
 
->>>>>>> Stashed changes
 class mainMenu extends Phaser.Scene{
 
     constructor(){
@@ -23,11 +20,13 @@ class mainMenu extends Phaser.Scene{
         this.bg = this.add.sprite(600, 337.5, 'menuBg');
         this.bg.anims.play('menuBgAnim');
 
-        this.play = this.physics.add.sprite(575, 350, 'playButton');
-        this.playPressed = this.physics.add.sprite(575, 350, 'playButtonPressed');
+        this.titulo = this.physics.add.sprite(600, 225, 'title').setScale(0.8).refreshBody();
+        
+        this.play = this.physics.add.sprite(575, 475, 'playButton').setScale(0.8).refreshBody();
+        this.playPressed = this.physics.add.sprite(575, 475, 'playButtonPressed').setScale(0.8).refreshBody();
 
-        this.quit = this.physics.add.sprite(575, 500, 'quitButton');
-        this.quitPressed = this.physics.add.sprite(575, 500, 'quitButtonPressed');
+        this.quit = this.physics.add.sprite(575, 600, 'quitButton').setScale(0.8).refreshBody();
+        this.quitPressed = this.physics.add.sprite(575, 600, 'quitButtonPressed').setScale(0.8).refreshBody();
 
         this.quitPressed.alpha = 0;
         this.playPressed.alpha = 0;
@@ -40,8 +39,6 @@ class mainMenu extends Phaser.Scene{
         this.enterKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.selection = 0;
-<<<<<<< Updated upstream
-=======
 
         if(gameBgMusic === undefined){
             gameBgMusic = this.sound.add('gameMusic');
@@ -59,7 +56,6 @@ class mainMenu extends Phaser.Scene{
             victoryBgMusic.setVolume(0);
         }
         menuBgMusic.setVolume(1);
->>>>>>> Stashed changes
     }
 
     update(){
