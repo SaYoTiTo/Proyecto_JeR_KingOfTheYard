@@ -183,9 +183,12 @@ de Juego.
 - Cuando acaba la partida te lleva a la pantalla de Victoria, en la que aparece el jugador que ha ganado. 
 **![](https://lh4.googleusercontent.com/J5wuvDuDZmc1uh5AimaBRO7UYN7CPDDDQUvtUdXlN1S12wffT6Mq5j-LVV7DB1Keo-1iWYBrRUDxhLbADsQa_7rWLOzSuSBo-pUL4mU-5LZiHw3L0-W606Eez_Tz6PZoJQrARmzi=s1600)**
 **![](https://lh5.googleusercontent.com/lSNsb4SFkFiqg90pqH1ZQzc9wbLGcNDr48xwTseADx28b4hpyiHTPYU3lw2pApR3dymEKw9KMMhYenHojE8LgiEEhTUYOkv-Ecj0LQ2lZBnFP7cShVU_GtwtBZhpBCKfYzHoJ6vx=s1600)**
+
 ### Victoria
 - **Botón Salir**: te devuelve a la pantalla de Selección de Partida.
-- **![](https://lh6.googleusercontent.com/wKAUZu94vBynwhndnXmR0kS0NIVX5k1pcYnh8Nff5xvRXgy1voK8szhYyOeEUWvto9KTbeNdeS3chaGkk1jJAVqJjDthzVAJ_WIIoHx9oi1nQ-8zCdJ_2ZrAK8H6oVhBvQ2VzqiY=s1600)**
+
+![fondo_victoria_n_GIF](https://user-images.githubusercontent.com/72553373/139136047-32cd2810-0d23-4527-9ea2-49a0f7b29bf2.gif)
+
 
 # 4-Arte
 Uno de los puntos en los que se sustenta *King of the Yard* es la competitividad de los jugadores y la simpleza de un juego de pilla-pilla; por eso el estilo es un doodle 2D. La trama es simple ya que el juego no tiene intención de ser complicado, ya que el objetivo del juego es que los jugadores compitan para convertirse en el nuevo rey del patio y se diviertan consiguiendoló.
