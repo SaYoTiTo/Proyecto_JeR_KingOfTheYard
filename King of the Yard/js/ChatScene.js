@@ -17,10 +17,10 @@ class ChatScene extends Phaser.Scene {
             this.alpha = 1;
             this.playPressed.alpha = 0;
         });
-        this.play.on("pointerdown", function(){
-            document.getElementById('chat').style.display = 'none';
+        this.play.on("pointerdown", function(){            
             this.scene.scene.stop('chatScene');
             this.scene.scene.start('mainMenu');
+            document.getElementById('chat').style.display = 'none';
         });
     }
 
