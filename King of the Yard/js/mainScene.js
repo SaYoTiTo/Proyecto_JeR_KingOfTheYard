@@ -500,7 +500,7 @@ function givePoints(){
     if(crown.attached === 'red'){
         red.points++;
         redText.setText('Red Score: ' + red.points);
-        if(red.points === 10){
+        if(red.points === 20){
             gameBgMusic.setVolume(0);
             this.scene.stop('controlsMenu');
             this.scene.start('redWinScene');
@@ -508,7 +508,7 @@ function givePoints(){
     }else if(crown.attached === 'blue'){
         blue.points++;
         blueText.setText('Blue Score: ' + blue.points);
-        if(blue.points === 10){
+        if(blue.points === 20){
             gameBgMusic.setVolume(0);
             this.scene.stop('controlsMenu');
             this.scene.start('blueWinScene');
