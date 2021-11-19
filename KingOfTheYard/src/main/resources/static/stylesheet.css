@@ -1,117 +1,143 @@
 
+@font-face {
+    font-family: 'pwchalkmedium';
+    src: url('"./assets/font/pwchalk-webfont.woff2') format('woff2'),
+         url('"./assets/font/pwchalk-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+scroll{
+	 height:10px;
+	 width: 5px;
+    overflow:scroll;
+    overflow-x:hidden;
+}
+
+.DivToScroll{   
+    background-color: #F5F5F5;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px 0 4px 0;
+    color: #3B3C3E;
+    font-size: 12px;
+    font-weight: bold;
+    left: -1px;
+    padding: 10px 7px 5px;
+     overflow-x:hidden;
+    overflow:scroll;
+     height:100px;
+	 width: 200px;
+}
+
+.DivWithScroll{
+    height:120px;
+    overflow:scroll;
+    overflow-x:hidden;
+}
+
 body {
-    background-color: black;
+  max-width: 800px;
+  padding: 20px;
 }
 
 h1 {
-    text-align: center;
-    text-transform: uppercase;
-    font-family: 'Courier New', Courier, monospace;
-    src: url("./assets/fonts/Shojumaru/Shojumaru-Regular.ttf");
-}
-
-#chat {
-    background-color: #ff5757;
-    width: 700px;
-    padding: 10px;
-    border-style: solid;
-    border-color: white;
-    position: absolute;
-    display: none;
-    left: 100px;
-}
-
-#jugadores {
-    background-color: black;
-    color: white;
-    width: 200px;
-    height: 80%;
-    padding: 0.25rem 1rem;
-    word-wrap:break-word;
-    overflow: auto;
-}
-
-#info {
-    width: 400px;
-    height: 98%;
-    overflow: auto;
-    padding: 0.25rem 1rem;
-    word-wrap:break-word;
-}
-
-.chat__wrap {
-    display: flex;
-    flex-flow: row nowrap;
-}
-
-/*------------------------------------------------------*/
-/*SECCION DE TODO LO QUE TIENE QUE VER CON LOS JUGADORES*/
-/*------------------------------------------------------*/
-.info__container {
-    margin: 0.5rem;
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: space-between;
-}
-
-/*caja de los jugadores conectados*/
-.info__players {
-    margin-bottom: 1rem;
-}
-
-/*caja para meter el nombre de usuario*/
-.info__nickname {
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 0.8rem;
-    padding: 0.25rem 0.5rem;
-}
-
-/*botones conectarse y desconectarse*/
-.info__button-wrap {
-    display: flex;
-    flex-flow: row nowrap;
+  font-family: 'Courier New', Courier, monospace;
+	font-size: 20px;
+	
     
 }
-.info__button {
-    width: 100%;
-    margin: 0 0.5rem;
-    padding: 0.25rem 0.5rem;
-    font-size: 0.8rem;
+
+div{
+  font-family: 'Courier New', Courier, monospace;
 }
 
-/*------------------------------------------------*/
-/*SECCION DE TODO LO QUE TIENE QUE VER CON EL CHAT*/
-/*------------------------------------------------*/
-.chat__container {
-    margin: 0.5rem;
-    display: flex;
-    flex-flow: column wrap;
+text{
+  font-family: 'Courier New', Courier, monospace;
 }
 
-/*caja donde salen los mensajes*/
-.chat__messages {
-    background-color: white;
-    height: 400px;
-    margin-bottom: 1rem;
+l1 {
+  font-family: 'pwchalkmedium';
+  font-size: 18px;
+  border: 1px solid #dedede;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px 0;
+  border-color: #ccc;
+  background-color: #ddd;
 }
 
-/*div de la caja para escribir y boton enviar*/
-.chat__inputs {
-    display: flex;
-    flex-flow: row nowrap;
+l2 {
+  font-family: 'pwchalkmedium';
+  font-size: 15px;
+  border: 1px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px 0;
 }
 
-/*boton enviar*/
-.chat__button{
-    margin: 1 0.5rem;
-    padding: 0.5rem 0.5rem;
-    font-size: 0.8rem;
+l3 {
+	font-family: 'pwchalkmedium';
+  	font-size: 20px;
+	background-color: #f1f1f9;
 }
 
-/*caja para escribir mensajes*/
-#msg__input{
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0.5rem 0.5rem;
+div.scroll{
+	background-color: #eee;
+  	width: 800px;
+  	height: 300px;
+	overflow: auto;
 }
+
+table{
+  border: 1px solid black;
+  background-color: #FFFFFF;
+}
+
+th {
+  text-align: left;
+}
+
+.chat__messages{
+	height:10px;
+	 width: 5px;
+    overflow:scroll;
+    overflow-x:hidden;
+}
+
+.container {
+  border: 4px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.container1 {
+  border: 4px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.container2 {
+  border: 0.5px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 1px 0;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+

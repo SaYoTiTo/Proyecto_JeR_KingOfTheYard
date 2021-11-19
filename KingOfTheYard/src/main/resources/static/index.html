@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="shortcut icon" href="#" />
     <title>KING OF THE YARD</title>
-    <!--<link rel="stylesheet" href="stylesheet.css">-->
+    <link rel="stylesheet" href="stylesheet.css">
     <!-- Imports del juego -->
     <script src="js/phaser.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -22,37 +22,35 @@
     <script type="text/javascript" src="js/redWinScene.js"></script>
     <script type="text/javascript" src="js/game.js"></script>
     
-    <style type="text/css">
-        body {
-            margin: 0;
-        }
-    </style>
+    
 </head>
     
 <body>
 <div id="chat" class="chat__container">
-        <h1>chat room</h1>
+        <h1>SAFE ZONE</h1>
         <div class="chat__wrap">
             <section class="info__container">
                 <!--caja en la que salen los conectados-->
-                <div id="jugadores" class="info_players">Desconectado</div>
-
+        
+                <div id="jugadores" class="DivToScroll">Desconectado</div>
+				</div>
                 <div>
                     <!--caja para meter el nombre de usuario-->
                     <input class="info__nickname" id='nick' type='text' placeholder="Nombre de usuario">
-
+                    <p></p>
                     <!--botones conectarse y desconectarse-->
                     <div class="info__button-wrap">
                         <button class="info__button" id='conectarse'>Conexión</button>
                         <button class="info__button" id='desconectarse'>Desconexión</button>
                     </div>
+                    
                 </div>
             </section>
 
             <section class="chat__container">
 
                 <!--donde salen los mensajes-->
-                <div class="chat__messages">
+                <div class="DivToScroll">
                     <div id='info'></div>
                 </div>
 
@@ -62,6 +60,7 @@
                         <input id='msg__input' type='text' placeholder="Escribir mensaje..."></input>
                         <!--boton enviar-->
                         <button class="chat__button" id='sendButton'>Enviar</button>
+                        <p></p>
                     </div>
                 </div>
             </section>
