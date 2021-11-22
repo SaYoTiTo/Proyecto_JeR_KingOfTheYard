@@ -28,43 +28,57 @@
 <body>
 <div id="chat" class="chat__container">
         <h1>SAFE ZONE</h1>
-        <div class="chat__wrap">
-            <section class="info__container">
-                <!--caja en la que salen los conectados-->
+        <table class="table">
+            <tr>
+                <td>
+                    <section class="info__container">
+                        <!--caja en la que salen los conectados-->
+                
+                        <div id="jugadores" class="DivToScroll">Desconectado</div>
+                        </div>
+                        
+                    </section>
+                </td>
+                <td>
+                    <section class="chat__container">
+
+                        <!--donde salen los mensajes-->
+                        <div class="DivToScroll">
+                            <div id='info'></div>
+                        </div>
         
-                <div id="jugadores" class="DivToScroll">Desconectado</div>
-				</div>
-                <div>
-                    <!--caja para meter el nombre de usuario-->
-                    <input class="info__nickname" id='nick' type='text' placeholder="Nombre de usuario">
-                    <p></p>
-                    <!--botones conectarse y desconectarse-->
-                    <div class="info__button-wrap">
-                        <button class="info__button" id='conectarse'>Conexión</button>
-                        <button class="info__button" id='desconectarse'>Desconexión</button>
+                        
+                    </section>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <!--caja para meter el nombre de usuario-->
+                        <input class="info__nickname" id='nick' type='text' placeholder="Nombre de usuario">
+                        <p></p>
+                        <!--botones conectarse y desconectarse-->
+                        <div class="info__button-wrap">
+                            <button class="info__button" id='conectarse'>Conexión</button>
+                            <button class="info__button" id='desconectarse'>Desconexión</button>
+                        </div>                        
                     </div>
-                    
-                </div>
-            </section>
-
-            <section class="chat__container">
-
-                <!--donde salen los mensajes-->
-                <div class="DivToScroll">
-                    <div id='info'></div>
-                </div>
-
-                <div>
+                </td>
+                <td>
                     <div class="chat__inputs">
                         <!--caja para escribir-->
-                        <input id='msg__input' type='text' placeholder="Escribir mensaje..."></input>
-                        <!--boton enviar-->
-                        <button class="chat__button" id='sendButton'>Enviar</button>
+                        <input id='msg__input' type='text' placeholder="Escribir mensaje..." class="info__nickname"></input>
+                        <p></p>
+                        <div>
+                            <!--boton enviar-->
+                            <button class="info__button" id='sendButton'>Enviar</button>
+                        </div>
+                        
                         <p></p>
                     </div>
-                </div>
-            </section>
-        </div>
+                </td>
+            </tr>
+        </table>
     </div>
 </body>
 </html>
