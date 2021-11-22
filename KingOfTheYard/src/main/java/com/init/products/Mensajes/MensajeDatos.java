@@ -43,7 +43,7 @@ public class MensajeDatos {
 	public void setMensaje(Mensaje mensaje) {
 		try {
             BufferedWriter file = new BufferedWriter(new FileWriter(ruta, true));
-            file.write(mensaje.getAutor()+ "#" + mensaje.getFecha() + "#" + mensaje.getMs() + "\n");
+            file.write(mensaje.getAutor()+ "#" + mensaje.getFecha() + "#" + mensaje.getTexto() + "\n");
             file.close();
         } catch (IOException ex) {
             System.out.println(ex);

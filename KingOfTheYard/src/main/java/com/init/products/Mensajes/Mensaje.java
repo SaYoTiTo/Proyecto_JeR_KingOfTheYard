@@ -4,7 +4,7 @@ public class Mensaje {
 
 	private String autor;	//autor del mensaje
 	private String fecha;  //fecha del mensaje
-	private String ms;		//mensaje
+	private String texto;		//mensaje
 	
 	
 	public Mensaje() {}
@@ -12,7 +12,7 @@ public class Mensaje {
 	public Mensaje(String autor, String fecha, String ms) {
 		this.autor = autor;
 		this.fecha = fecha;
-		this.ms = ms;
+		this.texto = ms;
 	}
 	
 	public String getAutor() {
@@ -21,11 +21,11 @@ public class Mensaje {
 	public void setAutor(String autor) {
 		this.autor = autor;
 	}
-	public String getMs() {
-		return ms;
+	public String getTexto() {
+		return texto;
 	}
-	public void setMs(String ms) {
-		this.ms = ms;
+	public void setTexto(String ms) {
+		this.texto = ms;
 	}
 	public String getFecha() {
 		return fecha;
