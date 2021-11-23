@@ -15,9 +15,11 @@ class blueWinScene extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers('victoryBg', {start: 0, end: 2}),
         });
 
+        this.play = this.physics.add.sprite(575, 400, 'playButton').setScale(0.8).refreshBody();
         this.bg = this.add.sprite(600, 337.5, 'victoryBg');
         this.bg.anims.play('victoryBgAnim');
 
+        this.play.setInteractive();
         this.blueName = this.add.sprite(600, 300, 'blueName');
         this.blue = this.add.sprite(600, 500, 'blueChar');
 
@@ -40,6 +42,18 @@ class blueWinScene extends Phaser.Scene{
             victoryBgMusic.setVolume(0);
             this.scene.scene.stop('blueWinScene');
             this.scene.scene.start('mainMenu');
+        });
+        this.play.on("pointerover", () => {
+            this.alpha = 0;
+            this.playPressed.alpha = 1;
+        });
+        this.play.on("pointerout", () => {
+            this.alpha = 1;
+            this.playPressed.alpha = 0;
+        });
+        this.play.on("pointerdown", function(){
+            this.scene.scene.stop('blueWinScene');
+            this.scene.scene.start('game');
         });
     }
 }

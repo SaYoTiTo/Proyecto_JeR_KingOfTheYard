@@ -65,7 +65,7 @@ class mainMenu extends Phaser.Scene{
         menuBgMusic.setVolume(musicMult);
 
 		//The chat
-		//this.input.keyboard.on()
+        this.input.keyboard.on('keydown-C', chat, this);
 
     }
 
@@ -216,4 +216,9 @@ class mainMenu extends Phaser.Scene{
             }
         }
     }
+}
+
+function chat(){
+	this.scene.pause();
+	this.scene.launch('chatScene', { prev: 'mainMenu'});
 }
