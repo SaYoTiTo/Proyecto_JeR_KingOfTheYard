@@ -15,6 +15,8 @@ class blueWinScene extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers('victoryBg', {start: 0, end: 2}),
         });
 
+		thisScene = 'blueWinScene';
+		
         this.play = this.physics.add.sprite(575, 400, 'playButton').setScale(0.8).refreshBody();
         this.bg = this.add.sprite(600, 337.5, 'victoryBg');
         this.bg.anims.play('victoryBgAnim');
@@ -59,9 +61,4 @@ class blueWinScene extends Phaser.Scene{
             this.scene.scene.start('game');
         });
     }
-}
-
-function chat(){
-	this.scene.pause();
-	this.scene.launch('chatScene', { prev: 'blueWinScene'});
 }

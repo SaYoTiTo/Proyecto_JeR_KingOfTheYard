@@ -5,6 +5,8 @@ var victoryBgMusic;
 var musicMult = 1;
 var moveActive = true;
 
+var thisScene;
+
 class mainMenu extends Phaser.Scene{
 
     constructor(){
@@ -13,6 +15,8 @@ class mainMenu extends Phaser.Scene{
 
     create(){
 
+		thisScene = 'mainMenu';
+		
         this.anims.create({
             key: 'menuBgAnim',
             frameRate: 2.5,
@@ -220,5 +224,5 @@ class mainMenu extends Phaser.Scene{
 
 function chat(){
 	this.scene.pause();
-	this.scene.launch('chatScene', { prev: 'mainMenu'});
+	this.scene.launch('chatScene', { prev: thisScene });
 }

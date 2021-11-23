@@ -8,7 +8,9 @@ class configScene extends Phaser.Scene{
     }
 
     create(){
-
+		
+		thisScene = 'configScene';
+		
         this.anims.create({
             key: 'configBgAnim',
             frameRate: 2.5,
@@ -90,9 +92,4 @@ class configScene extends Phaser.Scene{
         });
 
     }
-}
-
-function chat(){
-	this.scene.pause();
-	this.scene.launch('chatScene', { prev: 'configScene'});
 }

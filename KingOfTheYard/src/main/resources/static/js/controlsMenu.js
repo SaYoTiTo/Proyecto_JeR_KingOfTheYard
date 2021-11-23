@@ -5,7 +5,9 @@ class controlsMenu extends Phaser.Scene{
     }
 
     create(){
-
+	
+		thisScene = 'controlsMenu';
+		
         this.anims.create({
             key: 'controlsBgAnim',
             frameRate: 3,
@@ -39,9 +41,4 @@ class controlsMenu extends Phaser.Scene{
         });
 
     }
-}
-
-function chat(){
-	this.scene.pause();
-	this.scene.launch('chatScene', { prev: 'controlsMenu'});
 }

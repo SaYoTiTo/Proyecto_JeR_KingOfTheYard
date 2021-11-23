@@ -15,10 +15,10 @@ scroll{
     font-weight: bold;
     left: -1px;
     padding: 10px 7px 5px;
-     overflow-x:hidden;
+    overflow-x:hidden;
     overflow:scroll;
-     height:250px;
-	 width: 575px;
+    height:250px;
+	width: 575px;
 }
 
 .DivWithScroll{
@@ -163,8 +163,6 @@ th {
 
 #chat{
 	position: absolute;
+	margin: 200px 0px 0px 0px;
 	display: none
 }
-
-
-

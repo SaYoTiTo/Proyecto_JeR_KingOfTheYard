@@ -7,6 +7,8 @@ class redWinScene extends Phaser.Scene{
     }
 
     create(){
+	
+		thisScene = 'redWinScene';
         
         this.anims.create({
             key: 'victoryBgAnim',
@@ -59,9 +61,4 @@ class redWinScene extends Phaser.Scene{
             this.scene.scene.start('game');
         });
     }
-}
-
-function chat(){
-	this.scene.pause();
-	this.scene.launch('chatScene', { prev: 'redWinScene'});
 }

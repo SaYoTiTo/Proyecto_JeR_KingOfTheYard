@@ -6,6 +6,8 @@ class selectionMenu extends Phaser.Scene{
 
     create(){
 
+		thisScene = 'selectionMenu';
+
         this.anims.create({
             key: 'selectionBgAnim',
             frameRate: 2.5,
@@ -77,9 +79,4 @@ class selectionMenu extends Phaser.Scene{
             }
         }
     }
-}
-
-function chat(){
-	this.scene.pause();
-	this.scene.launch('chatScene', { prev: 'selectionMenu'});
 }

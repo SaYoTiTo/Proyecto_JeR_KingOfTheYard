@@ -10,6 +10,10 @@ class chatScene extends Phaser.Scene {
 	}
 	
     create(){
+	
+		this.title = this.add.sprite(600, 50, 'title');
+		this.bg = this.add.sprite(600, 337.5, 'victoryBg');
+		
 		document.getElementById('chat').style.display = 'block';
         this.input.keyboard.on('keydown-ESC', goBack, this);
     }
