@@ -55,24 +55,29 @@
                 <td>
                     <div>
                         <!--caja para meter el nombre de usuario-->
-                        <input class="info__nickname" id='nick' type='text' placeholder="Nombre de usuario">
-                        <!--botones conectarse y desconectarse-->
-                        <div class="info__button-wrap">
-                            <button class="info__button" id='conectarse'>Conexión</button>
-                            <button class="info__button" id='desconectarse'>Desconexión</button>
-                        </div>                        
+                        <input class="info__nickname" id='nick' type='text' placeholder="Nombre de usuario">                     
                     </div>
                 </td>
                 <td>
                     <div class="chat__inputs">
                         <!--caja para escribir-->
                         <input id='msg__input' type='text' placeholder="Escribir mensaje..." class="info__nickname"></input>
-                        <div>
-                            <!--boton enviar-->
-                            <button class="info__button" id='sendButton'>Enviar</button>
-                        </div>
-                        
                     </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <!--botones conectarse y desconectarse-->
+                    <div class="info__button-wrap">
+                        <button class="info__button" id='conectarse'>Conexión</button>
+                        <button class="info__button" id='desconectarse'>Desconexión</button>
+                    </div> 
+                </td>
+                <td>
+                    <div>
+                        <!--boton enviar-->
+                        <button class="info__button" id='sendButton'>Enviar</button>
+                    </div>                    
                 </td>
             </tr>
         </table>
