@@ -48,6 +48,8 @@ class configScene extends Phaser.Scene{
 
         this.enterKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+		//The chat
+        this.input.keyboard.on('keydown-C', chat, this);
     }
 
     update(){
@@ -88,4 +90,9 @@ class configScene extends Phaser.Scene{
         });
 
     }
+}
+
+function chat(){
+	this.scene.pause();
+	this.scene.launch('chatScene', { prev: 'configScene'});
 }

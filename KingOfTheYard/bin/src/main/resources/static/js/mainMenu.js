@@ -63,6 +63,10 @@ class mainMenu extends Phaser.Scene{
         }
         
         menuBgMusic.setVolume(musicMult);
+
+		//The chat
+		//this.input.keyboard.on()
+
     }
 
     update(){

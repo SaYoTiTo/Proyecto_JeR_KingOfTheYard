@@ -29,6 +29,9 @@ class blueWinScene extends Phaser.Scene{
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
       
         victoryBgMusic.setVolume(musicMult);
+
+		//The chat
+        this.input.keyboard.on('keydown-C', chat, this);
     }
 
     update(){
@@ -56,4 +59,9 @@ class blueWinScene extends Phaser.Scene{
             this.scene.scene.start('game');
         });
     }
+}
+
+function chat(){
+	this.scene.pause();
+	this.scene.launch('chatScene', { prev: 'blueWinScene'});
 }
