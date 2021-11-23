@@ -168,6 +168,6 @@ th {
 
 #chat{
 	position: absolute;
-	margin: 200px 0px 0px 0px;
+	margin: 200px 0px 10px 0px;
 	display: none
 }
