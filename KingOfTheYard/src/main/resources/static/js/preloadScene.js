@@ -125,6 +125,17 @@ class preloadScene extends Phaser.Scene{
         this.load.image('redName', 'assets/redName.png');
         this.load.image('blueName', 'assets/blueName.png');
 
+		//Escena chat
+		this.load.spritesheet('chatBg', 'assets/safeZoneSpritesheet.png', {
+            frameWidth: 1200,
+            frameHeight: 675,
+        });
+
+		this.load.spritesheet('chatButton', 'assets/botonChat.png', {
+            frameWidth: 450,
+            frameHeight: 150,
+        });
+
         //Sonidos
         this.load.audio('gameMusic', ['assets/Music/gameMusic.wav']);
         this.load.audio('menuMusic', ['assets/Music/menuMusic.wav']);
