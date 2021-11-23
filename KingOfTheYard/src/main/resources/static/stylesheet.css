@@ -1,9 +1,15 @@
+@font-face {
+  font-family: 'pwchalkmedium';
+  src: url('"./assets/font/pwchalk-webfont.woff2') format('woff2'),
+       url('"./assets/font/pwchalk-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
 
 scroll{
 	 height:10px;
 	 width: 5px;
-    overflow:scroll;
-    overflow-x:hidden;
 }
 
 .DivToScroll{   
@@ -15,12 +21,34 @@ scroll{
     font-weight: bold;
     left: -1px;
     padding: 10px 7px 5px;
-    overflow-x:hidden;
-    overflow:scroll;
+    overflow-y:scroll;
     height:250px;
 	width: 570px;
   border-top-left-radius: 10px;  
+  border-bottom-left-radius: 10px; 
 }
+
+
+/* width 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track 
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle 
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover 
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}*/
+
 
 .DivWithScroll{
     height:120px;
@@ -37,8 +65,6 @@ scroll{
     color: rgb(0, 0, 0);
     left: -1px;
     padding: 10px 7px 5px;
-     overflow-x:hidden;
-    overflow:scroll;
      height:10px;
 	 width: 200px;
    border-radius: 10px;
