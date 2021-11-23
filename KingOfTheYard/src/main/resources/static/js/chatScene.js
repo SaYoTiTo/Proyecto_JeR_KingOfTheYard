@@ -16,6 +16,7 @@ class chatScene extends Phaser.Scene {
 		
 		document.getElementById('chat').style.display = 'block';
         this.input.keyboard.on('keydown-ESC', goBack, this);
+		this.input.keyboard.disableGlobalCapture();
     }
 
     update(){
