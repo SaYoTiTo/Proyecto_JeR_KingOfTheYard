@@ -42,7 +42,7 @@ public class SalaManagment {
 	
 	public SalaManagment() {
 		Random rd = new Random();
-		salaPrincipal.setCapacidad(2);
+		salaPrincipal.setCapacidad(20);
 		salaPrincipal.setId("" + (long)(Math.floor(rd.nextDouble()*999999)));
 		salaPrincipal.getRegistro().setRuta("registros/" + salaPrincipal.getId() + ".txt");
 		timer.start();
