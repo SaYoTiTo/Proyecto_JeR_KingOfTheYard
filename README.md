@@ -164,6 +164,10 @@ En este diagrama de estados se muestran todas las pantallas que se podrán ver a
 
 ![](https://lh4.googleusercontent.com/6kz1dUd5qaI5FyqX_-wuhK-9RRnQ9BIuvdWtDq3p_DhqIrEU0fv6vGHKy8C2lNE4R7MUWuTtX3zY1KzB0qp4L97yO8rDcFqLVAsUgVi78rZK1pbBWR1IA6A_TWbIfmUuTtutv9Rv=s1600)**
 
+### Sala de chat
+
+![safezone](https://user-images.githubusercontent.com/72553373/143837284-733e8717-e6c7-441a-a63d-0098c4ac58da.PNG)
+
 ### Pantalla Ajustes
 - **Boton Activar Sonido**: Al pulsarlo activas el audio si este está apagado.
 - **Boton Desactivar Sonido**: Al pulsarlo desactivas el audio si este está encendido.
@@ -218,4 +222,8 @@ En este apartado se hacen referencia a todos los archivos de audio que existen e
 ## Efectos
 - [Golpe](https://github.com/SaYoTiTo/Proyecto_JeR_KingOfTheYard/blob/main/King%20of%20the%20Yard/assets/Music/Punch%20Hit%20Sound%20Effect.mp3) 
 - [Victoria](https://github.com/SaYoTiTo/Proyecto_JeR_KingOfTheYard/blob/main/King%20of%20the%20Yard/assets/Music/Victory%20Sound%20Effect.mp3) 
+
+## Diagrama de clases y API REST
+
+![UML_KINGOFTHEYARD](https://user-images.githubusercontent.com/72553373/143836502-917d346d-a5f2-42ba-9ef6-403f3979ea9b.png)
 
