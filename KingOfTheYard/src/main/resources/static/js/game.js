@@ -6,7 +6,7 @@ var config = {
         default: 'arcade',
         arcade : {debug:false}
     },
-    scene:[preloadScene, mainMenu, selectionMenu, configScene, controlsMenu, mainScene, redWinScene, blueWinScene, chatScene]
+    scene:[preloadScene, mainMenu, selectionMenu, configScene, controlsMenu, mainScene, redWinScene, blueWinScene, chatScene, matchmakingScene, connectionLostScene, disconnectionScene ]
 };
 
 let game = new Phaser.Game(config);
