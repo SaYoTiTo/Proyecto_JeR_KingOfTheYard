@@ -33,13 +33,13 @@ class matchmakingScene extends Phaser.Scene {
        // stompClient.send("/game/search", {}, JSON.stringify({'name': "Saya"}));
     }
     
-    onConnected(){
-        stompClient.subscribe('/topic/searching', onMessage , { id: nick});
+    onConnected(){        
         var chatMessage = {
             name: "conexion",
             player: nick,
             info: nick
         };
+        stompClient.subscribe('/topic/searching', onMessage , { id: nick});
         stompClient.subscribe('/topic/searching/' + nick,  this.ping.bind(this), {id: nick+'a'});
         pingPongTimer = window.setInterval(this.pong.bind(this), 500);
         stompClient.send("/app/search", {}, JSON.stringify(chatMessage)); 
