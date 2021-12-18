@@ -1,10 +1,15 @@
 class selectionMenu extends Phaser.Scene{
 
+
+	
+
     constructor(){
         super({ key: 'selectionMenu'});
     }
 
     create(){
+
+		this.sceneStarted = false;
 
 		thisScene = 'selectionMenu';
 
@@ -68,9 +73,14 @@ class selectionMenu extends Phaser.Scene{
             this.onlinePressed.alpha = 0;
         });
         this.online.on("pointerdown", function(){
-            this.scene.scene.stop('selectionMenu');
+		if(!this.sceneStarted){
+			  this.scene.scene.stop('selectionMenu');
             this.scene.scene.start('matchmakingScene');
-        });
+			console.log("He llamado a matchmakingScene con raton");
+			this.sceneStarted = true;
+		}
+          
+        })
 		
         //Control con teclado
         if(this.leftKey.isDown){
@@ -88,8 +98,12 @@ class selectionMenu extends Phaser.Scene{
         }else if(this.enterKey.isDown || this.spaceKey.isDown){
             switch(this.selection){
                 case 1:
-                    this.scene.stop('selectionMenu');
-					this.scene.start('matchmakingScene')
+                    if(!this.sceneStarted){
+			  	this.scene.scene.stop('selectionMenu');
+            	this.scene.scene.start('matchmakingScene');
+				console.log("He llamado a matchmakingScene con teclado");
+				this.sceneStarted = true;
+				}
                 break;
                     
                 case 2:

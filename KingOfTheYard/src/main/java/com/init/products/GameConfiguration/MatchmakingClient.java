@@ -1,4 +1,4 @@
-package GameConfiguration;
+package com.init.products.GameConfiguration;
 
 public class MatchmakingClient {
 

@@ -1,7 +1,8 @@
-package GameConfiguration;
+package com.init.products.GameConfiguration;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -28,7 +29,7 @@ public class GameController {
 	Timer timer = new Timer(matchmakingTimeout, new ActionListener() {
 		@Override
         public void actionPerformed(ActionEvent e) {
-			//System.out.println("buscando desconectados");
+			System.out.println("buscando desconectados");
 			Iterator<MatchmakingClient> idsIterator = safeIds.iterator();
 	        while (idsIterator.hasNext()) {
 	        	MatchmakingClient user = idsIterator.next();
@@ -46,12 +47,13 @@ public class GameController {
 	@MessageMapping("/search")
 	@SendTo("/topic/searching")
 	public String findServer(@Payload GameMessage message) {
+		System.out.println("He llegado a FindServer");
 		if(primero) {
 			primero = false;
 			timer.start();
 		}
 		safeIds.add(new MatchmakingClient(message.getPlayer()));
-		//System.out.println(message.getPlayer() + " " + ids.size());
+		System.out.println(message.getPlayer() + " " + ids.size());
 		if(safeIds.size()>=2) {
 			sala++;
 			String aux = safeIds.get(0).getNick() + "%" + safeIds.get(1).getNick() + "%" + sala + "%" + Math.random()*100000;
@@ -62,18 +64,20 @@ public class GameController {
 			return aux;
 			
 		}
+		System.out.println("waiting");
 		return "waiting";
 	}
 	
 	@MessageMapping("/ping/{player}")
 	@SendTo("/topic/searching/{player}")
 	public boolean pingFunction(@DestinationVariable String player, @Payload boolean ping) {
-		//System.out.println("ping");
+		System.out.println("ping");
 		findPLayer(player).setPing(true);
 		return true;
 	}
 	
 	private MatchmakingClient findPLayer(String nick) {
+		
 		for (MatchmakingClient matchmakingClient : safeIds) {
 			if(matchmakingClient.getNick().equals(nick)) {
 				return matchmakingClient;
@@ -85,6 +89,7 @@ public class GameController {
 	@MessageMapping("/playing.send/{serverId}")
 	@SendTo("/topic/gameId/{serverId}")
 	public GameMessage sendMessage2(@DestinationVariable String serverId, @Payload GameMessage message) {
+		System.out.println("He llegado a ECHO");
 		return message;
 	}
 	
