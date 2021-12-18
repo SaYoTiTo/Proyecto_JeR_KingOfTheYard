@@ -31,6 +31,12 @@ class mainScene extends Phaser.Scene{
             
         this.input.mouse.disableContextMenu();
 
+        //Server variables
+        this.serverTimeout = 5000;
+        this.pinged = false;
+        this.localReady = false;
+        this.onlineReady = false;
+
         //Background
         this.anims.create({
             key: 'gameBgAnim',
@@ -206,16 +212,25 @@ class mainScene extends Phaser.Scene{
         blueText = this.add.text(625, 16, 'Blue Score: 0', { fontSize: '32px', fill: '#060057' });
     
         //Character controlls
-        this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-        this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-        this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-        
-        this.keyI = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
-        this.keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
-        this.keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
-        this.keyL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
-        
+        if(!online || jugador == 0){
+            this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+            this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+            this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+            this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        }
+        if(!online || jugador == 1){
+            this.keyI = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
+            this.keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
+            this.keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
+            this.keyL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
+        }
+
+        if(online){
+            this.messageInterval = window.setInterval(this.posMessages.bind(this), 100);
+            stompClient.subscrible('topic/gameId/' + server, this.onMessageReceived.bind(this), {id:nick});
+            this.chechServerInterval = window.setInterval(this.tryServer.bind(this), this.serverTimeout);
+          }
+
         //Colliders
         this.physics.add.collider(red, blue, stealCrown, null, this);
         this.physics.add.overlap(red, crown, getCrown, null, this);
@@ -451,6 +466,158 @@ class mainScene extends Phaser.Scene{
                     crown.x = blue.x;
                     crown.y = blue.y - 60;
                 }
+            }
+        }
+    }
+
+    tryServer(){
+        if(this.pinged == false){
+            this.restartGame();
+            this.scene.start('Disconected Scene');
+        }else{
+            this.pinged = false;
+        }
+    }
+
+    //Send position depending on player
+    posMessages(){
+        if(jugador == 0){
+            this.sendPosMessage(this.red.x, this.red.y, this.red.body.velocity,x, this.red.velocity.y, this.red.body.rotation);
+        }else if(jugador == 1){
+            this.sendPosMessage(this.blue.x, this.blue.y, this.blue.body.velocity,x, this.blue.velocity.y, this.blue.body.rotation);
+        }
+    }
+
+    //Send position
+    sendPosMessage(posX, posY, speedX, speedY, rot){
+
+        var msg = {
+            positionX: posX,
+            positionY: posY,
+            speedX: speedX,
+            speedY: speedY,
+            rotation: rot
+        }
+
+        var msgToTxt = JSON.stringify(msg);
+
+        var formedMsg = {
+            name: "move",
+            player: nick,
+            msg = msgToTxt
+        };
+
+        stompClient.send("app/playing.send/" + server, {}, JSON.stringify(formedMsg));
+    }
+
+    //Send hit between players
+    sendPlayerHitMessage(){
+        var msg = {
+            name: "hitPlayer",
+            player: nick,
+            info: player
+        };
+        stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(msg));
+    }
+
+    //Send hit to object
+    sendObjHitMessage(){
+        var msg = {
+            name: "hitObj",
+            player: nick,
+        };
+        stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(msg));
+    }
+
+    //Syncronize both players
+    sendSync(){
+        this.localReady = true;
+        if(this.onlineReady){
+            this.localReady = false;
+            this.onlineReady = false;
+            this.startGame();
+        }
+
+        var msg = {
+            name: "sync",
+            player: nick,
+            info: "ready"
+        }
+        stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(msg));
+    }
+
+    getSync(){
+        this.onlineReady = true;
+        if(this.localReady){
+            this.localReady = false;
+            this.onlineReady = false;
+            this.startGame();
+        }
+    }
+
+    //Send victory
+    victory(winner){
+        var msg = {
+            name: "victory",
+            player: nick,
+            info: winner
+        };
+        stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(msg));
+    }
+
+    //Receive victory
+    receivedVictory(winner){
+        if(online){
+            this.victory(winner);
+        }
+        
+        this.restartGame();
+
+        switch(winner){
+            case 1:
+                this.scene.start("redWinScene");
+            break;
+
+            case 2:
+                this.scene.start("blueWinScene");
+            break;
+        }
+    }
+
+    //Clear variables after ending
+    restartGame(){
+
+    }
+
+    //What to do with received message
+    onMessageReceived(message){
+        var msgObj = JSON.parse(message.body);
+
+        //If its not your own msg
+        if(nick != msgObj.player){
+            this.pinged = true;
+            
+            switch(msgObj.name){
+                case "move":
+                    this.updateOtherPosition(msgObj.info);
+                break;
+
+                case "hitPlayer":
+                    this.hitPlayer();
+                break;
+
+                case "hitObj":
+                    this.stunPlayer();
+                break;
+
+                case "victory":
+                    this.receivedVictory(winner);
+                break;
+
+                case "sync":
+                    this.getSync();
+                break;
+                
             }
         }
     }
