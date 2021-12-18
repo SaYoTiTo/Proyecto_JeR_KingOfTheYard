@@ -239,30 +239,30 @@ class mainScene extends Phaser.Scene{
         this.physics.add.collider(red, this.walls);
         this.physics.add.collider(blue, this.walls);
 
-        this.physics.add.overlap(red, floorSlow, reduceSpeed, null, this);
-        this.physics.add.overlap(blue, floorSlow, reduceSpeed, null, this);
+        this.physics.add.overlap(red, floorSlow, this.reduceSpeed, null, this);
+        this.physics.add.overlap(blue, floorSlow, this.reduceSpeed, null, this);
 
-        this.physics.add.collider(red, this.wheel, stun, null, this);               
-        this.physics.add.collider(blue, this.wheel, stun, null, this);
+        this.physics.add.collider(red, this.wheel, this.stun, null, this);               
+        this.physics.add.collider(blue, this.wheel, this.stun, null, this);
 
-        this.physics.add.collider(red, this.swing1Top, stun, null, this);
-        this.physics.add.collider(red, this.swing1Mid, stun, null, this);
-        this.physics.add.collider(red, this.swing1Bot, stun, null, this);
-        this.physics.add.collider(red, this.swing2Top, stun, null, this);
-        this.physics.add.collider(red, this.swing2Mid, stun, null, this);
-        this.physics.add.collider(red, this.swing2Bot, stun, null, this);
+        this.physics.add.collider(red, this.swing1Top, this.stun, null, this);
+        this.physics.add.collider(red, this.swing1Mid, this.stun, null, this);
+        this.physics.add.collider(red, this.swing1Bot, this.stun, null, this);
+        this.physics.add.collider(red, this.swing2Top, this.stun, null, this);
+        this.physics.add.collider(red, this.swing2Mid, this.stun, null, this);
+        this.physics.add.collider(red, this.swing2Bot, this.stun, null, this);
         
-        this.physics.add.collider(blue, this.swing1Mid, stun, null, this);
-        this.physics.add.collider(blue, this.swing1Top, stun, null, this);
-        this.physics.add.collider(blue, this.swing1Bot, stun, null, this);
-        this.physics.add.collider(blue, this.swing2Top, stun, null, this);
-        this.physics.add.collider(blue, this.swing2Mid, stun, null, this);
-        this.physics.add.collider(blue, this.swing2Bot, stun, null, this);
+        this.physics.add.collider(blue, this.swing1Mid, this.stun, null, this);
+        this.physics.add.collider(blue, this.swing1Top, this.stun, null, this);
+        this.physics.add.collider(blue, this.swing1Bot, this.stun, null, this);
+        this.physics.add.collider(blue, this.swing2Top, this.stun, null, this);
+        this.physics.add.collider(blue, this.swing2Mid, this.stun, null, this);
+        this.physics.add.collider(blue, this.swing2Bot, this.stun, null, this);
 
-        this.physics.add.collider(red, tp0, tp, null, this);
-        this.physics.add.collider(red, tp1, tp, null, this);
-        this.physics.add.collider(blue, tp0, tp, null, this);
-        this.physics.add.collider(blue, tp1, tp, null, this);
+        this.physics.add.collider(red, tp0, this.tp, null, this);
+        this.physics.add.collider(red, tp1, this.tp, null, this);
+        this.physics.add.collider(blue, tp0, this.tp, null, this);
+        this.physics.add.collider(blue, tp1, this.tp, null, this);
 
         //Music        
         gameBgMusic.setVolume(musicMult);
@@ -278,12 +278,12 @@ class mainScene extends Phaser.Scene{
         //Control velocity
         if(red.slowed){
             if(red.body.touching.none){
-                increaseSpeed(red);
+                this.increaseSpeed(red);
             }
         }
         if(blue.slowed){
             if(blue.body.touching.none){
-                increaseSpeed(blue);
+                this.increaseSpeed(blue);
             }
         }
         
@@ -480,8 +480,9 @@ class mainScene extends Phaser.Scene{
             crown.setDepth(30);
             console.log("La corona es de " + red.name);
             //Creates a timer to give points
-            pointTimer = this.time.addEvent({ delay: 2000, callback: givePoints, callbackScope: this, loop: true});
-            this.sendCrown(1);
+            pointTimer = this.time.addEvent({ delay: 2000, callback: this.givePoints, callbackScope: this, loop: true});
+            if(online)
+                this.sendCrown(1);
         }
     }
 
@@ -494,7 +495,7 @@ class mainScene extends Phaser.Scene{
                 red.anims.play("redStunAnim");
                 red.speedMod = 0;
                 //Creates a timer to stun
-                stun = this.time.addEvent({ delay: 2000, callback: () => red.speedMod = 1, callbackScope: this});
+                this.stun = this.time.addEvent({ delay: 2000, callback: () => red.speedMod = 1, callbackScope: this});
             }else{
                 crown.attached = 'red';
                 console.log("La corona ahora es de " + crown.attached);
@@ -502,7 +503,7 @@ class mainScene extends Phaser.Scene{
                 blue.anims.play("blueStunAnim");
                 blue.speedMod = 0;
                 //Creates a timer to stun
-                stun = this.time.addEvent({ delay: 2000, callback: () => blue.speedMod = 1, callbackScope: this});
+                this.stun = this.time.addEvent({ delay: 2000, callback: () => blue.speedMod = 1, callbackScope: this});
             } 
             
             boolSteal = false;
@@ -510,7 +511,7 @@ class mainScene extends Phaser.Scene{
             timer = this.time.addEvent({ delay: 2000, callback: () => boolSteal = true, callbackScope: this});
     
             //Creates a timer to give points
-            pointTimer = this.time.addEvent({ delay: 2000, callback: givePoints, callbackScope: this, loop: true});
+            pointTimer = this.time.addEvent({ delay: 2000, callback: this.givePoints, callbackScope: this, loop: true});
             
             //this.sendPlayerHitMessage();
         }
@@ -522,7 +523,8 @@ class mainScene extends Phaser.Scene{
             redText.setText('Red Score: ' + red.points);
             if(red.points === 20){
                 gameBgMusic.setVolume(0);
-                this.sendVictory(0);
+                if(online)
+                    this.sendVictory(0);
                 this.scene.stop('controlsMenu');
                 this.scene.start('redWinScene');
             }
@@ -530,7 +532,8 @@ class mainScene extends Phaser.Scene{
             blue.points++;
             blueText.setText('Blue Score: ' + blue.points);
             if(blue.points === 20){
-                this.sendVictory(1);
+                if(online)
+                    this.sendVictory(1);
                 gameBgMusic.setVolume(0);
                 this.scene.stop('controlsMenu');
                 this.scene.start('blueWinScene');
@@ -560,7 +563,8 @@ class mainScene extends Phaser.Scene{
         player.speedMod = 0;
         //Creates a timer to stun
         this.time.addEvent({ delay: 2000, callback: () => player.speedMod = 1, callbackScope: this});
-        this.sendObjHitMessage();    
+        if(online)
+            this.sendObjHitMessage();    
     }
 
     tp(player, tp){
@@ -578,7 +582,8 @@ class mainScene extends Phaser.Scene{
                 tpActive = false;
                 tpTimer = this.time.addEvent({ delay: 3000, callback: () => tpActive = true, callbackScope: this});         
             }
-            this.sendTp();
+            if(online)
+                this.sendTp();
         }
     }
     
