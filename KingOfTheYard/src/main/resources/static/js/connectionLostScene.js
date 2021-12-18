@@ -15,7 +15,7 @@ class connectionLostScene extends Phaser.Scene {
     
     create() {
          //let bg = this.add.sprite(0, 0, 'DISCONNECTION');
-        bg.setOrigin(0,0);
+        //bg.setOrigin(0,0);
 
         //AUDIO
          //this.titleSFX = this.sound.add('START_SFX');

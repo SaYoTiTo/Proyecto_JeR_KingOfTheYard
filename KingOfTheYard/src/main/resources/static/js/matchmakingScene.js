@@ -13,6 +13,7 @@ class matchmakingScene extends Phaser.Scene {
     create(){
         this.bg = this.add.sprite(0, 0, 'MATCHMAKING').setOrigin(0,0);
         this.conexion();
+		console.log("He tirado conexion");
         this.pongV = true;
     }
 
@@ -27,14 +28,18 @@ class matchmakingScene extends Phaser.Scene {
         socket = new SockJS('/ws');
         stompClient = Stomp.over(socket);
         stompClient.connect({}, this.onConnected.bind(this), this.onError.bind(this));
-        
+		console.log("Enviando peticion");        
         //JSON.stringify({sender: username, id: 1234});
        // stompClient.send("/game/search", {}, JSON.stringify({'name': "Saya"}));
        // stompClient.send("/game/search", {}, JSON.stringify({'name': "Saya"}));
     }
     
-    onConnected(){       
-        stompClient.subscribe('/topic/searching', onMessage , { id: nick});
+
+    onConnected(){
+	console.log("");  
+        stompClient.subscribe('/topic/searching', this.onMessage , { id: nick});
+
+
         var chatMessage = {
             name: "conexion",
             player: nick,
@@ -67,9 +72,10 @@ class matchmakingScene extends Phaser.Scene {
         console.log("ping")
         this.pongV = true;
     }
-}
 
-function onMessage(message){
+
+onMessage(message){
+	console.log("he llegado aqui")
     console.log("Mensaje recibido:" + message.body)
     if(message.body!="waiting"){
         var ids = message.body.split("%");
@@ -98,6 +104,9 @@ function onMessage(message){
             conexionEstablished = true;
         }
     }
+
+}
+
 	
 	
 	}
