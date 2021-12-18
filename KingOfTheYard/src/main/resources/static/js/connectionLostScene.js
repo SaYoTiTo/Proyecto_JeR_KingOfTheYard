@@ -1,7 +1,7 @@
-class ConnectionLostScene extends Phaser.Scene {
+class connectionLostScene extends Phaser.Scene {
 
     constructor() {
-        super({key:"connectionLostScene"});
+        super({key:'connectionLostScene'});
     }
     
     preload() {

@@ -3,7 +3,7 @@ var pingPongTimer;
 class matchmakingScene extends Phaser.Scene {
 	
 	  constructor() {
-        super('matchmakingScene');
+        super({key: 'matchmakingScene'});
     }
 
     preload(){

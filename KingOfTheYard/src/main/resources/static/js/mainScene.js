@@ -229,12 +229,12 @@ class mainScene extends Phaser.Scene{
             this.messageInterval = window.setInterval(this.posMessages.bind(this), 100);
             stompClient.subscrible('topic/gameId/' + server, this.onMessageReceived.bind(this), {id:nick});
             this.chechServerInterval = window.setInterval(this.tryServer.bind(this), this.serverTimeout);
-          }
+        }
 
         //Colliders
-        this.physics.add.collider(red, blue, stealCrown, null, this);
-        this.physics.add.overlap(red, crown, getCrown, null, this);
-        this.physics.add.overlap(blue, crown, getCrown, null, this);
+        this.physics.add.collider(red, blue, this.stealCrown, null, this);
+        this.physics.add.overlap(red, crown, this.getCrown, null, this);
+        this.physics.add.overlap(blue, crown, this.getCrown, null, this);
 
         this.physics.add.collider(red, this.walls);
         this.physics.add.collider(blue, this.walls);
@@ -268,6 +268,9 @@ class mainScene extends Phaser.Scene{
         gameBgMusic.setVolume(musicMult);
         punchSound = this.sound.add('punch');
         punchSound.setVolume(musicMult);
+
+        if(online)
+            this.sendSync();
     }
 
     update(){        
@@ -470,6 +473,115 @@ class mainScene extends Phaser.Scene{
         }
     }
 
+    getCrown(player, crown){
+        if(crown.attached === 'null'){
+            boolSteal = true;
+            crown.attached = player.name;
+            crown.setDepth(30);
+            console.log("La corona es de " + red.name);
+            //Creates a timer to give points
+            pointTimer = this.time.addEvent({ delay: 2000, callback: givePoints, callbackScope: this, loop: true});
+            this.sendCrown(1);
+        }
+    }
+
+    stealCrown(){
+        if(boolSteal){      
+            if(crown.attached === 'red'){
+                crown.attached = 'blue';
+                console.log("La corona ahora es de " + crown.attached);
+                punchSound.play();
+                red.anims.play("redStunAnim");
+                red.speedMod = 0;
+                //Creates a timer to stun
+                stun = this.time.addEvent({ delay: 2000, callback: () => red.speedMod = 1, callbackScope: this});
+            }else{
+                crown.attached = 'red';
+                console.log("La corona ahora es de " + crown.attached);
+                punchSound.play();
+                blue.anims.play("blueStunAnim");
+                blue.speedMod = 0;
+                //Creates a timer to stun
+                stun = this.time.addEvent({ delay: 2000, callback: () => blue.speedMod = 1, callbackScope: this});
+            } 
+            
+            boolSteal = false;
+            //Creates a timer to avoid instant re-stealing
+            timer = this.time.addEvent({ delay: 2000, callback: () => boolSteal = true, callbackScope: this});
+    
+            //Creates a timer to give points
+            pointTimer = this.time.addEvent({ delay: 2000, callback: givePoints, callbackScope: this, loop: true});
+            
+            //this.sendPlayerHitMessage();
+        }
+    }
+
+    givePoints(){
+        if(crown.attached === 'red'){
+            red.points++;
+            redText.setText('Red Score: ' + red.points);
+            if(red.points === 20){
+                gameBgMusic.setVolume(0);
+                this.sendVictory(0);
+                this.scene.stop('controlsMenu');
+                this.scene.start('redWinScene');
+            }
+        }else if(crown.attached === 'blue'){
+            blue.points++;
+            blueText.setText('Blue Score: ' + blue.points);
+            if(blue.points === 20){
+                this.sendVictory(1);
+                gameBgMusic.setVolume(0);
+                this.scene.stop('controlsMenu');
+                this.scene.start('blueWinScene');
+            }
+        }
+    }
+    
+    reduceSpeed(player){
+        if(player.speedMod !== 0){
+            player.slowed = true;
+            player.speedMod = 0.6;
+        }
+    }
+    
+    increaseSpeed(player){
+        player.slowed = false;
+        player.speedMod = 1;
+    }
+    
+    stun(player, object){
+        if(crown.attached === player.name)
+            crown.attached = 'null';
+        if(player.speedMod !== 0){
+            punchSound.play();
+            player.anims.play(player.name + "StunAnim");
+        }
+        player.speedMod = 0;
+        //Creates a timer to stun
+        this.time.addEvent({ delay: 2000, callback: () => player.speedMod = 1, callbackScope: this});
+        this.sendObjHitMessage();    
+    }
+
+    tp(player, tp){
+        if(tpActive){
+            if(tp.num === 0){
+                player.x = 200;
+                player.y = 50;
+                //Creates a timer to reestablish tp
+                tpActive = false;
+                tpTimer = this.time.addEvent({ delay: 3000, callback: () => tpActive = true, callbackScope: this});
+            }else{
+                player.x = 1125;
+                player.y = 550;
+                //Creates a timer to reestablish tp
+                tpActive = false;
+                tpTimer = this.time.addEvent({ delay: 3000, callback: () => tpActive = true, callbackScope: this});         
+            }
+            this.sendTp();
+        }
+    }
+    
     tryServer(){
         if(this.pinged == false){
             this.restartGame();
@@ -482,21 +594,22 @@ class mainScene extends Phaser.Scene{
     //Send position depending on player
     posMessages(){
         if(jugador == 0){
-            this.sendPosMessage(this.red.x, this.red.y, this.red.body.velocity,x, this.red.velocity.y, this.red.body.rotation);
+            this.sendPosMessage(this.red.x, this.red.y, this.red.body.velocity,x, this.red.body.velocity.y, this.red.body.rotation, red.points);
         }else if(jugador == 1){
-            this.sendPosMessage(this.blue.x, this.blue.y, this.blue.body.velocity,x, this.blue.velocity.y, this.blue.body.rotation);
+            this.sendPosMessage(this.blue.x, this.blue.y, this.blue.body.velocity,x, this.blue.body.velocity.y, this.blue.body.rotation, blue.points);
         }
     }
 
     //Send position
-    sendPosMessage(posX, posY, speedX, speedY, rot){
+    sendPosMessage(posX, posY, speedX, speedY, rot, pnts){
 
         var msg = {
             positionX: posX,
             positionY: posY,
             speedX: speedX,
             speedY: speedY,
-            rotation: rot
+            rotation: rot,
+            points: pnts
         }
 
         var msgToTxt = JSON.stringify(msg);
@@ -504,10 +617,10 @@ class mainScene extends Phaser.Scene{
         var formedMsg = {
             name: "move",
             player: nick,
-            msg = msgToTxt
+            info: msgToTxt
         };
 
-        stompClient.send("app/playing.send/" + server, {}, JSON.stringify(formedMsg));
+        stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(formedMsg));
     }
 
     //Send hit between players
@@ -515,7 +628,6 @@ class mainScene extends Phaser.Scene{
         var msg = {
             name: "hitPlayer",
             player: nick,
-            info: player
         };
         stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(msg));
     }
@@ -524,7 +636,7 @@ class mainScene extends Phaser.Scene{
     sendObjHitMessage(){
         var msg = {
             name: "hitObj",
-            player: nick,
+            player: nick
         };
         stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(msg));
     }
@@ -535,7 +647,7 @@ class mainScene extends Phaser.Scene{
         if(this.onlineReady){
             this.localReady = false;
             this.onlineReady = false;
-            this.startGame();
+            //this.startGame();
         }
 
         var msg = {
@@ -546,23 +658,41 @@ class mainScene extends Phaser.Scene{
         stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(msg));
     }
 
-    getSync(){
-        this.onlineReady = true;
-        if(this.localReady){
-            this.localReady = false;
-            this.onlineReady = false;
-            this.startGame();
-        }
+    //Send tp
+    sendTp(){
+        var msg = {
+            name: "tp",
+            player: nick,
+        };
+        stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(msg));
+    }
+
+    //Send crown
+    sendCrown(who){
+        var msg = {
+            name: "crown",
+            player: nick,
+            info: who
+        };
+        stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(msg));
     }
 
     //Send victory
-    victory(winner){
+    sendVictory(winner){
         var msg = {
             name: "victory",
             player: nick,
             info: winner
         };
         stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(msg));
+    }
+    getSync(){
+        this.onlineReady = true;
+        if(this.localReady){
+            this.localReady = false;
+            this.onlineReady = false;
+            //this.startGame();
+        }
     }
 
     //Receive victory
@@ -574,11 +704,11 @@ class mainScene extends Phaser.Scene{
         this.restartGame();
 
         switch(winner){
-            case 1:
+            case 0:
                 this.scene.start("redWinScene");
             break;
 
-            case 2:
+            case 1:
                 this.scene.start("blueWinScene");
             break;
         }
@@ -587,6 +717,20 @@ class mainScene extends Phaser.Scene{
     //Clear variables after ending
     restartGame(){
 
+        if(online){
+            conexionEstablished = false;
+            clearInterval(this.messageInterval);
+            clearInterval(this.chechServerInterval);
+            stompClient.unsubscribe(nick);
+            stompClient.disconnect();
+        }
+
+        stompClient = null;
+        socket = null;
+        jugador = -1;
+        server = -1;
+        online = false;
+        seed = 1;    
     }
 
     //What to do with received message
@@ -603,15 +747,23 @@ class mainScene extends Phaser.Scene{
                 break;
 
                 case "hitPlayer":
-                    this.hitPlayer();
+                    this.playersCollided();
                 break;
 
                 case "hitObj":
-                    this.stunPlayer();
+                    this.receivedStun();
+                break;
+
+                case "tp":
+                    this.coolDownTp();
+                break;
+
+                case "crown":
+                    this.updateCrown(msgObj.info);
                 break;
 
                 case "victory":
-                    this.receivedVictory(winner);
+                    this.receivedVictory(msgObj.info);
                 break;
 
                 case "sync":
@@ -621,106 +773,81 @@ class mainScene extends Phaser.Scene{
             }
         }
     }
-}
 
-function getCrown(player, crown){
-    if(crown.attached === 'null'){
-        boolSteal = true;
-        crown.attached = player.name;
-        crown.setDepth(30);
-        console.log("La corona es de " + red.name);
-        //Creates a timer to give points
-        pointTimer = this.time.addEvent({ delay: 2000, callback: givePoints, callbackScope: this, loop: true});
-    }
-}
+    //Received position update
+    updateOtherPosition(msgInfo){
+        var objInfo = JSON.parse(msgInfo);
 
-function stealCrown(){
-    if(boolSteal){      
-        if(crown.attached === 'red'){
-            crown.attached = 'blue';
-            console.log("La corona ahora es de " + crown.attached);
-            punchSound.play();
-            red.anims.play("redStunAnim");
-            red.speedMod = 0;
-            //Creates a timer to stun
-            stun = this.time.addEvent({ delay: 2000, callback: () => red.speedMod = 1, callbackScope: this});
+        if(player === 0){
+            blue.x = objInfo.positionX;
+            blue.y = objInfo.positionY;
+            blue.body.velocity.x = objInfo.speedX;
+            blue.body.velocity.y = objInfo.speedY;
+            blue.body.rotation = objInfo.rotation;
+            blue.points = objInfo.points;
+            if(objInfo.speedX !== 0 || objInfo.speedY !== 0){
+                if(!blue.anims.isPlaying)
+                    blue.anims.play('blueWalkAnim');
+            }
         }else{
-            crown.attached = 'red';
-            console.log("La corona ahora es de " + crown.attached);
+            red.x = objInfo.positionX;
+            red.y = objInfo.positionY;
+            red.body.velocity.x = objInfo.speedX;
+            red.body.velocity.y = objInfo.speedY;
+            red.body.rotation = objInfo.rotation;
+            red.points = objInfo.points;
+            if(objInfo.speedX !== 0 || objInfo.speedY !== 0){
+                if(!red.anims.isPlaying)
+                    red.anims.play('redWalkAnim');
+            }
+        }
+    }
+
+    //Other collided with object
+    receivedStun(){
+        if(player === 0){
+            if(crown.attached === blue.name){
+                crown.attached = 'null';
+                boolSteal = false;
+            }
             punchSound.play();
             blue.anims.play("blueStunAnim");
-            blue.speedMod = 0;
-            //Creates a timer to stun
-            stun = this.time.addEvent({ delay: 2000, callback: () => blue.speedMod = 1, callbackScope: this});
-        } 
-        
-        boolSteal = false;
-        //Creates a timer to avoid instant re-stealing
-        timer = this.time.addEvent({ delay: 2000, callback: () => boolSteal = true, callbackScope: this});
-
-        //Creates a timer to give points
-        pointTimer = this.time.addEvent({ delay: 2000, callback: givePoints, callbackScope: this, loop: true});
-    }
-}
-
-function givePoints(){
-    if(crown.attached === 'red'){
-        red.points++;
-        redText.setText('Red Score: ' + red.points);
-        if(red.points === 20){
-            gameBgMusic.setVolume(0);
-            this.scene.stop('controlsMenu');
-            this.scene.start('redWinScene');
-        }
-    }else if(crown.attached === 'blue'){
-        blue.points++;
-        blueText.setText('Blue Score: ' + blue.points);
-        if(blue.points === 20){
-            gameBgMusic.setVolume(0);
-            this.scene.stop('controlsMenu');
-            this.scene.start('blueWinScene');
-        }
-    }
-}
-
-function reduceSpeed(player){
-    if(player.speedMod !== 0){
-        player.slowed = true;
-        player.speedMod = 0.6;
-    }
-}
-
-function increaseSpeed(player){
-    player.slowed = false;
-    player.speedMod = 1;
-}
-
-function stun(player, object){
-    if(crown.attached === player.name)
-        crown.attached = 'null';
-    if(player.speedMod !== 0){
-        punchSound.play();
-        player.anims.play(player.name + "StunAnim");
-    }
-    player.speedMod = 0;
-    //Creates a timer to stun
-    this.time.addEvent({ delay: 2000, callback: () => player.speedMod = 1, callbackScope: this});
-}
-
-function tp(player, tp){
-    if(tpActive){
-        if(tp.num === 0){
-            player.x = 200;
-            player.y = 50;
-            //Creates a timer to reestablish tp
-            tpActive = false;
-            tpTimer = this.time.addEvent({ delay: 3000, callback: () => tpActive = true, callbackScope: this});
         }else{
-            player.x = 1125;
-            player.y = 550;
-            //Creates a timer to reestablish tp
-            tpActive = false;
-            tpTimer = this.time.addEvent({ delay: 3000, callback: () => tpActive = true, callbackScope: this});         
+            if(crown.attached === red.name){
+                crown.attached = 'null';
+                boolSteal = false;
+            }
+            punchSound.play();
+            red.anims.play("redStunAnim");
         }
+    }
+
+    //Players collided
+    playersCollided(){
+        
+    }
+
+    //Update crown
+    updateCrown(msgInfo){
+
+        var obj = JSON.parse(msgInfo)
+        if(obj.who === -1){
+            crown.attached = 'null';
+            boolSteal = false;
+        }else{
+            boolSteal = true;
+            if(player === 0){
+                crown.attached = blue.name;
+                
+            }else if(player === 1){
+                crown.attached = red.name;
+            }
+        }
+    }
+
+    //Cooldown tp
+    coolDownTp(){
+        tpActive = false;
+        tpTimer = this.time.addEvent({ delay: 3000, callback: () => tpActive = true, callbackScope: this});
     }
 }

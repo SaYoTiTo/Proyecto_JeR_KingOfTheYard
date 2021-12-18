@@ -1,7 +1,7 @@
-class DisconnectionScene extends Phaser.Scene {
+class disconnectionScene extends Phaser.Scene {
 
     constructor() {
-        super({key:"disconnectionScene"});
+        super({key:'disconnectionScene'});
     }
     
     preload() {

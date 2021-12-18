@@ -20,16 +20,16 @@ class selectionMenu extends Phaser.Scene{
 
         this.select = this.physics.add.sprite(600, 175, 'selectionTxt').setScale(0.8).refreshBody();
 
-        this.online = this.physics.add.sprite(300, 450, 'onlineButtonOff').setScale(0.7).refreshBody();
-        //this.onlinePressed = this.physics.add.sprite(300, 350, 'onlineButtonOffPressed').setScale(0.7).refreshBody();
+        this.online = this.physics.add.sprite(300, 450, 'onlineButton').setScale(0.7).refreshBody();
+        this.onlinePressed = this.physics.add.sprite(300, 450, 'onlineButtonPressed').setScale(0.7).refreshBody();
 
         this.offline = this.physics.add.sprite(900, 450, 'offlineButton').setScale(0.7).refreshBody();
         this.offlinePressed = this.physics.add.sprite(900, 450, 'offlineButtonPressed').setScale(0.7).refreshBody();
 
         this.offlinePressed.alpha = 0;
-        //this.onlinePressed.alpha = 0;
+        this.onlinePressed.alpha = 0;
 
-        //this.online.setInteractive();
+        this.online.setInteractive();
         this.offline.setInteractive();
 
         this.leftKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
@@ -58,18 +58,38 @@ class selectionMenu extends Phaser.Scene{
             this.scene.scene.start('controlsMenu');
         });
 
+		//Control con raton
+        this.online.on("pointerover", () => {
+            this.alpha = 0;
+            this.onlinePressed.alpha = 1;
+        });
+        this.online.on("pointerout", () => {
+            this.alpha = 1;
+            this.onlinePressed.alpha = 0;
+        });
+        this.online.on("pointerdown", function(){
+            this.scene.scene.stop('selectionMenu');
+            this.scene.scene.start('matchmakingScene');
+        });
+		
         //Control con teclado
         if(this.leftKey.isDown){
             this.offline.alpha = 1;
             this.offlinePressed.alpha = 0;
+			this.online.alpha = 0;
+			this.onlinePressed.alpha = 1;
+			this.selection = 1;
         }else if(this.rightKey.isDown){
             this.offline.alpha = 0;
             this.offlinePressed.alpha = 1;
+			this.online.alpha = 1;
+			this.onlinePressed.alpha = 0;
             this.selection = 2;
         }else if(this.enterKey.isDown || this.spaceKey.isDown){
             switch(this.selection){
                 case 1:
-                    
+                    this.scene.stop('selectionMenu');
+					this.scene.start('matchmakingScene')
                 break;
                     
                 case 2:
