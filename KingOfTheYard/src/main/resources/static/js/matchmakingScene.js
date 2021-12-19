@@ -38,8 +38,7 @@ class matchmakingScene extends Phaser.Scene {
     onConnected(){
 	console.log("");  
         stompClient.subscribe('/topic/searching', this.onMessage , { id: nick});
-
-
+        
         var chatMessage = {
             name: "conexion",
             player: nick,

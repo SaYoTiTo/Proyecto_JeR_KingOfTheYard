@@ -32,7 +32,7 @@ class mainScene extends Phaser.Scene{
         this.input.mouse.disableContextMenu();
 
         //Server variables
-        this.serverTimeout = 5000;
+        this.serverTimeout = 500000;
         this.pinged = false;
         this.localReady = false;
         this.onlineReady = false;
@@ -227,7 +227,7 @@ class mainScene extends Phaser.Scene{
 
         if(online){
             this.messageInterval = window.setInterval(this.posMessages.bind(this), 100);
-            stompClient.subscrible('topic/gameId/' + server, this.onMessageReceived.bind(this), {id:nick});
+            stompClient.subscribe('topic/gameId/' + server, this.onMessageReceived.bind(this), {id:nick});
             this.chechServerInterval = window.setInterval(this.tryServer.bind(this), this.serverTimeout);
         }
 
@@ -335,6 +335,7 @@ class mainScene extends Phaser.Scene{
                 break;
             }
         }
+        if(!online || jugador == 0){
 
         //Update red
         if (this.keyA.isDown)
@@ -384,7 +385,9 @@ class mainScene extends Phaser.Scene{
         }else if(red.body.velocity.y > 0){
             red.body.rotation = 180;
         }
+    }
 
+    if(!online || jugador == 1){
         //Update blue
         if (this.keyJ.isDown)
         {
@@ -433,6 +436,7 @@ class mainScene extends Phaser.Scene{
         }else if(blue.body.velocity.y > 0){
             blue.body.rotation = 180;
         }
+    }
 
         //Update crown
         if(crown.attached !== 'null'){
@@ -599,9 +603,9 @@ class mainScene extends Phaser.Scene{
     //Send position depending on player
     posMessages(){
         if(jugador == 0){
-            this.sendPosMessage(this.red.x, this.red.y, this.red.body.velocity,x, this.red.body.velocity.y, this.red.body.rotation, red.points);
+            this.sendPosMessage(red.x, red.y, red.body.velocity.x, red.body.velocity.y, red.body.rotation, red.points);
         }else if(jugador == 1){
-            this.sendPosMessage(this.blue.x, this.blue.y, this.blue.body.velocity,x, this.blue.body.velocity.y, this.blue.body.rotation, blue.points);
+            this.sendPosMessage(blue.x, blue.y, blue.body.velocity.x, blue.body.velocity.y, blue.body.rotation, blue.points);
         }
     }
 

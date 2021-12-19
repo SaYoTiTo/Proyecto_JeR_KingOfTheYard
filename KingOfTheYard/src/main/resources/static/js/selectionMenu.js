@@ -59,6 +59,7 @@ class selectionMenu extends Phaser.Scene{
             this.offlinePressed.alpha = 0;
         });
         this.offline.on("pointerdown", function(){
+            online = false;
             this.scene.scene.stop('selectionMenu');
             this.scene.scene.start('controlsMenu');
         });
@@ -74,6 +75,7 @@ class selectionMenu extends Phaser.Scene{
         });
         this.online.on("pointerdown", function(){
 		if(!this.sceneStarted){
+            online = true;
 			  this.scene.scene.stop('selectionMenu');
             this.scene.scene.start('matchmakingScene');
 			console.log("He llamado a matchmakingScene con raton");
@@ -99,6 +101,7 @@ class selectionMenu extends Phaser.Scene{
             switch(this.selection){
                 case 1:
                     if(!this.sceneStarted){
+                        online = true;
 			  	this.scene.scene.stop('selectionMenu');
             	this.scene.scene.start('matchmakingScene');
 				console.log("He llamado a matchmakingScene con teclado");
@@ -107,6 +110,7 @@ class selectionMenu extends Phaser.Scene{
                 break;
                     
                 case 2:
+                    online = false;
                     this.scene.stop('selectionMenu');
                     this.scene.start('controlsMenu');
                 break;
