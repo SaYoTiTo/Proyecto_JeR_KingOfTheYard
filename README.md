@@ -174,6 +174,9 @@ En este diagrama de estados se muestran todas las pantallas que se podrán ver a
 
 ![image](https://user-images.githubusercontent.com/72553373/139135737-881e61c7-19f7-41b1-b07c-a9e7cc8febbe.png)
 
+### Escena Matchmaking
+
+![gif](https://user-images.githubusercontent.com/72553373/146694557-96add425-386a-4d5a-86cc-12547981912e.gif)
 
 ### Selección de Partida
 - **Botón Offline**: Al pulsarlo lleva a la pantalla de Juego
