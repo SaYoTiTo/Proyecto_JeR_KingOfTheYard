@@ -227,7 +227,7 @@ class mainScene extends Phaser.Scene{
 
         if(online){
             this.messageInterval = window.setInterval(this.posMessages.bind(this), 100);
-            stompClient.subscribe('topic/gameId/' + server, this.onMessageReceived.bind(this), {id:nick});
+            stompClient.subscribe('/topic/gameId/' + server, this.onMessageReceived.bind(this), {id:nick});
             this.chechServerInterval = window.setInterval(this.tryServer.bind(this), this.serverTimeout);
         }
 
@@ -744,6 +744,7 @@ class mainScene extends Phaser.Scene{
 
     //What to do with received message
     onMessageReceived(message){
+        console.log("He recibido un mensaje");
         var msgObj = JSON.parse(message.body);
 
         //If its not your own msg
@@ -787,7 +788,7 @@ class mainScene extends Phaser.Scene{
     updateOtherPosition(msgInfo){
         var objInfo = JSON.parse(msgInfo);
 
-        if(player === 0){
+        if(jugador === 0){
             blue.x = objInfo.positionX;
             blue.y = objInfo.positionY;
             blue.body.velocity.x = objInfo.speedX;
@@ -814,7 +815,7 @@ class mainScene extends Phaser.Scene{
 
     //Other collided with object
     receivedStun(){
-        if(player === 0){
+        if(jugador === 0){
             if(crown.attached === blue.name){
                 crown.attached = 'null';
                 boolSteal = false;
@@ -845,10 +846,10 @@ class mainScene extends Phaser.Scene{
             boolSteal = false;
         }else{
             boolSteal = true;
-            if(player === 0){
+            if(jugador === 0){
                 crown.attached = blue.name;
                 
-            }else if(player === 1){
+            }else if(jugador === 1){
                 crown.attached = red.name;
             }
         }

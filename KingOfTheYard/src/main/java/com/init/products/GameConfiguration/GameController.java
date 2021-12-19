@@ -91,6 +91,8 @@ public class GameController {
 	@SendTo("/topic/gameId/{serverId}")
 	public GameMessage sendMessage2(@DestinationVariable String serverId, @Payload GameMessage message) {
 		System.out.println("He llegado a ECHO");
+		System.out.println(message.getName());		
+		System.out.println(message.getPlayer());
 		return message;
 	}
 	

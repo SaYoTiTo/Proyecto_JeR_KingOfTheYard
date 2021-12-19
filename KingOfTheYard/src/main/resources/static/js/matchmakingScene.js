@@ -85,6 +85,7 @@ onMessage(message){
             stompClient.unsubscribe( nick);
             stompClient.unsubscribe( nick+'a');
             seed = ids[3];
+            console.log("Soy el jugador 0 y estoy pasando");
             //console.log("Pasando a escena de juego");
             //this.scene.start('GAME_SCENE_KEY');
             //this.titleBGM.stop();
@@ -97,6 +98,7 @@ onMessage(message){
             stompClient.unsubscribe( nick);
             stompClient.unsubscribe( nick+1);
             seed = ids[3];
+            console.log("Soy el jugador 1 y estoy pasando");
             //console.log("Pasando a escena de juego");
             //this.scene.start('GAME_SCENE_KEY');
             //this.titleBGM.stop();
