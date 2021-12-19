@@ -49,7 +49,8 @@ public class GameController {
 	public String findServer(@Payload GameMessage message) {
 		System.out.println("He llegado a FindServer");
 		if(primero) {
-			primero = false;
+			System.out.println("Yo soy el primero en entrar: " + primero);
+			primero = false;			
 			timer.start();
 		}
 		safeIds.add(new MatchmakingClient(message.getPlayer()));
