@@ -250,5 +250,6 @@ Otros tipos de mensajes que se pueden encontrar son:
 
 Los jugadores solo interpretan mensajes provenientes de jugadores distintos a ellos mismos. Si no reciben mensajes de otros jugadores en una cierta cantidad de tiempo, se interpretara que se han desconectado y se saldra a una pantalla de desconexión.
 
-![image](https://user-images.githubusercontent.com/72553373/146694457-6afead41-595b-4f8f-8f3e-c191b488b621.png)
+![image](https://user-images.githubusercontent.com/72553373/146694938-e1fa904c-5628-404b-8cb9-cf3accb4765b.png)
+
 
