@@ -149,6 +149,16 @@ class preloadScene extends Phaser.Scene{
             frameWidth: 1200,
             frameHeight: 675,
         });
+		this.load.spritesheet('youAreBlue', 'assets/youAreBlueSpritesheet.png', {
+            frameWidth: 1200,
+            frameHeight: 675,
+        });
+		this.load.spritesheet('youAreRed', 'assets/youAreRedSpritesheet.png', {
+            frameWidth: 1200,
+            frameHeight: 675,
+        });
+
+
         //Sonidos
         this.load.audio('gameMusic', ['assets/Music/gameMusic.wav']);
         this.load.audio('menuMusic', ['assets/Music/menuMusic.wav']);

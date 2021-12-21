@@ -285,10 +285,27 @@ class mainScene extends Phaser.Scene{
 
         if(online){
             this.sendSync();
-			if(jugador === 0)
-				this.cartelito = this.physics.add.sprite(600, 337.5, 'wheel', 0).setScale(0.65).refreshBody();
-			else
-				this.cartelito = this.physics.add.sprite(600, 337.5, 'wheel', 0).setScale(0.65).refreshBody();
+			if(jugador === 1){
+                this.anims.create({
+                    key: 'youAreBlueAnim',
+                    frameRate: 2.5,
+                    repeat: -1,
+                    frames: this.anims.generateFrameNumbers('youAreBlue', {start: 0, end: 2}),
+                });
+				this.cartelito = this.physics.add.sprite(600, 337.5, 'youAreBlue', 0);
+				this.cartelito.depth = 500;
+                this.cartelito.anims.play('youAreBlueAnim');
+            }else{
+				this.anims.create({
+                    key: 'youAreRedAnim',
+                    frameRate: 2.5,
+                    repeat: -1,
+                    frames: this.anims.generateFrameNumbers('youAreRed', {start: 0, end: 2}),
+                });
+				this.cartelito = this.physics.add.sprite(600, 337.5, 'youAreRed', 0);
+				this.cartelito.depth = 500;
+                this.cartelito.anims.play('youAreRedAnim');
+            }
             this.time.addEvent({ delay: 1000, callback: () => this.cartelito.setVisible(false), callbackScope: this});
 		}
     }
@@ -879,7 +896,7 @@ class mainScene extends Phaser.Scene{
                 blueText.setText('Blue Score: ' + blue.points);
                 if(objInfo.speedX !== 0 || objInfo.speedY !== 0){
                     if(!blue.anims.isPlaying)
-                    blue.anims.play('blueWalkAnim');
+                    	blue.anims.play('blueWalkAnim');
                 }
             }else{
                 red.x = objInfo.positionX;
