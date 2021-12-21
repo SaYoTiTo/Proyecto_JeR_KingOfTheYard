@@ -29,12 +29,12 @@ public class GameController {
 	Timer timer = new Timer(matchmakingTimeout, new ActionListener() {
 		@Override
         public void actionPerformed(ActionEvent e) {
-			System.out.println("buscando desconectados");
+			//System.out.println("buscando desconectados");
 			Iterator<MatchmakingClient> idsIterator = safeIds.iterator();
 	        while (idsIterator.hasNext()) {
 	        	MatchmakingClient user = idsIterator.next();
 	            if(!user.isPing()) {
-	            	System.out.println("Jugador desconectado");
+	            	//System.out.println("Jugador desconectado");
 	            	idsIterator.remove();
 	            }else {
 	            	user.setPing(false);
@@ -47,7 +47,7 @@ public class GameController {
 	@MessageMapping("/search")
 	@SendTo("/topic/searching")
 	public String findServer(@Payload GameMessage message) {
-		System.out.println("He llegado a FindServer");
+		//System.out.println("He llegado a FindServer");
 		if(primero) {
 			System.out.println("Yo soy el primero en entrar: " + primero);
 			primero = false;
@@ -65,7 +65,7 @@ public class GameController {
 			return aux;
 			
 		}
-		System.out.println("waiting");
+		//System.out.println("waiting");
 		return "waiting";
 	}
 	
@@ -90,9 +90,9 @@ public class GameController {
 	@MessageMapping("/playing.send/{serverId}")
 	@SendTo("/topic/gameId/{serverId}")
 	public GameMessage sendMessage2(@DestinationVariable String serverId, @Payload GameMessage message) {
-		System.out.println("He llegado a ECHO");
-		System.out.println(message.getName());		
-		System.out.println(message.getPlayer());
+		//System.out.println("He llegado a ECHO");
+		//System.out.println(message.getName());		
+		//System.out.println(message.getPlayer());
 		return message;
 	}
 	
