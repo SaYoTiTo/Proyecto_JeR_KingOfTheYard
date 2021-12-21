@@ -196,6 +196,15 @@ de Juego.
 
 ![fondo_victoria_n_GIF](https://user-images.githubusercontent.com/72553373/139136047-32cd2810-0d23-4527-9ea2-49a0f7b29bf2.gif)
 
+### Escena Conexion Perdida
+
+![gif_lost_coneect](https://user-images.githubusercontent.com/72553373/146913642-62a3c852-d755-48ca-8022-08e4d1888279.gif)
+
+
+### Escena Jugador Desconectado
+
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/72553373/146913653-ff9120c1-f12d-4b60-84e2-57cd006929e7.gif)
+
 
 # 4-Arte
 Uno de los puntos en los que se sustenta *King of the Yard* es la competitividad de los jugadores y la simpleza de un juego de pilla-pilla; por eso el estilo es un doodle 2D. La trama es simple ya que el juego no tiene intención de ser complicado, ya que el objetivo del juego es que los jugadores compitan para convertirse en el nuevo rey del patio y se diviertan consiguiendoló.
