@@ -38,7 +38,7 @@ class mainScene extends Phaser.Scene{
 		tpActive = true;
 		
         //Server variables
-        this.serverTimeout = 5000;
+        this.serverTimeout = 2000;
         this.pinged = false;
         this.localReady = false;
         this.onlineReady = false;
@@ -351,6 +351,7 @@ class mainScene extends Phaser.Scene{
                     break;
                 }
             }
+            
             if(!online || jugador === 0){
                 //Update red
                 if (this.keyA.isDown)
@@ -614,6 +615,7 @@ class mainScene extends Phaser.Scene{
         player.speedMod = 0;
         //Creates a timer to stun
         this.time.addEvent({ delay: 2000, callback: () => player.speedMod = 1, callbackScope: this});
+		this.time.addEvent({ delay: 2000, callback: () => player.anims.stop()})
         if(online)
             this.sendObjHitMessage();    
     }
@@ -682,10 +684,11 @@ class mainScene extends Phaser.Scene{
     }
 
     //Send hit between players
-    sendPlayerHitMessage(){
+    sendPlayerHitMessage(who){
         var msg = {
             name: "hitPlayer",
             player: nick,
+            info: who
         };
         stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(msg));
     }
@@ -875,6 +878,7 @@ class mainScene extends Phaser.Scene{
             }
             punchSound.play();
             blue.anims.play("blueStunAnim", 60, false);
+			this.time.addEvent({ delay: 2000, callback: () => blue.anims.stop()})
         }else{
             if(crown.attached === red.name){
                 crown.attached = 'null';
@@ -882,12 +886,12 @@ class mainScene extends Phaser.Scene{
             }
             punchSound.play();
             red.anims.play("redStunAnim", 60, false);
+			this.time.addEvent({ delay: 2000, callback: () => red.anims.stop()})
         }
     }
 
     //Players collided
     playersCollided(){
-        
     }
 
     //Update crown

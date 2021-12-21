@@ -141,6 +141,14 @@ class preloadScene extends Phaser.Scene{
             frameWidth: 1200,
             frameHeight: 675,
         });
+		this.load.spritesheet('lostConnectionBg', 'assets/lostConnectionSpritesheet.png', {
+            frameWidth: 1200,
+            frameHeight: 675,
+        });
+		this.load.spritesheet('disconnectedBg', 'assets/playerDisconnectedSpritesheet.png', {
+            frameWidth: 1200,
+            frameHeight: 675,
+        });
         //Sonidos
         this.load.audio('gameMusic', ['assets/Music/gameMusic.wav']);
         this.load.audio('menuMusic', ['assets/Music/menuMusic.wav']);
