@@ -283,8 +283,14 @@ class mainScene extends Phaser.Scene{
         punchSound = this.sound.add('punch');
         punchSound.setVolume(musicMult);
 
-        if(online)
+        if(online){
             this.sendSync();
+			if(jugador === 0)
+				this.cartelito = this.physics.add.sprite(600, 337.5, 'wheel', 0).setScale(0.65).refreshBody();
+			else
+				this.cartelito = this.physics.add.sprite(600, 337.5, 'wheel', 0).setScale(0.65).refreshBody();
+            this.time.addEvent({ delay: 1000, callback: () => this.cartelito.setVisible(false), callbackScope: this});
+		}
     }
 
     update(){        
