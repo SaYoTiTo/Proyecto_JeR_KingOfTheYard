@@ -846,7 +846,29 @@ class mainScene extends Phaser.Scene{
                 blue.y = objInfo.positionY;
                 blue.body.velocity.x = objInfo.speedX;
                 blue.body.velocity.y = objInfo.speedY;
-                blue.body.rotation = objInfo.rotation;
+                //blue.body.rotation = objInfo.rotation;
+                //Update blue rotation
+                if(blue.body.velocity.x > 0){
+                    if(blue.body.velocity.y > 0){
+                        blue.angle = 135;
+                    }else if(blue.body.velocity.y < 0){
+                        blue.angle = 45;
+                    }else{
+                        blue.angle = 90;
+                    }
+                }else if(blue.body.velocity.x < 0){
+                    if(blue.body.velocity.y > 0){
+                        blue.angle = -135;
+                    }else if(blue.body.velocity.y < 0){
+                        blue.angle = -45;
+                    }else{
+                        blue.angle = -90;
+                    }
+                }else if(blue.body.velocity.y < 0){
+                    blue.angle = 0;
+                }else if(blue.body.velocity.y > 0){
+                    blue.angle = 180;
+                }
                 blue.points = objInfo.points;
                 blueText.setText('Blue Score: ' + blue.points);
                 if(objInfo.speedX !== 0 || objInfo.speedY !== 0){
@@ -858,7 +880,29 @@ class mainScene extends Phaser.Scene{
                 red.y = objInfo.positionY;
                 red.body.velocity.x = objInfo.speedX;
                 red.body.velocity.y = objInfo.speedY;
-                red.body.rotation = objInfo.rotation;
+                //red.body.rotation = objInfo.rotation;
+                //Update blue rotation
+                if(red.body.velocity.x > 0){
+                    if(red.body.velocity.y > 0){
+                        red.angle = 135;
+                    }else if(red.body.velocity.y < 0){
+                        red.angle = 45;
+                    }else{
+                        red.angle = 90;
+                    }
+                }else if(red.body.velocity.x < 0){
+                    if(red.body.velocity.y > 0){
+                        red.angle = -135;
+                    }else if(red.body.velocity.y < 0){
+                        red.angle = -45;
+                    }else{
+                        red.angle = -90;
+                    }
+                }else if(red.body.velocity.y < 0){
+                    red.angle = 0;
+                }else if(red.body.velocity.y > 0){
+                    red.angle = 180;
+                }
                 red.points = objInfo.points;
                 redText.setText('Red Score: ' + red.points);
                 if(objInfo.speedX !== 0 || objInfo.speedY !== 0){
