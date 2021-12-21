@@ -1,0 +1,6 @@
+SERVER #10:16:40#User 1 se conectó
+SERVER #10:16:46#User 2 se conectó
+User 1#10:16:54#Holiwis
+User 2#10:17:00#Me encanta!
+SERVER#10:17:42#User 2 se desconectó
+SERVER#10:17:44#User 1 se desconectó

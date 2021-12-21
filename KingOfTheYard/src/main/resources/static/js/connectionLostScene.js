@@ -2,35 +2,32 @@ class connectionLostScene extends Phaser.Scene {
 
     constructor() {
         super({key:'connectionLostScene'});
-    }
-    
-    preload() {
-        //IMAGENES
-            //this.load.image('DISCONNECTION', 'assets/interface/scenes/LOST_CONNECTION.png');
-            //this.load.image('RESTART_BUTTON','assets/sprites/buttons/RESTART_BUTTON.png');
-        //AUDIO
-            //this.load.audio("START_SFX","assets/audio/TITLE_BGM.mp3");
-    }
-    
+    }   
     
     create() {
-         //let bg = this.add.sprite(0, 0, 'DISCONNECTION');
-        //bg.setOrigin(0,0);
 
-        //AUDIO
-         //this.titleSFX = this.sound.add('START_SFX');
+        menuBgMusic.setVolume(musicMult);
+        /*
+        this.anims.create({
+            key: 'connectionLostBgAnim',
+            frameRate: 2.5,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('connectionLostBg', {start: 0, end: 2}),
+        });
 
-        //BOTON
-            //let restartButton = this.add.image(config.width / 2, 650, 'RESTART_BUTTON');
-            //restartButton.setInteractive({useHandCursor: true});
-            //restartButton.on('pointerdown', () => this.restartGame());
+        this.bg = this.add.sprite(600, 337.5, 'connectionLostBg');
+        this.bg.anims.play('connectionLostBgAnim');
+        this.bg.setInteractive();
+        */
     }
 
-    restartGame(){
-        //this.titleSFX.play();
-        this.scene.start('mainMenu');
-
+    update(){
+        
+        /*
+        this.bg.on("pointerdown", function(){
+            this.scene.scene.stop('connectionLostScene');
+            this.scene.scene.start('mainMenu');
+        });
+        */
     }
-
-
 }

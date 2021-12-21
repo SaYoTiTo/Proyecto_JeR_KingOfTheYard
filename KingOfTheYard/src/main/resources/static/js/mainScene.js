@@ -3,7 +3,7 @@ var blue;
 var crown;
 
 var boolSteal = false;
-var pointTimer;
+var pointTimer = null;
 
 var redText;
 var blueText;
@@ -31,11 +31,18 @@ class mainScene extends Phaser.Scene{
             
         this.input.mouse.disableContextMenu();
 
+		//Start variables
+		boolSteal = false;
+		pointTimer = null;
+		animDone = false;
+		tpActive = true;
+		
         //Server variables
-        this.serverTimeout = 500000;
+        this.serverTimeout = 5000;
         this.pinged = false;
         this.localReady = false;
         this.onlineReady = false;
+        this.gameFinished = false;
 
         //Background
         this.anims.create({
@@ -59,13 +66,13 @@ class mainScene extends Phaser.Scene{
         this.anims.create({
             key: 'redWalkAnim',
             frameRate: 2.5,
-            repeat: 0,
+            repeat: 1,
             frames: this.anims.generateFrameNumbers('redCharAnim', {start: 0, end: 7}),
         });
         this.anims.create({
             key: 'redStunAnim',
             frameRate: 1.5,
-            repeat: 0,
+            repeat: 1,
             frames: this.anims.generateFrameNumbers('redStun', {start: 0, end: 3}),
         });
 
@@ -282,202 +289,205 @@ class mainScene extends Phaser.Scene{
 
     update(){        
 
-        //Control velocity
-        if(red.slowed){
-            if(red.body.touching.none){
-                this.increaseSpeed(red);
-            }
-        }
-        if(blue.slowed){
-            if(blue.body.touching.none){
-                this.increaseSpeed(blue);
-            }
-        }
-        
-        //Update swing
-        if(!animDone){
-            switch(anim){
-                case 0:
-                    this.swing1Top.body.enable = false;
-                    this.swing1Bot.body.enable = true;
-                    this.swing1Mid.body.enable = false;
-                    this.swing2Top.body.enable = true;
-                    this.swing2Bot.body.enable = false;
-                    this.swing2Mid.body.enable = false;
-                    animDone = true;
-                    this.time.addEvent({ delay: 650, callback: function() { anim++; animDone = false}, callbackScope: this});
-                break;
+        if(!this.gameFinished){
 
-                case 1:
-                    this.swing1Top.body.enable = false;
-                    this.swing1Bot.body.enable = false;
-                    this.swing1Mid.body.enable = true;
-                    this.swing2Top.body.enable = false;
-                    this.swing2Bot.body.enable = false;
-                    this.swing2Mid.body.enable = true;
-                    animDone = true;
-                    this.time.addEvent({ delay: 650, callback: function() { anim++; animDone = false}, callbackScope: this});
-                break;
-
-                case 2:
-                    this.swing1Top.body.enable = true;
-                    this.swing1Bot.body.enable = false;
-                    this.swing1Mid.body.enable = false;
-                    this.swing2Top.body.enable = false;
-                    this.swing2Bot.body.enable = true;
-                    this.swing2Mid.body.enable = false;
-                    animDone = true;
-                    this.time.addEvent({ delay: 650, callback: function() { anim++; animDone = false}, callbackScope: this});
-                break;
-
-                case 3:
-                    this.swing1Top.body.enable = false;
-                    this.swing1Bot.body.enable = false;
-                    this.swing1Mid.body.enable = true;
-                    this.swing2Top.body.enable = false;
-                    this.swing2Bot.body.enable = false;
-                    this.swing2Mid.body.enable = true;
-                    animDone = true;
-                    this.time.addEvent({ delay: 650, callback: function() { anim = 0; animDone = false}, callbackScope: this});
-                break;
-            }
-        }
-        if(!online || jugador == 0){
-            //Update red
-            if (this.keyA.isDown)
-            {
-                red.body.velocity.x = -160 * red.speedMod;
-            }else if (this.keyD.isDown)
-            {
-                red.body.velocity.x = 160 * red.speedMod;
-            }else{
-                red.body.velocity.x = 0;
-            }
-            if (this.keyW.isDown){
-                red.body.velocity.y = -160 * red.speedMod;
-            }else if (this.keyS.isDown){
-                red.body.velocity.y = 160 * red.speedMod;
-            }else{
-                red.body.velocity.y = 0;
-            }
-
-            //Red animation
-            if(red.body.velocity.x !== 0 || red.body.velocity.y !== 0){
-                if(!red.anims.isPlaying)
-                    red.anims.play('redWalkAnim');
-            }else{
-                red.anims.stop();
-            }
-
-            //Update red rotation
-            if(red.body.velocity.x > 0){
-                if(red.body.velocity.y > 0){
-                    red.body.rotation = 135;
-                }else if(red.body.velocity.y < 0){
-                    red.body.rotation = 45;
-                }else{
-                    red.body.rotation = 90;
+            //Control velocity
+            if(red.slowed){
+                if(red.body.touching.none){
+                    this.increaseSpeed(red);
                 }
-            }else if(red.body.velocity.x < 0){
-                if(red.body.velocity.y > 0){
-                    red.body.rotation = 225;
-                }else if(red.body.velocity.y < 0){
-                    red.body.rotation = 305;
-                }else{
-                    red.body.rotation = 270;
+            }
+            if(blue.slowed){
+                if(blue.body.touching.none){
+                    this.increaseSpeed(blue);
                 }
-            }else if(red.body.velocity.y < 0){
-                red.body.rotation = 0;
-            }else if(red.body.velocity.y > 0){
-                red.body.rotation = 180;
             }
-        }
+            
+            //Update swing
+            if(!animDone){
+                switch(anim){
+                    case 0:
+                        this.swing1Top.body.enable = false;
+                        this.swing1Bot.body.enable = true;
+                        this.swing1Mid.body.enable = false;
+                        this.swing2Top.body.enable = true;
+                        this.swing2Bot.body.enable = false;
+                        this.swing2Mid.body.enable = false;
+                        animDone = true;
+                        this.time.addEvent({ delay: 650, callback: function() { anim++; animDone = false}, callbackScope: this});
+                    break;
 
-        if(!online || jugador == 1){
-            //Update blue
-            if (this.keyJ.isDown)
-            {
-                blue.body.velocity.x = -160 * blue.speedMod;
-            }else if (this.keyL.isDown)
-            {
-                blue.body.velocity.x = 160 * blue.speedMod;
-            }else{
-                blue.body.velocity.x = 0;
-            }
-            if (this.keyI.isDown){
-                blue.body.velocity.y = -160 * blue.speedMod;
-            }else if (this.keyK.isDown){
-                blue.body.velocity.y = 160 * blue.speedMod;
-            }else{
-                blue.body.velocity.y = 0;
-            }
+                    case 1:
+                        this.swing1Top.body.enable = false;
+                        this.swing1Bot.body.enable = false;
+                        this.swing1Mid.body.enable = true;
+                        this.swing2Top.body.enable = false;
+                        this.swing2Bot.body.enable = false;
+                        this.swing2Mid.body.enable = true;
+                        animDone = true;
+                        this.time.addEvent({ delay: 650, callback: function() { anim++; animDone = false}, callbackScope: this});
+                    break;
 
-            //Blue animation
-            if(blue.body.velocity.x !== 0 || blue.body.velocity.y !== 0){
-                if(!blue.anims.isPlaying)
-                    blue.anims.play('blueWalkAnim');
-            }else{
-                blue.anims.stop();
-            }
+                    case 2:
+                        this.swing1Top.body.enable = true;
+                        this.swing1Bot.body.enable = false;
+                        this.swing1Mid.body.enable = false;
+                        this.swing2Top.body.enable = false;
+                        this.swing2Bot.body.enable = true;
+                        this.swing2Mid.body.enable = false;
+                        animDone = true;
+                        this.time.addEvent({ delay: 650, callback: function() { anim++; animDone = false}, callbackScope: this});
+                    break;
 
-            //Update blue rotation
-            if(blue.body.velocity.x > 0){
-                if(blue.body.velocity.y > 0){
-                    blue.body.rotation = 135;
-                }else if(blue.body.velocity.y < 0){
-                    blue.body.rotation = 45;
-                }else{
-                    blue.body.rotation = 90;
+                    case 3:
+                        this.swing1Top.body.enable = false;
+                        this.swing1Bot.body.enable = false;
+                        this.swing1Mid.body.enable = true;
+                        this.swing2Top.body.enable = false;
+                        this.swing2Bot.body.enable = false;
+                        this.swing2Mid.body.enable = true;
+                        animDone = true;
+                        this.time.addEvent({ delay: 650, callback: function() { anim = 0; animDone = false}, callbackScope: this});
+                    break;
                 }
-            }else if(blue.body.velocity.x < 0){
-                if(blue.body.velocity.y > 0){
-                    blue.body.rotation = 225;
-                }else if(blue.body.velocity.y < 0){
-                    blue.body.rotation = 305;
-                }else{
-                    blue.body.rotation = 270;
-                }
-            }else if(blue.body.velocity.y < 0){
-                blue.body.rotation = 0;
-            }else if(blue.body.velocity.y > 0){
-                blue.body.rotation = 180;
             }
-        }
+            if(!online || jugador === 0){
+                //Update red
+                if (this.keyA.isDown)
+                {
+                    red.body.velocity.x = -160 * red.speedMod;
+                }else if (this.keyD.isDown)
+                {
+                    red.body.velocity.x = 160 * red.speedMod;
+                }else{
+                    red.body.velocity.x = 0;
+                }
+                if (this.keyW.isDown){
+                    red.body.velocity.y = -160 * red.speedMod;
+                }else if (this.keyS.isDown){
+                    red.body.velocity.y = 160 * red.speedMod;
+                }else{
+                    red.body.velocity.y = 0;
+                }
 
-        //Update crown
-        if(crown.attached !== 'null'){
-            if(crown.attached === red.name){
-                //Depends on red position
-                //SI solo va a la derecha, que se aleje mas
-                if(red.body.velocity.x > 0 && red.body.velocity.y === 0){
-                    crown.x = red.x - 90;
-                    crown.y = red.y;
-                }else if(red.body.velocity.x !== 0 || red.body.velocity.y !== 0){
-                    if(red.speedMod !== 1){
-                        crown.x = red.x - red.body.velocity.x / 1.5;
-                        crown.y = red.y - red.body.velocity.y / 1.5;
+                //Red animation
+                if(red.body.velocity.x !== 0 || red.body.velocity.y !== 0){
+                    if(!red.anims.isPlaying)
+                        red.anims.play('redWalkAnim');
+                }else{
+                    red.anims.stop();
+                }
+
+                //Update red rotation
+                if(red.body.velocity.x > 0){
+                    if(red.body.velocity.y > 0){
+                        red.body.rotation = 135;
+                    }else if(red.body.velocity.y < 0){
+                        red.body.rotation = 45;
                     }else{
-                        crown.x = red.x - red.body.velocity.x / 2.5;
-                        crown.y = red.y - red.body.velocity.y / 2.5;
+                        red.body.rotation = 90;
                     }
-                }else{
-                    crown.x = red.x;
-                    crown.y = red.y - 65;
-                }
-                
-            }else if(crown.attached === blue.name){
-                //Depends on blue position
-                if(blue.body.velocity.x !== 0 || blue.body.velocity.y !== 0){
-                    if(blue.speedMod !== 1){
-                        crown.x = blue.x - blue.body.velocity.x / 1.5;
-                        crown.y = blue.y - blue.body.velocity.y / 1.5;
+                }else if(red.body.velocity.x < 0){
+                    if(red.body.velocity.y > 0){
+                        red.body.rotation = 225;
+                    }else if(red.body.velocity.y < 0){
+                        red.body.rotation = 305;
                     }else{
-                        crown.x = blue.x - blue.body.velocity.x / 2.5;
-                        crown.y = blue.y - blue.body.velocity.y / 2.5;
-                    }                    
+                        red.body.rotation = 270;
+                    }
+                }else if(red.body.velocity.y < 0){
+                    red.body.rotation = 0;
+                }else if(red.body.velocity.y > 0){
+                    red.body.rotation = 180;
+                }
+            }
+
+            if(!online || jugador === 1){
+                //Update blue
+                if (this.keyJ.isDown)
+                {
+                    blue.body.velocity.x = -160 * blue.speedMod;
+                }else if (this.keyL.isDown)
+                {
+                    blue.body.velocity.x = 160 * blue.speedMod;
                 }else{
-                    crown.x = blue.x;
-                    crown.y = blue.y - 60;
+                    blue.body.velocity.x = 0;
+                }
+                if (this.keyI.isDown){
+                    blue.body.velocity.y = -160 * blue.speedMod;
+                }else if (this.keyK.isDown){
+                    blue.body.velocity.y = 160 * blue.speedMod;
+                }else{
+                    blue.body.velocity.y = 0;
+                }
+
+                //Blue animation
+                if(blue.body.velocity.x !== 0 || blue.body.velocity.y !== 0){
+                    if(!blue.anims.isPlaying)
+                        blue.anims.play('blueWalkAnim');
+                }else{
+                    blue.anims.stop();
+                }
+
+                //Update blue rotation
+                if(blue.body.velocity.x > 0){
+                    if(blue.body.velocity.y > 0){
+                        blue.body.rotation = 135;
+                    }else if(blue.body.velocity.y < 0){
+                        blue.body.rotation = 45;
+                    }else{
+                        blue.body.rotation = 90;
+                    }
+                }else if(blue.body.velocity.x < 0){
+                    if(blue.body.velocity.y > 0){
+                        blue.body.rotation = 225;
+                    }else if(blue.body.velocity.y < 0){
+                        blue.body.rotation = 305;
+                    }else{
+                        blue.body.rotation = 270;
+                    }
+                }else if(blue.body.velocity.y < 0){
+                    blue.body.rotation = 0;
+                }else if(blue.body.velocity.y > 0){
+                    blue.body.rotation = 180;
+                }
+            }
+
+            //Update crown
+            if(crown.attached !== 'null'){
+                if(crown.attached === red.name){
+                    //Depends on red position
+                    //SI solo va a la derecha, que se aleje mas
+                    if(red.body.velocity.x > 0 && red.body.velocity.y === 0){
+                        crown.x = red.x - 90;
+                        crown.y = red.y;
+                    }else if(red.body.velocity.x !== 0 || red.body.velocity.y !== 0){
+                        if(red.speedMod !== 1){
+                            crown.x = red.x - red.body.velocity.x / 1.5;
+                            crown.y = red.y - red.body.velocity.y / 1.5;
+                        }else{
+                            crown.x = red.x - red.body.velocity.x / 2.5;
+                            crown.y = red.y - red.body.velocity.y / 2.5;
+                        }
+                    }else{
+                        crown.x = red.x;
+                        crown.y = red.y - 65;
+                    }
+                    
+                }else if(crown.attached === blue.name){
+                    //Depends on blue position
+                    if(blue.body.velocity.x !== 0 || blue.body.velocity.y !== 0){
+                        if(blue.speedMod !== 1){
+                            crown.x = blue.x - blue.body.velocity.x / 1.5;
+                            crown.y = blue.y - blue.body.velocity.y / 1.5;
+                        }else{
+                            crown.x = blue.x - blue.body.velocity.x / 2.5;
+                            crown.y = blue.y - blue.body.velocity.y / 2.5;
+                        }                    
+                    }else{
+                        crown.x = blue.x;
+                        crown.y = blue.y - 60;
+                    }
                 }
             }
         }
@@ -489,8 +499,10 @@ class mainScene extends Phaser.Scene{
             crown.attached = player.name;
             crown.setDepth(30);
             console.log("La corona es de " + red.name);
-            //Creates a timer to give points
-            pointTimer = this.time.addEvent({ delay: 2000, callback: this.givePoints, callbackScope: this, loop: true});
+            if(pointTimer === null){
+                //Creates a timer to give points
+                pointTimer = this.time.addEvent({ delay: 2000, callback: this.givePoints, callbackScope: this, loop: true});
+            }
             if(online)
                 this.sendCrown(1);
         }
@@ -502,7 +514,7 @@ class mainScene extends Phaser.Scene{
                 crown.attached = 'blue';
                 console.log("La corona ahora es de " + crown.attached);
                 punchSound.play();
-                red.anims.play("redStunAnim");
+                red.anims.play("redStunAnim", 60, false);
                 red.speedMod = 0;
                 //Creates a timer to stun
                 this.stun = this.time.addEvent({ delay: 2000, callback: () => red.speedMod = 1, callbackScope: this});
@@ -510,7 +522,7 @@ class mainScene extends Phaser.Scene{
                 crown.attached = 'red';
                 console.log("La corona ahora es de " + crown.attached);
                 punchSound.play();
-                blue.anims.play("blueStunAnim");
+                blue.anims.play("blueStunAnim", 60, false);
                 blue.speedMod = 0;
                 //Creates a timer to stun
                 this.stun = this.time.addEvent({ delay: 2000, callback: () => blue.speedMod = 1, callbackScope: this});
@@ -518,35 +530,64 @@ class mainScene extends Phaser.Scene{
             
             boolSteal = false;
             //Creates a timer to avoid instant re-stealing
-            timer = this.time.addEvent({ delay: 2000, callback: () => boolSteal = true, callbackScope: this});
-    
-            //Creates a timer to give points
-            pointTimer = this.time.addEvent({ delay: 2000, callback: this.givePoints, callbackScope: this, loop: true});
-            
-            //this.sendPlayerHitMessage();
+            timer = this.time.addEvent({ delay: 2000, callback: () => boolSteal = true, callbackScope: this});  
         }
     }
 
     givePoints(){
-        if(crown.attached === 'red'){
-            red.points++;
-            redText.setText('Red Score: ' + red.points);
-            if(red.points === 20){
-                gameBgMusic.setVolume(0);
-                if(online)
-                    this.sendVictory(0);
-                this.scene.stop('mainScene');
-                this.scene.start('redWinScene');
+        //If not online, update both points
+        if(!online){
+            if(crown.attached === 'red'){
+                red.points++;
+                redText.setText('Red Score: ' + red.points);
+                if(red.points === 20){
+                    gameBgMusic.setVolume(0);
+                    if(online)
+                        this.sendVictory(0);
+                    this.scene.stop('mainScene');
+                    this.scene.start('redWinScene');
+                }
+            }else if(crown.attached === 'blue'){
+                blue.points++;
+                blueText.setText('Blue Score: ' + blue.points);
+                if(blue.points === 20){
+                    if(online)
+                        this.sendVictory(1);
+                    gameBgMusic.setVolume(0);
+                    this.scene.stop('mainScene');
+                    this.scene.start('blueWinScene');
+                }
             }
-        }else if(crown.attached === 'blue'){
-            blue.points++;
-            blueText.setText('Blue Score: ' + blue.points);
-            if(blue.points === 20){
-                if(online)
-                    this.sendVictory(1);
-                gameBgMusic.setVolume(0);
-                this.scene.stop('mainScene');
-                this.scene.start('blueWinScene');
+        //If online, just test your points
+        }else if(!this.gameFinished){
+            if(jugador === 0){
+                if(crown.attached === 'red'){
+                    red.points++;
+                    redText.setText('Red Score: ' + red.points);
+                    if(red.points === 20){
+                        gameBgMusic.setVolume(0);
+                        if(online)
+                            this.sendVictory(0);
+                        this.gameFinished = true;
+                        this.restartGame();
+                        this.scene.stop('mainScene');
+                        this.scene.start('redWinScene');
+                    }
+                }
+            }else{
+                if(crown.attached === 'blue'){
+                    blue.points++;
+                    blueText.setText('Blue Score: ' + blue.points);
+                    if(blue.points === 20){
+                        if(online)
+                            this.sendVictory(1);
+                        this.gameFinished = true;
+                        gameBgMusic.setVolume(0);
+                        this.restartGame();
+                        this.scene.stop('mainScene');
+                        this.scene.start('blueWinScene');
+                    }
+                }
             }
         }
     }
@@ -568,7 +609,7 @@ class mainScene extends Phaser.Scene{
             crown.attached = 'null';
         if(player.speedMod !== 0){
             punchSound.play();
-            player.anims.play(player.name + "StunAnim");
+            player.anims.play(player.name + "StunAnim", 60, false);
         }
         player.speedMod = 0;
         //Creates a timer to stun
@@ -600,7 +641,7 @@ class mainScene extends Phaser.Scene{
     tryServer(){
         if(this.pinged == false){
             this.restartGame();
-            this.scene.start('Disconected Scene');
+            this.scene.start('disconnectionScene');
         }else{
             this.pinged = false;
         }
@@ -608,10 +649,12 @@ class mainScene extends Phaser.Scene{
 
     //Send position depending on player
     posMessages(){
-        if(jugador == 0){
-            this.sendPosMessage(red.x, red.y, red.body.velocity.x, red.body.velocity.y, red.body.rotation, red.points);
-        }else if(jugador == 1){
-            this.sendPosMessage(blue.x, blue.y, blue.body.velocity.x, blue.body.velocity.y, blue.body.rotation, blue.points);
+        if(!this.gameFinished){
+            if(jugador == 0){
+                this.sendPosMessage(red.x, red.y, red.body.velocity.x, red.body.velocity.y, red.body.rotation, red.points);
+            }else if(jugador == 1){
+                this.sendPosMessage(blue.x, blue.y, blue.body.velocity.x, blue.body.velocity.y, blue.body.rotation, blue.points);
+            }
         }
     }
 
@@ -706,13 +749,13 @@ class mainScene extends Phaser.Scene{
         if(this.localReady){
             this.localReady = false;
             this.onlineReady = false;
-            //this.startGame();
         }
     }
 
     //Receive victory
     receivedVictory(winner){
        
+        this.gameFinished = true;
         this.restartGame();
 
         switch(winner){
@@ -791,29 +834,34 @@ class mainScene extends Phaser.Scene{
 
     //Received position update
     updateOtherPosition(msgInfo){
-        var objInfo = JSON.parse(msgInfo);
 
-        if(jugador === 0){
-            blue.x = objInfo.positionX;
-            blue.y = objInfo.positionY;
-            blue.body.velocity.x = objInfo.speedX;
-            blue.body.velocity.y = objInfo.speedY;
-            blue.rotation = objInfo.rotation;
-            blue.points = objInfo.points;
-			blueText.setText('Blue Score: ' + blue.points);
-            if(objInfo.speedX !== 0 || objInfo.speedY !== 0){
-                blue.anims.play('blueWalkAnim');
-            }
-        }else{
-            red.x = objInfo.positionX;
-            red.y = objInfo.positionY;
-            red.body.velocity.x = objInfo.speedX;
-            red.body.velocity.y = objInfo.speedY;
-            red.rotation = objInfo.rotation;
-            red.points = objInfo.points;
-			redText.setText('Red Score: ' + red.points);
-            if(objInfo.speedX !== 0 || objInfo.speedY !== 0){
-                red.anims.play('redWalkAnim');
+        if(!this.gameFinished){
+            var objInfo = JSON.parse(msgInfo);
+
+            if(jugador === 0){
+                blue.x = objInfo.positionX;
+                blue.y = objInfo.positionY;
+                blue.body.velocity.x = objInfo.speedX;
+                blue.body.velocity.y = objInfo.speedY;
+                blue.body.rotation = objInfo.rotation;
+                blue.points = objInfo.points;
+                blueText.setText('Blue Score: ' + blue.points);
+                if(objInfo.speedX !== 0 || objInfo.speedY !== 0){
+                    if(!blue.anims.isPlaying)
+                    blue.anims.play('blueWalkAnim');
+                }
+            }else{
+                red.x = objInfo.positionX;
+                red.y = objInfo.positionY;
+                red.body.velocity.x = objInfo.speedX;
+                red.body.velocity.y = objInfo.speedY;
+                red.body.rotation = objInfo.rotation;
+                red.points = objInfo.points;
+                redText.setText('Red Score: ' + red.points);
+                if(objInfo.speedX !== 0 || objInfo.speedY !== 0){
+                    if(!red.anims.isPlaying)
+                        red.anims.play('redWalkAnim');
+                }
             }
         }
     }
@@ -826,14 +874,14 @@ class mainScene extends Phaser.Scene{
                 boolSteal = false;
             }
             punchSound.play();
-            blue.anims.play("blueStunAnim");
+            blue.anims.play("blueStunAnim", 60, false);
         }else{
             if(crown.attached === red.name){
                 crown.attached = 'null';
                 boolSteal = false;
             }
             punchSound.play();
-            red.anims.play("redStunAnim");
+            red.anims.play("redStunAnim", 60, false);
         }
     }
 
@@ -850,6 +898,10 @@ class mainScene extends Phaser.Scene{
             crown.attached = 'null';
             boolSteal = false;
         }else{
+            if(pointTimer === null){
+                //Creates a timer to give points
+                pointTimer = this.time.addEvent({ delay: 2000, callback: this.givePoints, callbackScope: this, loop: true});
+            }
             boolSteal = true;
             if(jugador === 0){
                 crown.attached = blue.name;

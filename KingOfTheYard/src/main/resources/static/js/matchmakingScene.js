@@ -6,12 +6,17 @@ class matchmakingScene extends Phaser.Scene {
         super({key: 'matchmakingScene'});
     }
 
-    preload(){
-        //this.load.image('MATCHMAKING', 'assets/sprites/matchmaking.png'); Poner nuestra imagen
-    }
-
     create(){
-        this.bg = this.add.sprite(0, 0, 'MATCHMAKING').setOrigin(0,0);
+        this.anims.create({
+            key: 'matchmakingBgAnim',
+            frameRate: 2.5,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('matchmakingBg', {start: 0, end: 2}),
+        });
+
+        this.bg = this.add.sprite(600, 337.5, 'matchmakingBg');
+        this.bg.anims.play('matchmakingBgAnim');
+
         this.conexion();
 		console.log("He tirado conexion");
         this.pongV = true;
@@ -20,6 +25,7 @@ class matchmakingScene extends Phaser.Scene {
     update(){
         if(conexionEstablished){
             console.log("Pasando a escena de juego");
+            menuBgMusic.setVolume(0);
             this.scene.start('mainScene');
         }
     }
@@ -73,41 +79,37 @@ class matchmakingScene extends Phaser.Scene {
     }
 
 
-onMessage(message){
-	console.log("he llegado aqui")
-    console.log("Mensaje recibido:" + message.body)
-    if(message.body!="waiting"){
-        var ids = message.body.split("%");
-        if(ids[0]==nick){
-            clearInterval(pingPongTimer);
-            jugador = 0;
-            server = ids[2];
-            stompClient.unsubscribe( nick);
-            stompClient.unsubscribe( nick+'a');
-            seed = ids[3];
-            console.log("Soy el jugador 0 y estoy pasando");
-            //console.log("Pasando a escena de juego");
-            //this.scene.start('GAME_SCENE_KEY');
-            //this.titleBGM.stop();
-            conexionEstablished = true;
-        }
-        if(ids[1]==nick){
-            clearInterval(pingPongTimer);
-            jugador = 1;
-            server = ids[2];
-            stompClient.unsubscribe( nick);
-            stompClient.unsubscribe( nick+1);
-            seed = ids[3];
-            console.log("Soy el jugador 1 y estoy pasando");
-            //console.log("Pasando a escena de juego");
-            //this.scene.start('GAME_SCENE_KEY');
-            //this.titleBGM.stop();
-            conexionEstablished = true;
+    onMessage(message){
+        console.log("he llegado aqui")
+        console.log("Mensaje recibido:" + message.body)
+        if(message.body!="waiting"){
+            var ids = message.body.split("%");
+            if(ids[0]==nick){
+                clearInterval(pingPongTimer);
+                jugador = 0;
+                server = ids[2];
+                stompClient.unsubscribe( nick);
+                stompClient.unsubscribe( nick+'a');
+                seed = ids[3];
+                console.log("Soy el jugador 0 y estoy pasando");
+                //console.log("Pasando a escena de juego");
+                //this.scene.start('GAME_SCENE_KEY');
+                //this.titleBGM.stop();
+                conexionEstablished = true;
+            }
+            if(ids[1]==nick){
+                clearInterval(pingPongTimer);
+                jugador = 1;
+                server = ids[2];
+                stompClient.unsubscribe( nick);
+                stompClient.unsubscribe( nick+1);
+                seed = ids[3];
+                console.log("Soy el jugador 1 y estoy pasando");
+                //console.log("Pasando a escena de juego");
+                //this.scene.start('GAME_SCENE_KEY');
+                //this.titleBGM.stop();
+                conexionEstablished = true;
+            }
         }
     }
-
 }
-
-	
-	
-	}

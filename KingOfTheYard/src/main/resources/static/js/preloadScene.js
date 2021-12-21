@@ -136,6 +136,11 @@ class preloadScene extends Phaser.Scene{
             frameHeight: 150,
         });
 
+		//Escenas multijugador
+		this.load.spritesheet('matchmakingBg', 'assets/matchmakingSpritesheet.png', {
+            frameWidth: 1200,
+            frameHeight: 675,
+        });
         //Sonidos
         this.load.audio('gameMusic', ['assets/Music/gameMusic.wav']);
         this.load.audio('menuMusic', ['assets/Music/menuMusic.wav']);

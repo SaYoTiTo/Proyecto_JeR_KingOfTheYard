@@ -1,0 +1,6 @@
+SERVER #10:25:04#Persona 1 se conectó
+SERVER #10:25:10#Persona 2 se conectó
+Persona 2#10:25:16#Hey, listen
+Persona 1#10:25:23#Bye
+SERVER#10:25:32#Persona 1 se desconectó
+SERVER#10:25:36#Persona 2 se desconectó
